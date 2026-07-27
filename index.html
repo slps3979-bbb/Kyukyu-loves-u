@@ -11,12 +11,12 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     
-    /* 背景改為麵包超人圖片 + 淡化遮罩 */
+    /* 背景替換為你提供的 Pinterest 麵包超人圖片 */
     body { 
-      background: linear-gradient(rgba(255, 248, 240, 0.75), rgba(255, 248, 240, 0.75)), 
-                  url('https://upload.wikimedia.org/wikipedia/zh/thumb/0/05/Anpanman_logo.png/300px-Anpanman_logo.png') center/contain repeat;
+      background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), 
+                  url('https://i.pinimg.com/736x/f3/ba/d7/f3bad76de57da7569355710364b6c017.jpg') center/cover no-repeat fixed;
       padding: 15px; 
-      color: #4a3b32; 
+      color: #333; 
       max-width: 480px; 
       margin: 0 auto; 
       min-height: 100vh; 
@@ -24,45 +24,59 @@
     
     /* 標題區塊 */
     .header { text-align: center; margin-bottom: 15px; }
-    .header h1 { font-size: 22px; font-weight: 800; color: #8c5a3c; }
-    .header p { font-size: 13px; color: #a67c52; margin-top: 4px; font-weight: bold; }
+    .header h1 { font-size: 22px; font-weight: 800; color: #4a3b32; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); }
+    .header p { font-size: 13px; color: #6e5d53; margin-top: 4px; font-weight: bold; }
     
-    /* 放大版淺褐色日期選單分頁列 */
+    /* 取消外層白色底框的 1~5 日期按鈕區塊 */
     .tab-bar { 
       display: flex; 
       justify-content: space-between; 
-      background: rgba(255, 255, 255, 0.9); 
-      padding: 8px; 
-      border-radius: 16px; 
+      background: transparent; /* 無底框 */
+      padding: 4px 0; 
       margin-bottom: 20px; 
-      box-shadow: 0 4px 12px rgba(140, 90, 60, 0.15); 
-      gap: 6px;
+      gap: 8px;
     }
     .tab-btn { 
       flex: 1; 
       text-align: center; 
-      padding: 12px 0; /* 放大按鈕高度 */
-      font-size: 18px; /* 放大字體 */
+      padding: 12px 0; 
+      font-size: 18px; 
       font-weight: 800; 
-      color: #8c7355; 
-      border: 2px solid #e2d2c0; 
-      background-color: #f5ebe0; /* 淺褐色背景 */
-      border-radius: 12px; 
+      color: #6e472e; 
+      border: 3px solid #a67c5e; /* 加粗外框 */
+      background-color: rgba(255, 255, 255, 0.85); 
+      border-radius: 14px; 
       cursor: pointer; 
       transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    /* 點選時的深褐色 */
+    /* 點選時的深褐色底 */
     .tab-btn.active { 
       background-color: #a67c5e; 
       color: #ffffff; 
-      border-color: #8c5a3c;
+      border-color: #6e472e;
       transform: scale(1.05);
     }
 
     /* 行程頁面內容 */
     .day-content { display: none; }
     .day-content.active { display: block; }
-    .day-title { text-align: center; font-size: 19px; font-weight: 800; margin-bottom: 15px; color: #6e472e; background: #f3e5d8; padding: 6px 12px; border-radius: 20px; display: inline-block; width: 100%; }
+    
+    /* DAY 標題改成白底黑字 */
+    .day-title { 
+      text-align: center; 
+      font-size: 18px; 
+      font-weight: 800; 
+      margin-bottom: 15px; 
+      color: #000000; /* 黑字 */
+      background-color: #ffffff; /* 白底 */
+      padding: 8px 16px; 
+      border-radius: 20px; 
+      display: block; 
+      width: 100%; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      border: 1px solid #e0e0e0;
+    }
 
     /* 卡片樣式 */
     .card { 
@@ -70,25 +84,24 @@
       border-radius: 16px; 
       padding: 14px 16px; 
       margin-bottom: 12px; 
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06); 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
       display: flex; 
       align-items: flex-start; 
       gap: 12px; 
-      border: 1px solid #ebdcd0;
     }
     .time { 
       font-size: 13px; 
       font-weight: 800; 
       color: #ffffff; 
-      background-color: #c48b64; /* 淺褐時間標籤 */
+      background-color: #a67c5e; 
       padding: 4px 10px; 
       border-radius: 20px; 
       white-space: nowrap; 
       margin-top: 2px; 
     }
     .details { flex: 1; }
-    .details h3 { font-size: 16px; font-weight: bold; color: #4a3b32; margin-bottom: 4px; }
-    .details p { font-size: 13px; color: #6e5d53; line-height: 1.4; }
+    .details h3 { font-size: 16px; font-weight: bold; color: #222222; margin-bottom: 4px; }
+    .details p { font-size: 13px; color: #555555; line-height: 1.4; }
     .tag { 
       display: inline-block; 
       font-size: 11px; 
@@ -108,7 +121,7 @@
     <p>10/27 – 10/31</p>
   </div>
 
-  <!-- 放大版 1~5 天淺褐色切換按鈕 -->
+  <!-- 無白底框、框加粗的 1~5 按鈕 -->
   <div class="tab-bar">
     <button class="tab-btn active" onclick="switchDay(1)">1</button>
     <button class="tab-btn" onclick="switchDay(2)">2</button>
@@ -117,7 +130,7 @@
     <button class="tab-btn" onclick="switchDay(5)">5</button>
   </div>
 
-  <!-- 第一天內容 -->
+  <!-- 第一天內容 (白底黑字標題) -->
   <div id="day1" class="day-content active">
     <div class="day-title">DAY 1 抵達 & 皿倉山夜景</div>
     <div class="card">
