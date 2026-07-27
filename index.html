@@ -4,46 +4,111 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>九州 究極の旅</title>
-  <!-- PWA 設定：全螢幕顯示、隱藏網址列 -->
+  <!-- PWA 全螢幕設定 -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="九州旅行">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: #e3edf2; padding: 15px; color: #333; max-width: 480px; margin: 0 auto; min-height: 100vh; }
     
-    /* 標題與標籤 */
+    /* 背景改為麵包超人圖片 + 淡化遮罩 */
+    body { 
+      background: linear-gradient(rgba(255, 248, 240, 0.75), rgba(255, 248, 240, 0.75)), 
+                  url('https://upload.wikimedia.org/wikipedia/zh/thumb/0/05/Anpanman_logo.png/300px-Anpanman_logo.png') center/contain repeat;
+      padding: 15px; 
+      color: #4a3b32; 
+      max-width: 480px; 
+      margin: 0 auto; 
+      min-height: 100vh; 
+    }
+    
+    /* 標題區塊 */
     .header { text-align: center; margin-bottom: 15px; }
-    .header h1 { font-size: 20px; font-weight: 700; color: #1f3a52; }
-    .header p { font-size: 12px; color: #668199; margin-top: 4px; }
+    .header h1 { font-size: 22px; font-weight: 800; color: #8c5a3c; }
+    .header p { font-size: 13px; color: #a67c52; margin-top: 4px; font-weight: bold; }
     
-    /* 日期選單分頁列 */
-    .tab-bar { display: flex; justify-content: space-between; background: #ffffff; padding: 6px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    .tab-btn { flex: 1; text-align: center; padding: 8px 0; font-size: 13px; font-weight: bold; color: #7f99b2; border: none; background: transparent; border-radius: 8px; cursor: pointer; }
-    .tab-btn.active { background-color: #588070; color: #ffffff; }
+    /* 放大版淺褐色日期選單分頁列 */
+    .tab-bar { 
+      display: flex; 
+      justify-content: space-between; 
+      background: rgba(255, 255, 255, 0.9); 
+      padding: 8px; 
+      border-radius: 16px; 
+      margin-bottom: 20px; 
+      box-shadow: 0 4px 12px rgba(140, 90, 60, 0.15); 
+      gap: 6px;
+    }
+    .tab-btn { 
+      flex: 1; 
+      text-align: center; 
+      padding: 12px 0; /* 放大按鈕高度 */
+      font-size: 18px; /* 放大字體 */
+      font-weight: 800; 
+      color: #8c7355; 
+      border: 2px solid #e2d2c0; 
+      background-color: #f5ebe0; /* 淺褐色背景 */
+      border-radius: 12px; 
+      cursor: pointer; 
+      transition: all 0.2s ease;
+    }
+    /* 點選時的深褐色 */
+    .tab-btn.active { 
+      background-color: #a67c5e; 
+      color: #ffffff; 
+      border-color: #8c5a3c;
+      transform: scale(1.05);
+    }
 
     /* 行程頁面內容 */
     .day-content { display: none; }
     .day-content.active { display: block; }
-    .day-title { text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #2d4d42; }
+    .day-title { text-align: center; font-size: 19px; font-weight: 800; margin-bottom: 15px; color: #6e472e; background: #f3e5d8; padding: 6px 12px; border-radius: 20px; display: inline-block; width: 100%; }
 
     /* 卡片樣式 */
-    .card { background: #ffffff; border-radius: 16px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); display: flex; align-items: flex-start; gap: 12px; }
-    .time { font-size: 12px; font-weight: 800; color: #ffffff; background-color: #6a8d73; padding: 3px 8px; border-radius: 20px; white-space: nowrap; margin-top: 2px; }
+    .card { 
+      background: rgba(255, 255, 255, 0.92); 
+      border-radius: 16px; 
+      padding: 14px 16px; 
+      margin-bottom: 12px; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06); 
+      display: flex; 
+      align-items: flex-start; 
+      gap: 12px; 
+      border: 1px solid #ebdcd0;
+    }
+    .time { 
+      font-size: 13px; 
+      font-weight: 800; 
+      color: #ffffff; 
+      background-color: #c48b64; /* 淺褐時間標籤 */
+      padding: 4px 10px; 
+      border-radius: 20px; 
+      white-space: nowrap; 
+      margin-top: 2px; 
+    }
     .details { flex: 1; }
-    .details h3 { font-size: 15px; font-weight: bold; color: #2c3e50; margin-bottom: 4px; }
-    .details p { font-size: 12px; color: #666; line-height: 1.4; }
-    .tag { display: inline-block; font-size: 10px; background: #f0f4f8; color: #4a6984; padding: 2px 6px; border-radius: 4px; margin-top: 4px; font-weight: bold; }
+    .details h3 { font-size: 16px; font-weight: bold; color: #4a3b32; margin-bottom: 4px; }
+    .details p { font-size: 13px; color: #6e5d53; line-height: 1.4; }
+    .tag { 
+      display: inline-block; 
+      font-size: 11px; 
+      background: #f7ebe1; 
+      color: #a66a44; 
+      padding: 3px 8px; 
+      border-radius: 6px; 
+      margin-top: 6px; 
+      font-weight: bold; 
+    }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <h1>九州 究極の旅</h1>
+    <h1>九州 究極の旅 🍞</h1>
     <p>10/27 – 10/31</p>
   </div>
 
-  <!-- 1~5 天的切換按鈕 -->
+  <!-- 放大版 1~5 天淺褐色切換按鈕 -->
   <div class="tab-bar">
     <button class="tab-btn active" onclick="switchDay(1)">1</button>
     <button class="tab-btn" onclick="switchDay(2)">2</button>
@@ -67,7 +132,7 @@
       <div class="details">
         <h3>Shin-Shin 博多拉麵</h3>
         <p>KITTE博多店吃午餐，順便逛逛 KITTE</p>
-        <span class="tag">必吃</span>
+        <span class="tag">必吃美食</span>
       </div>
     </div>
     <div class="card">
@@ -82,7 +147,7 @@
       <div class="details">
         <h3>皿倉山展望台夜景</h3>
         <p>小倉站 ➔ 八幡站 ➔ 接駁車至纜車登頂看新日本三大夜景</p>
-        <span class="tag">景點</span>
+        <span class="tag">重點景點</span>
       </div>
     </div>
     <div class="card">
@@ -109,7 +174,7 @@
       <div class="details">
         <h3>辻利茶舗 & Shiroya 麵包</h3>
         <p>京町本店抹茶、Shiroya 買奶油小蛋糕</p>
-        <span class="tag">美食</span>
+        <span class="tag">必吃美食</span>
       </div>
     </div>
     <div class="card">
@@ -150,7 +215,7 @@
       <div class="details">
         <h3>九州自然動物園</h3>
         <p>搭乘 Jungle Bus 叢林巴士近距離餵食猛獸與大象</p>
-        <span class="tag">重點</span>
+        <span class="tag">重點景點</span>
       </div>
     </div>
     <div class="card">
@@ -185,7 +250,7 @@
       <div class="details">
         <h3>由布釜飯「心」</h3>
         <p>站前店吃豐後牛/地雞釜飯，日乃新寄放行李/買名產</p>
-        <span class="tag">必吃</span>
+        <span class="tag">必吃美食</span>
       </div>
     </div>
     <div class="card">
@@ -233,7 +298,7 @@
       <div class="details">
         <h3>麵屋兼虎 福岡PARCO店</h3>
         <p>午餐享用超濃郁沾麵</p>
-        <span class="tag">美食</span>
+        <span class="tag">必吃美食</span>
       </div>
     </div>
     <div class="card">
@@ -248,7 +313,7 @@
       <div class="details">
         <h3>焼肉ホルモン山翔</h3>
         <p>離境前最後的高級燒肉饗宴</p>
-        <span class="tag">必吃</span>
+        <span class="tag">必吃美食</span>
       </div>
     </div>
     <div class="card">
@@ -262,11 +327,9 @@
 
   <script>
     function switchDay(dayNum) {
-      // 隱藏所有分頁
       document.querySelectorAll('.day-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
       
-      // 顯示點選的分頁
       document.getElementById('day' + dayNum).classList.add('active');
       event.target.classList.add('active');
     }
