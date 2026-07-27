@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>九州 究極の旅</title>
+  <!-- PWA 設定：全螢幕顯示、隱藏網址列 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="九州旅行">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: #e3edf2; padding: 15px; color: #333; max-width: 480px; margin: 0 auto; min-height: 100vh; }
+    
+    /* 標題與標籤 */
+    .header { text-align: center; margin-bottom: 15px; }
+    .header h1 { font-size: 20px; font-weight: 700; color: #1f3a52; }
+    .header p { font-size: 12px; color: #668199; margin-top: 4px; }
+    
+    /* 日期選單分頁列 */
+    .tab-bar { display: flex; justify-content: space-between; background: #ffffff; padding: 6px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .tab-btn { flex: 1; text-align: center; padding: 8px 0; font-size: 13px; font-weight: bold; color: #7f99b2; border: none; background: transparent; border-radius: 8px; cursor: pointer; }
+    .tab-btn.active { background-color: #588070; color: #ffffff; }
+
+    /* 行程頁面內容 */
+    .day-content { display: none; }
+    .day-content.active { display: block; }
+    .day-title { text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #2d4d42; }
+
+    /* 卡片樣式 */
+    .card { background: #ffffff; border-radius: 16px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); display: flex; align-items: flex-start; gap: 12px; }
+    .time { font-size: 12px; font-weight: 800; color: #ffffff; background-color: #6a8d73; padding: 3px 8px; border-radius: 20px; white-space: nowrap; margin-top: 2px; }
+    .details { flex: 1; }
+    .details h3 { font-size: 15px; font-weight: bold; color: #2c3e50; margin-bottom: 4px; }
+    .details p { font-size: 12px; color: #666; line-height: 1.4; }
+    .tag { display: inline-block; font-size: 10px; background: #f0f4f8; color: #4a6984; padding: 2px 6px; border-radius: 4px; margin-top: 4px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>九州 究極の旅</h1>
+    <p>10/27 – 10/31</p>
+  </div>
+
+  <!-- 1~5 天的切換按鈕 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchDay(1)">1</button>
+    <button class="tab-btn" onclick="switchDay(2)">2</button>
+    <button class="tab-btn" onclick="switchDay(3)">3</button>
+    <button class="tab-btn" onclick="switchDay(4)">4</button>
+    <button class="tab-btn" onclick="switchDay(5)">5</button>
+  </div>
+
+  <!-- 第一天內容 -->
+  <div id="day1" class="day-content active">
+    <div class="day-title">DAY 1 抵達 & 皿倉山夜景</div>
+    <div class="card">
+      <div class="time">10:40</div>
+      <div class="details">
+        <h3>福岡國際機場</h3>
+        <p>辦理入境、提取行李、兌換票券</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">12:20</div>
+      <div class="details">
+        <h3>Shin-Shin 博多拉麵</h3>
+        <p>KITTE博多店吃午餐，順便逛逛 KITTE</p>
+        <span class="tag">必吃</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">14:00</div>
+      <div class="details">
+        <h3>前往小倉 & 飯店 Check-in</h3>
+        <p>綠色窗口劃位 ➔ 新幹線/特急至小倉 ➔ 小倉麗嘉皇家酒店放行李</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">16:00</div>
+      <div class="details">
+        <h3>皿倉山展望台夜景</h3>
+        <p>小倉站 ➔ 八幡站 ➔ 接駁車至纜車登頂看新日本三大夜景</p>
+        <span class="tag">景點</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">20:00</div>
+      <div class="details">
+        <h3>資先生烏龍麵 & 唐吉訶德</h3>
+        <p>魚町店晚餐，吃完逛唐吉訶德採買，返回小倉麗嘉皇家酒店</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第二天內容 -->
+  <div id="day2" class="day-content">
+    <div class="day-title">DAY 2 小倉城區 ➔ 由布院 Villa</div>
+    <div class="card">
+      <div class="time">09:00</div>
+      <div class="details">
+        <h3>八坂神社 & 小倉城區</h3>
+        <p>散步參拜、小倉中央商店街、旦過市場體驗</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">11:15</div>
+      <div class="details">
+        <h3>辻利茶舗 & Shiroya 麵包</h3>
+        <p>京町本店抹茶、Shiroya 買奶油小蛋糕</p>
+        <span class="tag">美食</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">12:10</div>
+      <div class="details">
+        <h3>搭乘觀光特急前往由布院</h3>
+        <p>小倉站 ➔ 大分站 (AMU PLAZA) ➔ 由布院站</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">16:00</div>
+      <div class="details">
+        <h3>由布院別邸 樹 (獨棟Villa)</h3>
+        <p>Check-in 放行李，體驗奢華獨棟住宿</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">16:30</div>
+      <div class="details">
+        <h3>湯布院花卉村 & 備糧</h3>
+        <p>童話小鎮拍照，A-COOP超市 & 7-11 採買零食</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">19:00</div>
+      <div class="details">
+        <h3>鰻魚 田舍庵 / Villa 放鬆</h3>
+        <p>享用鰻魚名店晚餐，回 Villa 享受私人湯屋與空間</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第三天內容 -->
+  <div id="day3" class="day-content">
+    <div class="day-title">DAY 3 自然動物園 & 湯之坪吃貨散策</div>
+    <div class="card">
+      <div class="time">08:30</div>
+      <div class="details">
+        <h3>九州自然動物園</h3>
+        <p>搭乘 Jungle Bus 叢林巴士近距離餵食猛獸與大象</p>
+        <span class="tag">重點</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">14:30</div>
+      <div class="details">
+        <h3>湯之坪街道 & 金鱗湖散策</h3>
+        <p>Milch半熟起司、B SPEAK生乳捲、鞠智銅鑼燒、telato抹茶冰淇淋</p>
+        <span class="tag">甜點巡禮</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">16:00</div>
+      <div class="details">
+        <h3>特色小店巡禮</h3>
+        <p>橡子共和國、Miffy森之廚房、SNOOPY Chocolat、金賞可樂餅</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">18:00</div>
+      <div class="details">
+        <h3>金鱗湖夕照與小吃美食</h3>
+        <p>五衛門布丁、大章魚燒、中津炸雞吉吾、柚子胡椒伴手禮</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第四天內容 -->
+  <div id="day4" class="day-content">
+    <div class="day-title">DAY 4 由布院釜飯 ➔ 天神商圈大採購</div>
+    <div class="card">
+      <div class="time">10:50</div>
+      <div class="details">
+        <h3>由布釜飯「心」</h3>
+        <p>站前店吃豐後牛/地雞釜飯，日乃新寄放行李/買名產</p>
+        <span class="tag">必吃</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">12:00</div>
+      <div class="details">
+        <h3>特急列車返回博多</h3>
+        <p>搭車回博多站 ➔ AMU PLAZA / KITTE / MING 明太子街逛街</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">17:00</div>
+      <div class="details">
+        <h3>福岡休雷蓋特酒店 Check-in</h3>
+        <p>飯店放置行李稍作休息</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">17:30</div>
+      <div class="details">
+        <h3>天神商圈百貨巡禮</h3>
+        <p>Full Full 明太子法國麵包、岩田屋、大丸百貨天神店</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">21:30</div>
+      <div class="details">
+        <h3>Itookashi & 唐吉訶德</h3>
+        <p>宵夜甜點/酒吧 ➔ 唐吉訶德福岡天神本店深夜採買</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第五天內容 -->
+  <div id="day5" class="day-content">
+    <div class="day-title">DAY 5 潮流購物 ➔ 神社 ➔ 燒肉返台</div>
+    <div class="card">
+      <div class="time">10:00</div>
+      <div class="details">
+        <h3>天神潮流與地下街</h3>
+        <p>福岡PARCO ➔ Mina天神 (Uniqlo/GU/LOFT) ➔ 天神地下街</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">11:00</div>
+      <div class="details">
+        <h3>麵屋兼虎 福岡PARCO店</h3>
+        <p>午餐享用超濃郁沾麵</p>
+        <span class="tag">美食</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">14:50</div>
+      <div class="details">
+        <h3>櫛田神社 & Full Full 補貨</h3>
+        <p>參觀博多總鎮守與山笠展示，購買麵包帶著走</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">16:20</div>
+      <div class="details">
+        <h3>焼肉ホルモン山翔</h3>
+        <p>離境前最後的高級燒肉饗宴</p>
+        <span class="tag">必吃</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="time">18:00</div>
+      <div class="details">
+        <h3>飯店取行李 ➔ 福岡國際機場</h3>
+        <p>搭車前往機場，辦理登機、逛免稅店，準備返台！</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchDay(dayNum) {
+      // 隱藏所有分頁
+      document.querySelectorAll('.day-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      // 顯示點選的分頁
+      document.getElementById('day' + dayNum).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
