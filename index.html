@@ -11,340 +11,499 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     
-    /* 背景替換為你提供的 Pinterest 麵包超人圖片 */
+    /* 頁面整體固定高，防止整體頁面滾動 */
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
     body { 
       background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), 
                   url('https://i.pinimg.com/736x/f3/ba/d7/f3bad76de57da7569355710364b6c017.jpg') center/cover no-repeat fixed;
-      padding: 15px; 
       color: #333; 
       max-width: 480px; 
       margin: 0 auto; 
-      min-height: 100vh; 
+      display: flex;
+      flex-direction: column;
+      padding: 12px 12px 0 12px;
     }
     
-    /* 標題區塊 */
-    .header { text-align: center; margin-bottom: 15px; }
-    .header h1 { font-size: 22px; font-weight: 800; color: #4a3b32; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); }
-    .header p { font-size: 13px; color: #6e5d53; margin-top: 4px; font-weight: bold; }
+    /* 固定頂部區塊 */
+    .top-fixed {
+      flex-shrink: 0;
+    }
+
+    .header { text-align: center; margin-bottom: 10px; }
+    .header h1 { font-size: 20px; font-weight: 800; color: #4a3b32; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); }
+    .header p { font-size: 12px; color: #6e5d53; margin-top: 2px; font-weight: bold; }
     
-    /* 取消外層白色底框的 1~5 日期按鈕區塊 */
+    /* 無白底框、框加粗的 1~5 按鈕（固定不滑動） */
     .tab-bar { 
       display: flex; 
       justify-content: space-between; 
-      background: transparent; /* 無底框 */
-      padding: 4px 0; 
-      margin-bottom: 20px; 
-      gap: 8px;
+      background: transparent; 
+      padding: 2px 0; 
+      margin-bottom: 12px; 
+      gap: 6px;
     }
     .tab-btn { 
       flex: 1; 
       text-align: center; 
-      padding: 12px 0; 
+      padding: 10px 0; 
       font-size: 18px; 
       font-weight: 800; 
       color: #6e472e; 
-      border: 3px solid #a67c5e; /* 加粗外框 */
+      border: 3px solid #a67c5e; 
       background-color: rgba(255, 255, 255, 0.85); 
-      border-radius: 14px; 
+      border-radius: 12px; 
       cursor: pointer; 
       transition: all 0.2s ease;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    /* 點選時的深褐色底 */
     .tab-btn.active { 
       background-color: #a67c5e; 
       color: #ffffff; 
       border-color: #6e472e;
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
 
-    /* 行程頁面內容 */
+    /* 滾動內容專屬區域 */
+    .content-scrollable {
+      flex: 1;
+      overflow-y: auto;
+      padding-bottom: 20px;
+      -webkit-overflow-scrolling: touch;
+    }
+
     .day-content { display: none; }
     .day-content.active { display: block; }
     
     /* DAY 標題改成白底黑字 */
     .day-title { 
       text-align: center; 
-      font-size: 18px; 
+      font-size: 16px; 
       font-weight: 800; 
-      margin-bottom: 15px; 
-      color: #000000; /* 黑字 */
-      background-color: #ffffff; /* 白底 */
-      padding: 8px 16px; 
-      border-radius: 20px; 
+      margin-bottom: 12px; 
+      color: #000000; 
+      background-color: #ffffff; 
+      padding: 6px 12px; 
+      border-radius: 16px; 
       display: block; 
       width: 100%; 
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       border: 1px solid #e0e0e0;
     }
 
-    /* 卡片樣式 */
+    /* 卡片與可點擊展開設計 */
     .card { 
       background: rgba(255, 255, 255, 0.92); 
-      border-radius: 16px; 
-      padding: 14px 16px; 
-      margin-bottom: 12px; 
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
-      display: flex; 
-      align-items: flex-start; 
-      gap: 12px; 
+      border-radius: 14px; 
+      padding: 12px 14px; 
+      margin-bottom: 10px; 
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08); 
+      border: 1px solid #ebdcd0;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .card-main {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
     }
     .time { 
-      font-size: 13px; 
+      font-size: 12px; 
       font-weight: 800; 
       color: #ffffff; 
       background-color: #a67c5e; 
-      padding: 4px 10px; 
-      border-radius: 20px; 
+      padding: 4px 8px; 
+      border-radius: 16px; 
       white-space: nowrap; 
-      margin-top: 2px; 
     }
     .details { flex: 1; }
-    .details h3 { font-size: 16px; font-weight: bold; color: #222222; margin-bottom: 4px; }
-    .details p { font-size: 13px; color: #555555; line-height: 1.4; }
-    .tag { 
-      display: inline-block; 
-      font-size: 11px; 
-      background: #f7ebe1; 
-      color: #a66a44; 
-      padding: 3px 8px; 
-      border-radius: 6px; 
-      margin-top: 6px; 
-      font-weight: bold; 
+    .details h3 { font-size: 15px; font-weight: bold; color: #222222; }
+    .details p { font-size: 12px; color: #666; margin-top: 2px; }
+    
+    .expand-btn {
+      font-size: 11px;
+      color: #a67c5e;
+      font-weight: bold;
+      background: #f5ebe0;
+      padding: 4px 8px;
+      border-radius: 8px;
+      border: 1px solid #d7be9f;
+      white-space: nowrap;
+      margin-left: 6px;
+    }
+
+    /* 隱藏的交通/列車班次詳細內容 */
+    .transit-details {
+      display: none;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed #d7be9f;
+      font-size: 12px;
+      color: #4a3b32;
+      background: rgba(245, 235, 224, 0.5);
+      padding: 8px;
+      border-radius: 8px;
+    }
+    .transit-details.show {
+      display: block;
     }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <h1>九州 究極の旅 🍞</h1>
-    <p>10/27 – 10/31</p>
-  </div>
+  <!-- 固定不動的上半部 -->
+  <div class="top-fixed">
+    <div class="header">
+      <h1>九州 究極の旅 🍞</h1>
+      <p>2026/10/27 – 10/31</p>
+    </div>
 
-  <!-- 無白底框、框加粗的 1~5 按鈕 -->
-  <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchDay(1)">1</button>
-    <button class="tab-btn" onclick="switchDay(2)">2</button>
-    <button class="tab-btn" onclick="switchDay(3)">3</button>
-    <button class="tab-btn" onclick="switchDay(4)">4</button>
-    <button class="tab-btn" onclick="switchDay(5)">5</button>
-  </div>
-
-  <!-- 第一天內容 (白底黑字標題) -->
-  <div id="day1" class="day-content active">
-    <div class="day-title">DAY 1 抵達 & 皿倉山夜景</div>
-    <div class="card">
-      <div class="time">10:40</div>
-      <div class="details">
-        <h3>福岡國際機場</h3>
-        <p>辦理入境、提取行李、兌換票券</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">12:20</div>
-      <div class="details">
-        <h3>Shin-Shin 博多拉麵</h3>
-        <p>KITTE博多店吃午餐，順便逛逛 KITTE</p>
-        <span class="tag">必吃美食</span>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">14:00</div>
-      <div class="details">
-        <h3>前往小倉 & 飯店 Check-in</h3>
-        <p>綠色窗口劃位 ➔ 新幹線/特急至小倉 ➔ 小倉麗嘉皇家酒店放行李</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">16:00</div>
-      <div class="details">
-        <h3>皿倉山展望台夜景</h3>
-        <p>小倉站 ➔ 八幡站 ➔ 接駁車至纜車登頂看新日本三大夜景</p>
-        <span class="tag">重點景點</span>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">20:00</div>
-      <div class="details">
-        <h3>資先生烏龍麵 & 唐吉訶德</h3>
-        <p>魚町店晚餐，吃完逛唐吉訶德採買，返回小倉麗嘉皇家酒店</p>
-      </div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchDay(1)">1</button>
+      <button class="tab-btn" onclick="switchDay(2)">2</button>
+      <button class="tab-btn" onclick="switchDay(3)">3</button>
+      <button class="tab-btn" onclick="switchDay(4)">4</button>
+      <button class="tab-btn" onclick="switchDay(5)">5</button>
     </div>
   </div>
 
-  <!-- 第二天內容 -->
-  <div id="day2" class="day-content">
-    <div class="day-title">DAY 2 小倉城區 ➔ 由布院 Villa</div>
-    <div class="card">
-      <div class="time">09:00</div>
-      <div class="details">
-        <h3>八坂神社 & 小倉城區</h3>
-        <p>散步參拜、小倉中央商店街、旦過市場體驗</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">11:15</div>
-      <div class="details">
-        <h3>辻利茶舗 & Shiroya 麵包</h3>
-        <p>京町本店抹茶、Shiroya 買奶油小蛋糕</p>
-        <span class="tag">必吃美食</span>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">12:10</div>
-      <div class="details">
-        <h3>搭乘觀光特急前往由布院</h3>
-        <p>小倉站 ➔ 大分站 (AMU PLAZA) ➔ 由布院站</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">16:00</div>
-      <div class="details">
-        <h3>由布院別邸 樹 (獨棟Villa)</h3>
-        <p>Check-in 放行李，體驗奢華獨棟住宿</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">16:30</div>
-      <div class="details">
-        <h3>湯布院花卉村 & 備糧</h3>
-        <p>童話小鎮拍照，A-COOP超市 & 7-11 採買零食</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">19:00</div>
-      <div class="details">
-        <h3>鰻魚 田舍庵 / Villa 放鬆</h3>
-        <p>享用鰻魚名店晚餐，回 Villa 享受私人湯屋與空間</p>
-      </div>
-    </div>
-  </div>
+  <!-- 可獨立滑動的行程內容區 -->
+  <div class="content-scrollable">
 
-  <!-- 第三天內容 -->
-  <div id="day3" class="day-content">
-    <div class="day-title">DAY 3 自然動物園 & 湯之坪吃貨散策</div>
-    <div class="card">
-      <div class="time">08:30</div>
-      <div class="details">
-        <h3>九州自然動物園</h3>
-        <p>搭乘 Jungle Bus 叢林巴士近距離餵食猛獸與大象</p>
-        <span class="tag">重點景點</span>
+    <!-- DAY 1 -->
+    <div id="day1" class="day-content active">
+      <div class="day-title">第1天 (2026/10/27)</div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">10:40</div>
+            <div class="details"><h3>福岡國際機場</h3><p>停留 01時30分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">12:24</div>
+            <div class="details"><h3>Shin-Shin 博多拉麵 KITTE博多店</h3><p>停留 01時00分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">13:25</div>
+            <div class="details"><h3>購物中心KITTE</h3><p>停留 00時30分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">14:02</div>
+            <div class="details"><h3>博多車站 新幹線中央口 綠色窗口</h3><p>停留 00時13分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">14:30</div>
+            <div class="details"><h3>Kokura Station</h3><p>停留 00時10分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">14:40</div>
+            <div class="details"><h3>AMU PLAZA 小倉</h3><p>停留 00時40分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">15:28</div>
+            <div class="details"><h3>小倉麗嘉皇家酒店</h3><p>停留 00時30分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">16:08</div>
+            <div class="details"><h3>Kokura Station</h3><p>停留 00時17分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">16:55</div>
+            <div class="details"><h3>Yahata Station</h3><p>停留 00時35分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">18:05</div>
+            <div class="details"><h3>皿倉山展望台</h3><p>停留 00時20分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">18:56</div>
+            <div class="details"><h3>Yahata Station</h3><p>停留 00時21分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">19:50</div>
+            <div class="details"><h3>Kokura Station</h3><p>停留 00時00分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">19:51</div>
+            <div class="details"><h3>肯德基</h3><p>停留 00時30分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">20:27</div>
+            <div class="details"><h3>資先生烏龍麵魚町店</h3><p>停留 01時00分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">21:30</div>
+            <div class="details"><h3>Don Quijote Kokura Uomachi</h3><p>停留 01時00分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)">
+          <div class="card-main">
+            <div class="time">22:47</div>
+            <div class="details"><h3>小倉麗嘉皇家酒店</h3><p>停留 01時00分</p></div>
+          </div>
+          <div class="expand-btn">交通/班次 ▾</div>
+        </div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
       </div>
     </div>
-    <div class="card">
-      <div class="time">14:30</div>
-      <div class="details">
-        <h3>湯之坪街道 & 金鱗湖散策</h3>
-        <p>Milch半熟起司、B SPEAK生乳捲、鞠智銅鑼燒、telato抹茶冰淇淋</p>
-        <span class="tag">甜點巡禮</span>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">16:00</div>
-      <div class="details">
-        <h3>特色小店巡禮</h3>
-        <p>橡子共和國、Miffy森之廚房、SNOOPY Chocolat、金賞可樂餅</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">18:00</div>
-      <div class="details">
-        <h3>金鱗湖夕照與小吃美食</h3>
-        <p>五衛門布丁、大章魚燒、中津炸雞吉吾、柚子胡椒伴手禮</p>
-      </div>
-    </div>
-  </div>
 
-  <!-- 第四天內容 -->
-  <div id="day4" class="day-content">
-    <div class="day-title">DAY 4 由布院釜飯 ➔ 天神商圈大採購</div>
-    <div class="card">
-      <div class="time">10:50</div>
-      <div class="details">
-        <h3>由布釜飯「心」</h3>
-        <p>站前店吃豐後牛/地雞釜飯，日乃新寄放行李/買名產</p>
-        <span class="tag">必吃美食</span>
+    <!-- DAY 2 -->
+    <div id="day2" class="day-content">
+      <div class="day-title">第2天 (2026/10/28)</div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">09:00</div><div class="details"><h3>小倉麗嘉皇家酒店</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">09:20</div><div class="details"><h3>Kokura Station</h3><p>停留 00時15分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">09:46</div><div class="details"><h3>八坂神社</h3><p>停留 00時20分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">10:17</div><div class="details"><h3>小倉中央商店街</h3><p>停留 00時20分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">10:45</div><div class="details"><h3>旦過市場</h3><p>停留 00時25分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">11:19</div><div class="details"><h3>辻利茶舗 京町本店</h3><p>停留 00時30分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">11:52</div><div class="details"><h3>奶油小蛋糕 Shiroya 小倉店</h3><p>停留 00時15分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">12:10</div><div class="details"><h3>Kokura Station</h3><p>停留 00時32分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">14:10</div><div class="details"><h3>AMU PLAZA 大分</h3><p>停留 00時48分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">15:52</div><div class="details"><h3>由布院站</h3><p>停留 00時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">15:56</div><div class="details"><h3>由布院別邸 樹 (獨棟Villa)</h3><p>停留 00時30分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">16:36</div><div class="details"><h3>湯布院花卉村</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">17:45</div><div class="details"><h3>A-COOP超市 湯布院店</h3><p>停留 00時30分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">18:18</div><div class="details"><h3>7-Eleven; Yufuin Yunotsubo</h3><p>停留 00時30分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">18:57</div><div class="details"><h3>由布院別邸 樹 (獨棟Villa)</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
+      </div>
+      <div class="card">
+        <div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">22:24</div><div class="details"><h3>鰻魚 田舍庵</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div>
+        <div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div>
       </div>
     </div>
-    <div class="card">
-      <div class="time">12:00</div>
-      <div class="details">
-        <h3>特急列車返回博多</h3>
-        <p>搭車回博多站 ➔ AMU PLAZA / KITTE / MING 明太子街逛街</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">17:00</div>
-      <div class="details">
-        <h3>福岡休雷蓋特酒店 Check-in</h3>
-        <p>飯店放置行李稍作休息</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">17:30</div>
-      <div class="details">
-        <h3>天神商圈百貨巡禮</h3>
-        <p>Full Full 明太子法國麵包、岩田屋、大丸百貨天神店</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">21:30</div>
-      <div class="details">
-        <h3>Itookashi & 唐吉訶德</h3>
-        <p>宵夜甜點/酒吧 ➔ 唐吉訶德福岡天神本店深夜採買</p>
-      </div>
-    </div>
-  </div>
 
-  <!-- 第五天內容 -->
-  <div id="day5" class="day-content">
-    <div class="day-title">DAY 5 潮流購物 ➔ 神社 ➔ 燒肉返台</div>
-    <div class="card">
-      <div class="time">10:00</div>
-      <div class="details">
-        <h3>天神潮流與地下街</h3>
-        <p>福岡PARCO ➔ Mina天神 (Uniqlo/GU/LOFT) ➔ 天神地下街</p>
-      </div>
+    <!-- DAY 3 -->
+    <div id="day3" class="day-content">
+      <div class="day-title">第3天 (2026/10/29)</div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">07:30</div><div class="details"><h3>由布院別邸 樹 (獨棟Villa)</h3><p>停留 00時45分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">08:57</div><div class="details"><h3>九州自然動物園</h3><p>停留 02時30分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">11:39</div><div class="details"><h3>Jungle bus No.2 Station</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">13:08</div><div class="details"><h3>由布院別邸 樹 (獨棟Villa)</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">14:25</div><div class="details"><h3>布丁.甜甜圈 Milch Donut&Cafe</h3><p>停留 00時15分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">14:47</div><div class="details"><h3>蛋糕卷 B SPEAK 本店</h3><p>停留 00時15分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">15:06</div><div class="details"><h3>鞠智 cucuchi（銅鑼燒和咖啡館）</h3><p>停留 00時20分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">15:34</div><div class="details"><h3>telato 抹茶ジェラート専門店</h3><p>停留 00時15分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">15:55</div><div class="details"><h3>湯布院Mana Mana</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">16:07</div><div class="details"><h3>Donguri No Mori</h3><p>停留 00時20分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">16:28</div><div class="details"><h3>Souvenir Gallery YUFUIN</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">16:40</div><div class="details"><h3>レモネード&スイーツlimo</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">16:51</div><div class="details"><h3>調味料 湯布院薬味家</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">17:03</div><div class="details"><h3>名產店 GOEMON</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">17:17</div><div class="details"><h3>金賞可樂餅 本店</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">17:29</div><div class="details"><h3>GABUGABU</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">17:40</div><div class="details"><h3>由布院霜淇淋</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">17:51</div><div class="details"><h3>湯布院長壽畑湯之坪店</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">18:02</div><div class="details"><h3>烏骨雞蛋布丁 五衛門</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">18:13</div><div class="details"><h3>大章魚燒 ばくだん焼本舗</h3><p>停留 00時15分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">18:29</div><div class="details"><h3>中津からあげ吉吾 湯布院店</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">18:43</div><div class="details"><h3>Miffy森之廚房</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">18:57</div><div class="details"><h3>箸屋一膳／金鱗湖店</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">19:09</div><div class="details"><h3>鍵屋 柚子胡椒</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">19:23</div><div class="details"><h3>SNOOPYChocolat 由布院店</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">19:34</div><div class="details"><h3>湯布院shiitakemonster</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
     </div>
-    <div class="card">
-      <div class="time">11:00</div>
-      <div class="details">
-        <h3>麵屋兼虎 福岡PARCO店</h3>
-        <p>午餐享用超濃郁沾麵</p>
-        <span class="tag">必吃美食</span>
-      </div>
+
+    <!-- DAY 4 -->
+    <div id="day4" class="day-content">
+      <div class="day-title">第4天 (2026/10/30)</div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">08:00</div><div class="details"><h3>由布院別邸 樹 (獨棟Villa)</h3><p>停留 02時50分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">10:56</div><div class="details"><h3>由布院站</h3><p>停留 00時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">10:57</div><div class="details"><h3>由布釜飯 「心」湯布院站前店</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">11:08</div><div class="details"><h3>可寄行李名產店 日乃新</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">11:19</div><div class="details"><h3>由布院站</h3><p>停留 00時41分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">14:16</div><div class="details"><h3>博多</h3><p>停留 00時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">14:22</div><div class="details"><h3>購物中心KITTE</h3><p>停留 00時10分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">14:36</div><div class="details"><h3>AMU PLAZA博多</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">15:39</div><div class="details"><h3>MING</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">16:58</div><div class="details"><h3>福岡休雷蓋特酒店</h3><p>停留 00時30分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">17:32</div><div class="details"><h3>Full full</h3><p>停留 00時30分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">18:11</div><div class="details"><h3>Iwataya Main Store</h3><p>停留 01時15分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">19:33</div><div class="details"><h3>大丸 福岡天神店</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">20:41</div><div class="details"><h3>福岡休雷蓋特酒店</h3><p>停留 00時30分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">21:31</div><div class="details"><h3>Itookashi</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">22:58</div><div class="details"><h3>唐吉訶德 福岡天神本店</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">00:07</div><div class="details"><h3>福岡休雷蓋特酒店</h3><p>停留 00時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
     </div>
-    <div class="card">
-      <div class="time">14:50</div>
-      <div class="details">
-        <h3>櫛田神社 & Full Full 補貨</h3>
-        <p>參觀博多總鎮守與山笠展示，購買麵包帶著走</p>
-      </div>
+
+    <!-- DAY 5 -->
+    <div id="day5" class="day-content">
+      <div class="day-title">第5天 (2026/10/31)</div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">09:00</div><div class="details"><h3>福岡休雷蓋特酒店</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">10:03</div><div class="details"><h3>福岡PARCO</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">11:03</div><div class="details"><h3>麵屋兼虎 福岡PARCO店</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">12:08</div><div class="details"><h3>Mina 天神</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">13:13</div><div class="details"><h3>天神地下街</h3><p>停留 01時20分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">14:52</div><div class="details"><h3>櫛田神社</h3><p>停留 00時30分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">15:44</div><div class="details"><h3>Full full</h3><p>停留 00時30分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">16:20</div><div class="details"><h3>焼肉ホルモン山翔</h3><p>停留 01時30分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">17:58</div><div class="details"><h3>福岡休雷蓋特酒店</h3><p>停留 00時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
+      <div class="card"><div class="card-header" onclick="toggleTransit(this)"><div class="card-main"><div class="time">18:14</div><div class="details"><h3>福岡國際機場</h3><p>停留 01時00分</p></div></div><div class="expand-btn">交通/班次 ▾</div></div><div class="transit-details">🚆 點擊此處可填寫交通/列車班次細節...</div></div>
     </div>
-    <div class="card">
-      <div class="time">16:20</div>
-      <div class="details">
-        <h3>焼肉ホルモン山翔</h3>
-        <p>離境前最後的高級燒肉饗宴</p>
-        <span class="tag">必吃美食</span>
-      </div>
-    </div>
-    <div class="card">
-      <div class="time">18:00</div>
-      <div class="details">
-        <h3>飯店取行李 ➔ 福岡國際機場</h3>
-        <p>搭車前往機場，辦理登機、逛免稅店，準備返台！</p>
-      </div>
-    </div>
+
   </div>
 
   <script>
+    // 切換天數分頁
     function switchDay(dayNum) {
       document.querySelectorAll('.day-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
       
       document.getElementById('day' + dayNum).classList.add('active');
-      event.target.classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    // 切換展開交通班次細節
+    function toggleTransit(headerEl) {
+      const detailsEl = headerEl.nextElementSibling;
+      const btnEl = headerEl.querySelector('.expand-btn');
+      
+      if (detailsEl.classList.contains('show')) {
+        detailsEl.classList.remove('show');
+        btnEl.innerHTML = '交通/班次 ▾';
+      } else {
+        detailsEl.classList.add('show');
+        btnEl.innerHTML = '收起細節 ▴';
+      }
     }
   </script>
 </body>
