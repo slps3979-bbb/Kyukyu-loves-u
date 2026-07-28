@@ -193,21 +193,21 @@
         .timeline-list {
             position: relative;
         }
-
-        .timeline-list::before {
-            content: "";
-            position: absolute;
-            top: 20px;
-            bottom: 20px;
-            left: 35px;
-            width: 6px;
-            /* 圓點串珠與虛線結合的甜美軸 */
-            background: radial-gradient(circle, #ff4081 35%, transparent 40%),
-                        linear-gradient(180deg, #a8000b 0%, #ff80ab 100%);
-            background-size: 12px 12px, 100% 100%;
-            border-radius: 4px;
-            z-index: 1;
-        }
+       .timeline-list::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 35px;
+    width: 6px;
+    /* 雙色珍珠串珠效果 */
+    background: radial-gradient(circle at 30% 30%, #ffffff 20%, #a8000b 80%),
+                radial-gradient(circle at 30% 30%, #ffffff 20%, #ff80ab 80%);
+    background-size: 10px 10px, 10px 10px;
+    background-position: 0 0, 0 10px;
+    border-radius: 6px;
+    z-index: 1;
+}
 
         .timeline-item {
             display: flex;
