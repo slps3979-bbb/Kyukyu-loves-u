@@ -1,26 +1,19 @@
-html_v2 = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🍬 福岡九州 5日極致之旅 🍬</title>
+    <title>福岡九州 5日極致之旅</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --fujiya-dark-red: #a8000b;
-            --fujiya-red: #d3000d;
-            --fujiya-pink: #ffeff2;
-            --fujiya-cream: #fffaf0;
-            --fujiya-brown: #4a2c11;
-            --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.25);
-        }
-
-        * {
-            box-sizing: border-box;
+   <style>
+        /* 1. 全局與背景設定：固定螢幕高度，鎖定全頁滾動 */
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
+            overflow: hidden;
         }
 
         body {
@@ -30,32 +23,37 @@ html_v2 = """<!DOCTYPE html>
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            color: var(--fujiya-brown);
-            padding: 16px 12px 60px 12px;
-            min-height: 100vh;
+            color: #4a2c11;
         }
 
+        /* 2. 主容器：使用 Flexbox 控制整體版面 */
         .container {
             max-width: 480px;
+            height: 100vh;
             margin: 0 auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
         }
 
-        /* Header Card */
+        /* 3. 固定頂部：標題框與天數按鈕 */
         .header-card {
+            flex-shrink: 0;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(5px);
-            border: 4px solid var(--fujiya-dark-red);
+            border: 4px solid #a8000b;
             border-radius: 24px;
-            padding: 0 16px 18px 16px;
+            padding: 0 16px 14px 16px;
             text-align: center;
-            box-shadow: var(--shadow-card);
-            margin-bottom: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            margin-bottom: 12px;
             position: relative;
             overflow: hidden;
         }
 
-        .peko-bar-top {
-            background: var(--fujiya-dark-red);
+        .peko-bar-top, .peko-bar-bottom {
+            background: #a8000b;
             color: white;
             font-size: 13px;
             font-weight: 900;
@@ -63,52 +61,39 @@ html_v2 = """<!DOCTYPE html>
             letter-spacing: 2px;
             margin-left: -16px;
             margin-right: -16px;
-            margin-bottom: 12px;
         }
-
-        .peko-bar-bottom {
-            background: var(--fujiya-dark-red);
-            color: white;
-            font-size: 13px;
-            font-weight: 900;
-            padding: 4px 0;
-            letter-spacing: 2px;
-            margin-left: -16px;
-            margin-right: -16px;
-            margin-top: 12px;
-        }
+        .peko-bar-top { margin-bottom: 12px; }
+        .peko-bar-bottom { margin-top: 12px; }
 
         .main-title {
             font-family: 'M PLUS Rounded 1c', sans-serif;
             font-weight: 900;
             font-size: 30px;
-            color: var(--fujiya-dark-red);
+            color: #a8000b;
             line-height: 1.3;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            flex-wrap: wrap;
         }
 
-        /* Day Navigation Grid - More Square & Justified */
         .day-nav {
+            flex-shrink: 0;
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 6px;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             width: 100%;
         }
 
         .nav-btn {
             background: rgba(255, 255, 255, 0.92);
-            border: 2.5px solid var(--fujiya-dark-red);
+            border: 2.5px solid #a8000b;
             border-radius: 12px;
             padding: 10px 2px;
             font-family: 'M PLUS Rounded 1c', sans-serif;
             font-weight: 900;
-            font-size: 13px;
-            color: var(--fujiya-brown);
+            font-size: 18px;
+            color: #4a2c11;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
@@ -121,7 +106,7 @@ html_v2 = """<!DOCTYPE html>
         }
 
         .nav-btn.active {
-            background: var(--fujiya-dark-red);
+            background: #a8000b;
             color: white;
             border-color: #ffffff;
             transform: translateY(-2px);
@@ -136,23 +121,22 @@ html_v2 = """<!DOCTYPE html>
             opacity: 0.9;
         }
 
-        /* Day Section */
+        /* 4. 天數分頁容器：佔滿剩餘高度 */
         .day-section {
             display: none;
         }
 
         .day-section.active {
-            display: block;
-            animation: fadeIn 0.25s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        /* 5. 關鍵設定：DAY 標題固定，僅時間地點列表 (.day-content) 可滑動 */
         .day-header {
-            background: var(--fujiya-dark-red);
+            flex-shrink: 0;
+            background: #a8000b;
             color: white;
             padding: 12px 18px;
             border-radius: 20px 20px 0 0;
@@ -161,28 +145,29 @@ html_v2 = """<!DOCTYPE html>
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 3px solid var(--fujiya-dark-red);
+            border: 3px solid #a8000b;
             border-bottom: none;
-            box-shadow: var(--shadow-card);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
         }
 
         .day-content {
+            flex: 1;
+            overflow-y: auto; /* 允許內部垂直滑動 */
+            -webkit-overflow-scrolling: touch;
             background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(8px);
-            border: 3px solid var(--fujiya-dark-red);
+            border: 3px solid #a8000b;
             border-top: none;
             border-radius: 0 0 20px 20px;
-            padding: 20px 12px;
-            box-shadow: var(--shadow-card);
-            position: relative;
+            padding: 16px 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
         }
 
-        /* Timeline Items with Lollipop Connecting Line */
+        /* 6. 時間軸與卡片樣式 */
         .timeline-list {
             position: relative;
         }
 
-        /* Connecting vertical line (lollipop stick) */
         .timeline-list::before {
             content: "";
             position: absolute;
@@ -192,8 +177,8 @@ html_v2 = """<!DOCTYPE html>
             width: 5px;
             background: repeating-linear-gradient(
                 180deg,
-                var(--fujiya-dark-red),
-                var(--fujiya-dark-red) 10px,
+                #a8000b,
+                #a8000b 10px,
                 #ff80ab 10px,
                 #ff80ab 18px
             );
@@ -213,23 +198,21 @@ html_v2 = """<!DOCTYPE html>
             margin-bottom: 0;
         }
 
-        /* Time Badge - Big Font & Separated Border */
         .time-badge {
             background: #ffffff;
-            color: var(--fujiya-dark-red);
+            color: #a8000b;
             font-weight: 900;
             font-size: 16px;
             padding: 8px 10px;
             border-radius: 16px;
             width: 72px;
             text-align: center;
-            border: 3px solid var(--fujiya-dark-red);
+            border: 3px solid #a8000b;
             box-shadow: 0 3px 8px rgba(0,0,0,0.15);
             flex-shrink: 0;
             z-index: 3;
         }
 
-        /* Location Card - Transparent Background & Separated Border */
         .item-details {
             flex-grow: 1;
             margin-left: 12px;
@@ -268,25 +251,14 @@ html_v2 = """<!DOCTYPE html>
             border: 1px solid rgba(0,0,0,0.1);
         }
 
-        /* Category Color Badges */
         .tag-food { background: #fff3e0; color: #e65100; }
         .tag-hotel { background: #e8eaf6; color: #1a237e; }
         .tag-shop { background: #fce4ec; color: #c2185b; }
         .tag-sight { background: #e8f5e9; color: #1b5e20; }
         .tag-trans { background: #e0f7fa; color: #006064; }
 
-        /* Footer */
         .footer {
-            text-align: center;
-            margin-top: 24px;
-            font-size: 13px;
-            font-weight: 900;
-            color: var(--fujiya-dark-red);
-            background: rgba(255,255,255,0.92);
-            padding: 12px;
-            border-radius: 16px;
-            border: 2px solid var(--fujiya-dark-red);
-            box-shadow: var(--shadow-card);
+            display: none; /* 隱藏底欄以挪出最大可滑動區域 */
         }
     </style>
 </head>
@@ -297,9 +269,7 @@ html_v2 = """<!DOCTYPE html>
     <div class="header-card">
         <div class="peko-bar-top">🍬 PEKO 🍬 PEKO 🍬 PEKO 🍬 PEKO 🍬</div>
         <h1 class="main-title">
-            <span>🍬</span>
             <span>福岡九州 5日極致之旅</span>
-            <span>🍬</span>
         </h1>
         <div class="peko-bar-bottom">🍬 PEKO 🍬 PEKO 🍬 PEKO 🍬 PEKO 🍬</div>
     </div>
@@ -307,23 +277,23 @@ html_v2 = """<!DOCTYPE html>
     <!-- Day Navigation Grid -->
     <div class="day-nav">
         <button class="nav-btn active" onclick="switchDay(1)">
-            第 1 天
+            1
             <span class="date-sub">10/27 (二)</span>
         </button>
         <button class="nav-btn" onclick="switchDay(2)">
-            第 2 天
+            2
             <span class="date-sub">10/28 (三)</span>
         </button>
         <button class="nav-btn" onclick="switchDay(3)">
-            第 3 天
+            3
             <span class="date-sub">10/29 (四)</span>
         </button>
         <button class="nav-btn" onclick="switchDay(4)">
-            第 4 天
+            4
             <span class="date-sub">10/30 (五)</span>
         </button>
         <button class="nav-btn" onclick="switchDay(5)">
-            第 5 天
+            5
             <span class="date-sub">10/31 (六)</span>
         </button>
     </div>
@@ -997,10 +967,3 @@ html_v2 = """<!DOCTYPE html>
 
 </body>
 </html>
-"""
-
-filename_v2 = "index-v2.html"
-with open(filename_v2, "w", encoding="utf-8") as f:
-    f.write(html_v2)
-
-print(f"Successfully generated {filename_v2}")
