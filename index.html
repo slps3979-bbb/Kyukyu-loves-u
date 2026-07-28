@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-  <style>
+    <style>
         /* 1. 全局設定與背景 */
         html, body {
             height: 100%;
@@ -26,7 +26,7 @@
             color: #4a2c11;
         }
 
-        /* 2. 主容器：修正整體對齊 */
+        /* 2. 主容器 */
         .container {
             max-width: 480px;
             height: 100vh;
@@ -37,7 +37,7 @@
             box-sizing: border-box;
         }
 
-        /* 3. 固定頂部標題框：純白邊框、完美裁切切齊 */
+        /* 3. 固定頂部標題框：純白邊框、完美無縫切齊 */
         .header-card {
             flex-shrink: 0;
             background: rgba(255, 255, 255, 0.95);
@@ -101,13 +101,13 @@
             padding: 8px 2px;
             font-family: 'M PLUS Rounded 1c', sans-serif;
             font-weight: 900;
-            font-size: 24px; /* 天數數字再放大 */
+            font-size: 24px;
             color: #4a2c11;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             text-align: center;
-            min-height: 68px; /* 稍微長方形比例 */
+            min-height: 68px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -123,11 +123,10 @@
             box-shadow: 0 6px 14px rgba(0,0,0,0.3);
         }
 
-        /* 日期與星期分兩行排版 */
         .nav-btn .date-sub {
             font-size: 10px;
             display: flex;
-            flex-direction: column; /* 讓日期與星期上下分行 */
+            flex-direction: column;
             align-items: center;
             font-weight: 700;
             margin-top: 4px;
@@ -166,12 +165,11 @@
             box-sizing: border-box;
         }
 
-        /* 日期小字靠右設定 */
         .day-header .day-date {
             font-size: 12px;
             font-weight: 700;
             opacity: 0.9;
-            margin-left: auto; /* 自動推至最右側 */
+            margin-left: auto;
         }
 
         .day-content {
@@ -189,7 +187,7 @@
             width: 100%;
         }
 
-       /* 6. 可愛甜美風「櫻桃串珠」時間軸 */
+        /* 6. 可愛甜美風「櫻桃珍珠」時間軸 */
         .timeline-list {
             position: relative;
         }
@@ -200,21 +198,20 @@
             top: 15px;
             bottom: 15px;
             left: 33px;
-            width: 10px; /* 拉大寬度讓圓珠更完整 */
-            /* 紅白雙色圓潤串珠 */
+            width: 10px;
             background-image: 
                 radial-gradient(circle at 35% 35%, #ffffff 0%, #ffffff 25%, #ff80ab 80%, #d3000d 100%),
                 radial-gradient(circle at 35% 35%, #ffffff 0%, #ffffff 30%, #a8000b 85%, #4a2c11 100%);
             background-size: 10px 10px;
-            background-position: 0 0, 0 16px; /* 拉開每顆珠子的垂直間距 */
-            background-repeat: repeat-y;       /* 讓串珠垂直重複排列 */
+            background-position: 0 0, 0 16px;
+            background-repeat: repeat-y;
             z-index: 1;
         }
 
         .timeline-item {
             display: flex;
-            align-items: flex-start; /* 改為頂部對齊，讓時間與地點標題平行 */
-            margin-bottom: 28px;      /* 關鍵：從 14px 加倍放大到 28px，串珠自然拉長！ */
+            align-items: flex-start;
+            margin-bottom: 28px; /* 拉大間距使串珠更長 */
             position: relative;
             z-index: 2;
         }
@@ -222,15 +219,15 @@
         .timeline-item:last-child {
             margin-bottom: 0;
         }
-      
-       /* 時間膠囊標籤 */
+
+        /* 時間膠囊標籤 */
         .time-badge {
             background: #ffffff;
             color: #a8000b;
             font-weight: 900;
             font-size: 15px;
             padding: 6px 8px;
-            margin-top: 2px; /* 新增這行：微調與右側文字的垂直對齊 */
+            margin-top: 2px;
             border-radius: 16px;
             width: 68px;
             text-align: center;
@@ -240,14 +237,14 @@
             z-index: 3;
         }
 
-        /* 7. 細項無邊框、無填滿底色樣式 */
+        /* 7. 細項無邊框樣式 */
         .item-details {
             flex-grow: 1;
             margin-left: 12px;
-            background: transparent; /* 取消填滿底色 */
-            border: none;              /* 取消框線 */
-            padding: 2px 4px;          /* 精簡內距 */
-            box-shadow: none;          /* 取消陰影 */
+            background: transparent;
+            border: none;
+            padding: 2px 4px;
+            box-shadow: none;
         }
 
         .item-title {
@@ -283,19 +280,16 @@
         .tag-sight { background: #e8f5e9; color: #1b5e20; }
         .tag-trans { background: #e0f7fa; color: #006064; }
 
-        .footer {
-            display: none;
-        }
-      /* 交通/車次專用：淺粉色果凍感小卡片 */
+        /* 8. 交通/車次專用：淺粉色果凍感小卡片 */
         .transit-jelly-card {
-            background: rgba(255, 235, 238, 0.75); /* 淺粉色半透明果凍底色 */
+            background: rgba(255, 235, 238, 0.75);
             backdrop-filter: blur(4px);
-            border: 1.5px solid rgba(255, 255, 255, 0.9); /* 上方微白光澤邊框 */
-            border-bottom: 2px solid rgba(239, 154, 154, 0.5); /* 底部立體果凍陰影邊 */
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            border-bottom: 2px solid rgba(239, 154, 154, 0.5);
             border-radius: 12px;
             padding: 8px 12px;
             margin-top: 6px;
-            box-shadow: 0 4px 10px rgba(211, 47, 47, 0.08); /* 柔和粉紅陰影 */
+            box-shadow: 0 4px 10px rgba(211, 47, 47, 0.08);
             display: flex;
             flex-direction: column;
             gap: 4px;
@@ -321,10 +315,14 @@
         }
 
         .transit-detail-text {
-            font-size: 14px; /* 字體加大 */
+            font-size: 14px;
             font-weight: 900;
             color: #8e0000;
             letter-spacing: 0.5px;
+        }
+
+        .footer {
+            display: none;
         }
     </style>
 </head>
@@ -340,27 +338,27 @@
         <div class="peko-bar-bottom">🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒</div>
     </div>
 
-   <!-- Day Navigation Grid -->
+    <!-- Day Navigation Grid -->
     <div class="day-nav">
         <button class="nav-btn active" onclick="switchDay(1)">
             1
-            <span class="date-sub"><span>10/27</span><span>(二)</span></span>
+            <span class="date-sub"><span>10/24</span><span>(六)</span></span>
         </button>
         <button class="nav-btn" onclick="switchDay(2)">
             2
-            <span class="date-sub"><span>10/28</span><span>(三)</span></span>
+            <span class="date-sub"><span>10/25</span><span>(日)</span></span>
         </button>
         <button class="nav-btn" onclick="switchDay(3)">
             3
-            <span class="date-sub"><span>10/29</span><span>(四)</span></span>
+            <span class="date-sub"><span>10/26</span><span>(一)</span></span>
         </button>
         <button class="nav-btn" onclick="switchDay(4)">
             4
-            <span class="date-sub"><span>10/30</span><span>(五)</span></span>
+            <span class="date-sub"><span>10/27</span><span>(二)</span></span>
         </button>
         <button class="nav-btn" onclick="switchDay(5)">
             5
-            <span class="date-sub"><span>10/31</span><span>(六)</span></span>
+            <span class="date-sub"><span>10/28</span><span>(三)</span></span>
         </button>
     </div>
 
@@ -368,7 +366,7 @@
     <div id="day1" class="day-section active">
         <div class="day-header">
             <span>DAY 1 ‧ 博多與小倉探索</span>
-            <span class="day-date">2026/10/29</span>
+            <span class="day-date">2026/10/24</span>
         </div>
         <div class="day-content">
             <div class="timeline-list">
@@ -393,54 +391,38 @@
                         <span class="item-duration tag-shop">停留 00時30分</span>
                     </div>
                 </div> 
-<!-- 1. 綠色窗口劃位 -->
-<div class="timeline-item">
-    <div class="time-badge">14:02</div>
-    <div class="item-details">
-        <div class="item-title"><span class="item-icon">🎫</span> 博多車站 新幹線中央口 綠色窗口</div>
-        <span class="item-duration tag-trans">停留 00時13分</span>
-    </div>
-</div>
-
-<!-- 2. 博多車站（搭車出發） -->
-<div class="timeline-item">
-    <div class="time-badge">14:16</div>
-    <div class="item-details">
-        <div class="item-title"><span class="item-icon">🚉</span> 博多車站</div>
-        
-        <button class="transit-btn" onclick="toggleTransit(this)">
-            <span>🚄 班次資訊</span> ▾
-        </button>
-
-        <div class="transit-info-box">
-            <div class="transit-input-group">
-                <input type="time" value="14:16" placeholder="出發時間">
-                <input type="time" value="14:31" placeholder="到達時間">
-            </div>
-            <input type="text" placeholder="輸入車次/月台（例：山陽新幹線 Sakura 550號）" style="width: 100%; padding: 3px 6px; border: 1px solid #ccc; border-radius: 6px; font-size: 11px;">
-        </div>
-    </div>
-</div>
-
-<!-- 3. 小倉車站（抵達） -->
-<div class="timeline-item">
-    <div class="time-badge">14:30</div>
-    <div class="item-details">
-        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station 小倉車站</div>
-        
-        <button class="transit-btn" onclick="toggleTransit(this)">
-            <span>🚉 到達資訊</span> ▾
-        </button>
-
-        <div class="transit-info-box">
-            <div class="transit-input-group">
-                <input type="time" value="14:30" placeholder="到達時間">
-            </div>
-            <input type="text" placeholder="月台或備註（例：3號月台出口）" style="width: 100%; padding: 3px 6px; border: 1px solid #ccc; border-radius: 6px; font-size: 11px;">
-        </div>
-    </div>
-</div>
-                
+                <div class="timeline-item">
+                    <div class="time-badge">14:02</div>
+                    <div class="item-details">
+                        <div class="item-title"><span class="item-icon">🎫</span> 博多車站 新幹線中央口 綠色窗口</div>
+                        <span class="item-duration tag-trans">停留 00時13分</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time-badge">14:16</div>
+                    <div class="item-details">
+                        <div class="item-title"><span class="item-icon">🚉</span> 博多車站</div>
+                        <div class="transit-jelly-card">
+                            <div class="transit-header">
+                                <span class="transit-icon">🚂</span> 
+                                <span class="transit-time-text">14:16 發 ➔ 14:31 到</span>
+                            </div>
+                            <div class="transit-detail-text">山陽新幹線 Sakura 550號 / 3號月台</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time-badge">14:30</div>
+                    <div class="item-details">
+                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station 小倉車站</div>
+                        <div class="transit-jelly-card">
+                            <div class="transit-header">
+                                <span class="transit-icon">🚂</span> 
+                                <span class="transit-time-text">14:30 到達</span>
+                            </div>
+                            <div class="transit-detail-text">新幹線/在來線轉乘月台</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="timeline-item">
                     <div class="time-badge">14:40</div>
@@ -456,27 +438,21 @@
                         <span class="item-duration tag-hotel">停留 00時30分</span>
                     </div>
                 </div>
-
- <div class="timeline-item">
-    <div class="time-badge">16:08</div>
-    <div class="item-details">
-        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station</div>
-        
-        <!-- 萬用交通按鈕區塊 -->
-        <button class="transit-btn" onclick="toggleTransit(this)"><span>🚉 車次資訊</span> ▾</button>
-        <div class="transit-info-box">
-            <div class="transit-input-group">
-                <input type="time" value="16:08" placeholder="出發時間">
-                <input type="time" value="16:25" placeholder="到達時間">
-            </div>
-            <input type="text" placeholder="輸入車次/月台/備註" style="width:100%; padding:3px 6px; border:1px solid #ccc; border-radius:6px; font-size:11px;">
-        </div>
-    </div>
-
-                    
-     </div>
-        <div class="timeline-item">
-            <div class="time-badge">16:55</div>
+                <div class="timeline-item">
+                    <div class="time-badge">16:08</div>
+                    <div class="item-details">
+                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station</div>
+                        <div class="transit-jelly-card">
+                            <div class="transit-header">
+                                <span class="transit-icon">🚂</span> 
+                                <span class="transit-time-text">16:08 發 ➔ 16:25 到</span>
+                            </div>
+                            <div class="transit-detail-text">鹿兒島本線 快速 / 2號月台</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time-badge">16:55</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🚉</span> Yahata Station</div>
                         <span class="item-duration tag-trans">停留 00時35分</span>
@@ -539,7 +515,7 @@
     <div id="day2" class="day-section">
         <div class="day-header">
             <span>DAY 2 ‧ 小倉老街與前往湯布院</span>
-           <span class="day-date">2026/10/29</span>
+            <span class="day-date">2026/10/25</span>
         </div>
         <div class="day-content">
             <div class="timeline-list">
@@ -656,7 +632,7 @@
     <div id="day3" class="day-section">
         <div class="day-header">
             <span>DAY 3 ‧ 動物園湯之坪散策</span>
-            <span class="day-date">2026/10/29</span>
+            <span class="day-date">2026/10/26</span>
         </div>
         <div class="day-content">
             <div class="timeline-list">
@@ -850,7 +826,7 @@
     <div id="day4" class="day-section">
         <div class="day-header">
             <span>DAY 4 ‧ 返博多與天神購物狂歡</span>
-            <span class="day-date">2026/10/29</span>
+            <span class="day-date">2026/10/27</span>
         </div>
         <div class="day-content">
             <div class="timeline-list">
@@ -981,7 +957,7 @@
     <div id="day5" class="day-section">
         <div class="day-header">
             <span>DAY 5 ‧ 天神商圈與滿載而歸</span>
-            <span class="day-date">2026/10/29</span>
+            <span class="day-date">2026/10/28</span>
         </div>
         <div class="day-content">
             <div class="timeline-list">
@@ -1061,7 +1037,7 @@
 
     <!-- Footer -->
     <div class="footer">
-       🍒🍒 祝您旅途愉快！旅程順利滿載而歸 🍒🍒 
+        🍒🍒 祝您旅途愉快！旅程順利滿載而歸 🍒🍒 
     </div>
 </div>
 
