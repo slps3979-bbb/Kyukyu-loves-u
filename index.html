@@ -189,38 +189,32 @@
             width: 100%;
         }
 
-        /* 6. 可愛甜美風「櫻桃串珠」時間軸 */
+       /* 6. 可愛甜美風「櫻桃串珠」時間軸 */
         .timeline-list {
             position: relative;
         }
-     .timeline-list::before {
-    content: "";
-    position: absolute;
-    top: 20px;
-    bottom: 20px;
-    left: 36px;
-    width: 5px;
-    /* 紅白相間小方塊點點 */
-    background: repeating-linear-gradient(
-        0deg,
-        #a8000b,
-        #a8000b 8px,
-        #ffffff 8px,
-        #ffffff 12px,
-        #ff80ab 12px,
-        #ff80ab 20px,
-        #ffffff 20px,
-        #ffffff 24px
-    );
-    border-radius: 3px;
-    box-shadow: 0 0 4px rgba(168, 0, 11, 0.2);
-    z-index: 1;
-}
+
+        .timeline-list::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            bottom: 15px;
+            left: 33px;
+            width: 10px; /* 拉大寬度讓圓珠更完整 */
+            /* 紅白雙色圓潤串珠 */
+            background-image: 
+                radial-gradient(circle at 35% 35%, #ffffff 0%, #ffffff 25%, #ff80ab 80%, #d3000d 100%),
+                radial-gradient(circle at 35% 35%, #ffffff 0%, #ffffff 30%, #a8000b 85%, #4a2c11 100%);
+            background-size: 10px 10px;
+            background-position: 0 0, 0 16px; /* 拉開每顆珠子的垂直間距 */
+            background-repeat: repeat-y;       /* 讓串珠垂直重複排列 */
+            z-index: 1;
+        }
 
         .timeline-item {
             display: flex;
-            align-items: center;
-            margin-bottom: 14px;
+            align-items: flex-start; /* 改為頂部對齊，讓時間與地點標題平行 */
+            margin-bottom: 28px;      /* 關鍵：從 14px 加倍放大到 28px，串珠自然拉長！ */
             position: relative;
             z-index: 2;
         }
@@ -228,14 +222,15 @@
         .timeline-item:last-child {
             margin-bottom: 0;
         }
-
-        /* 時間膠囊標籤 */
+      
+       /* 時間膠囊標籤 */
         .time-badge {
             background: #ffffff;
             color: #a8000b;
             font-weight: 900;
             font-size: 15px;
             padding: 6px 8px;
+            margin-top: 2px; /* 新增這行：微調與右側文字的垂直對齊 */
             border-radius: 16px;
             width: 68px;
             text-align: center;
@@ -357,20 +352,55 @@
                         <div class="item-title"><span class="item-icon">🛍️</span> 購物中心KITTE</div>
                         <span class="item-duration tag-shop">停留 00時30分</span>
                     </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time-badge">14:02</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🎫</span> 博多車站 新幹線中央口 綠色窗口</div>
-                        <span class="item-duration tag-trans">停留 00時13分</span>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time-badge">14:30</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station</div>
-                        <span class="item-duration tag-trans">停留 00時10分</span>
-                    </div>
+                </div> 
+<!-- 1. 綠色窗口劃位 -->
+<div class="timeline-item">
+    <div class="time-badge">14:02</div>
+    <div class="item-details">
+        <div class="item-title"><span class="item-icon">🎫</span> 博多車站 新幹線中央口 綠色窗口</div>
+        <span class="item-duration tag-trans">停留 00時13分</span>
+    </div>
+</div>
+
+<!-- 2. 博多車站（搭車出發） -->
+<div class="timeline-item">
+    <div class="time-badge">14:16</div>
+    <div class="item-details">
+        <div class="item-title"><span class="item-icon">🚉</span> 博多車站</div>
+        
+        <button class="transit-btn" onclick="toggleTransit(this)">
+            <span>🚄 班次資訊</span> ▾
+        </button>
+
+        <div class="transit-info-box">
+            <div class="transit-input-group">
+                <input type="time" value="14:16" placeholder="出發時間">
+                <input type="time" value="14:31" placeholder="到達時間">
+            </div>
+            <input type="text" placeholder="輸入車次/月台（例：山陽新幹線 Sakura 550號）" style="width: 100%; padding: 3px 6px; border: 1px solid #ccc; border-radius: 6px; font-size: 11px;">
+        </div>
+    </div>
+</div>
+
+<!-- 3. 小倉車站（抵達） -->
+<div class="timeline-item">
+    <div class="time-badge">14:30</div>
+    <div class="item-details">
+        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station 小倉車站</div>
+        
+        <button class="transit-btn" onclick="toggleTransit(this)">
+            <span>🚉 到達資訊</span> ▾
+        </button>
+
+        <div class="transit-info-box">
+            <div class="transit-input-group">
+                <input type="time" value="14:30" placeholder="到達時間">
+            </div>
+            <input type="text" placeholder="月台或備註（例：3號月台出口）" style="width: 100%; padding: 3px 6px; border: 1px solid #ccc; border-radius: 6px; font-size: 11px;">
+        </div>
+    </div>
+</div>
+                
                 </div>
                 <div class="timeline-item">
                     <div class="time-badge">14:40</div>
@@ -386,15 +416,27 @@
                         <span class="item-duration tag-hotel">停留 00時30分</span>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="time-badge">16:08</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station</div>
-                        <span class="item-duration tag-trans">停留 00時17分</span>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time-badge">16:55</div>
+
+ <div class="timeline-item">
+    <div class="time-badge">16:08</div>
+    <div class="item-details">
+        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station</div>
+        
+        <!-- 萬用交通按鈕區塊 -->
+        <button class="transit-btn" onclick="toggleTransit(this)"><span>🚉 車次資訊</span> ▾</button>
+        <div class="transit-info-box">
+            <div class="transit-input-group">
+                <input type="time" value="16:08" placeholder="出發時間">
+                <input type="time" value="16:25" placeholder="到達時間">
+            </div>
+            <input type="text" placeholder="輸入車次/月台/備註" style="width:100%; padding:3px 6px; border:1px solid #ccc; border-radius:6px; font-size:11px;">
+        </div>
+    </div>
+
+                    
+     </div>
+        <div class="timeline-item">
+            <div class="time-badge">16:55</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🚉</span> Yahata Station</div>
                         <span class="item-duration tag-trans">停留 00時35分</span>
