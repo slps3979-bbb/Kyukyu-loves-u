@@ -1,5 +1,3 @@
-import os
-
 html_content = """<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -956,10 +954,6 @@ html_content = """<!DOCTYPE html>
 
 </body>
 </html>
-"""
-
-filename = "index.html"
-with open(filename, "w", encoding="utf-8") as f:
     f.write(html_content)
 
 print(f"Successfully generated {filename}")
