@@ -193,19 +193,20 @@
         .timeline-list {
             position: relative;
         }
-       .timeline-list::before {
+      .timeline-list::before {
     content: "";
     position: absolute;
     top: 20px;
     bottom: 20px;
-    left: 35px;
-    width: 6px;
-    /* 雙色珍珠串珠效果 */
-    background: radial-gradient(circle at 30% 30%, #ffffff 20%, #a8000b 80%),
-                radial-gradient(circle at 30% 30%, #ffffff 20%, #ff80ab 80%);
-    background-size: 10px 10px, 10px 10px;
-    background-position: 0 0, 0 10px;
-    border-radius: 6px;
+    left: 33px;
+    width: 10px; /* 寬度拉大，才塞得下整顆圓珠 */
+    /* 精緻立體珍珠與紅珠相間 */
+    background-image: 
+        radial-gradient(circle at 35% 35%, #ffffff 0%, #ffffff 25%, #ff80ab 80%, #d3000d 100%),
+        radial-gradient(circle at 35% 35%, #ffffff 0%, #ffffff 30%, #a8000b 85%, #4a2c11 100%);
+    background-size: 10px 10px;
+    background-position: 0 0, 0 14px; /* 拉開間距，顆粒更明顯 */
+    background-repeat: repeat-y; /* 讓珍珠順著垂直軸一顆顆排下來 */
     z-index: 1;
 }
 
