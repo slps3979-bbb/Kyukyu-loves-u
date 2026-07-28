@@ -286,6 +286,46 @@
         .footer {
             display: none;
         }
+      /* 交通/車次專用：淺粉色果凍感小卡片 */
+        .transit-jelly-card {
+            background: rgba(255, 235, 238, 0.75); /* 淺粉色半透明果凍底色 */
+            backdrop-filter: blur(4px);
+            border: 1.5px solid rgba(255, 255, 255, 0.9); /* 上方微白光澤邊框 */
+            border-bottom: 2px solid rgba(239, 154, 154, 0.5); /* 底部立體果凍陰影邊 */
+            border-radius: 12px;
+            padding: 8px 12px;
+            margin-top: 6px;
+            box-shadow: 0 4px 10px rgba(211, 47, 47, 0.08); /* 柔和粉紅陰影 */
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .transit-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 800;
+            color: #c62828;
+        }
+
+        .transit-icon {
+            font-size: 16px;
+        }
+
+        .transit-time-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: #5d4037;
+        }
+
+        .transit-detail-text {
+            font-size: 14px; /* 字體加大 */
+            font-weight: 900;
+            color: #8e0000;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body>
