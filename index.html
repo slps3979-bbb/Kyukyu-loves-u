@@ -307,28 +307,46 @@
             flex-grow: 1;
         }
 
-        /* 加大版可點擊櫻桃按鈕 */
+/* 1. 櫻桃外框按鈕：加上圓角框框與微光澤感 */
         .cherry-btn {
-            background: transparent;
-            border: none;
-            padding: 2px;
+            background: #ffffff;                       /* 未點開時：白色背景 */
+            border: 2px solid #a8000b;                 /* 櫻桃紅外框 */
+            border-radius: 10px;                       /* 圓角框框 */
+            padding: 3px;                              /* 外框與櫻桃之間的間距 */
             cursor: pointer;
             outline: none;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* 微微的陰影 */
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Q彈縮放動畫 */
         }
 
-        .cherry-btn:active {
-            transform: scale(0.85);
-        }
-
-        /* 櫻桃圖案尺寸：放大至 22px，好按不誤觸 */
+        /* 未點開時：櫻桃圖案大小 (較小，如 18px) */
         .cherry-icon {
-            width: 22px;
+            width: 18px;
+            height: 18px;
+            transition: all 0.25s ease;
+        }
+
+        /* -------------------------------------------------- */
+        /* 2. 當選單「點開後 (.expanded)」的框框與櫻桃變大效果 */
+        /* -------------------------------------------------- */
+
+        /* 點開後：外框變深紅色背景、白框，並整體放大 */
+        .transit-jelly-card.expanded .cherry-btn {
+            background: #a8000b;                      /* 變成櫻桃紅底 */
+            border-color: #ffffff;                    /* 變成白框 */
+            transform: scale(1.15);                   /* 框框整體放大 1.15 倍 */
+            box-shadow: 0 4px 8px rgba(168, 0, 11, 0.3); /* 陰影變深 */
+        }
+
+        /* 點開後：櫻桃圖案變大，並變成白色 (或保持紅色) */
+        .transit-jelly-card.expanded .cherry-icon {
+            width: 22px;                              /* 圖案變大 */
             height: 22px;
+            fill: #ffffff;                            /* 填充顏色變成白色 (襯托紅底) */
         }
 
         /* 大兩號的時鐘按鈕 (20px) */
