@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>福岡九州 5日極致之旅</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,6 +82,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0;
         }
 
         /* 4. 天數按鈕 */
@@ -294,6 +295,7 @@
             transition: all 0.25s ease;
             width: 100%;
             box-sizing: border-box;
+            overflow: hidden; /* 防止內容溢出 */
         }
 
         .transit-header-row {
@@ -301,6 +303,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 8px;
+            width: 100%;
         }
 
         .transit-header {
@@ -308,7 +311,7 @@
             align-items: center;
             gap: 8px;
             flex-grow: 1;
-            min-width: 0;
+            min-width: 0; /* 讓內部 input 能縮小不撐開 */
         }
 
         /* 櫻桃按鈕 */
@@ -371,26 +374,37 @@
             fill: #a8000b;
         }
 
-        /* 🔧 核心修復：極致順暢的原生輸入框 (允許文字左右滑動與編輯) */
+        /* 🔧 關鍵修復：完全允許左右滑動與編輯游標移動 */
         .jelly-input {
             font-family: 'M PLUS Rounded 1c', 'Noto Sans TC', sans-serif;
             background: transparent;
             border: 1px solid transparent;
             border-radius: 6px;
-            padding: 2px 4px;
+            padding: 2px 6px;
             outline: none;
             width: 100%;
             box-sizing: border-box;
             
-            /* 開啟手機原生的文字拖拽滑動支援 */
-            touch-action: pan-x;
-            -webkit-user-select: text;
-            user-select: text;
+            /* 開啟內部水平滑動與文字顯示強迫不換行 */
+            white-space: nowrap !important;
+            overflow-x: auto !important;
+            display: block;
+
+            /* 手機原生文字選取與拖拽能力 */
+            touch-action: pan-x !important;
+            -webkit-user-select: text !important;
+            user-select: text !important;
+            pointer-events: auto !important;
         }
 
-        /* 點擊輸入框時出現細微粉紅邊框，提示正在打字滑動 */
+        /* 隱藏原生滑動條讓畫面更乾淨 */
+        .jelly-input::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 點擊輸入框時出現細微粉紅邊框 */
         .jelly-input:focus {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             border-color: rgba(239, 154, 154, 0.8);
         }
 
@@ -410,6 +424,7 @@
             border-top: 1px dashed rgba(239, 154, 154, 0);
             padding-top: 0;
             width: 100%;
+            min-width: 0;
         }
 
         .transit-jelly-card.expanded .transit-expand-content {
@@ -418,6 +433,7 @@
             margin-top: 6px;
             padding-top: 6px;
             border-top-color: rgba(239, 154, 154, 0.6);
+            overflow: visible; /* 允許輸入框滑動 */
         }
 
         .input-detail-text {
