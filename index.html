@@ -392,20 +392,38 @@
             border-top-color: rgba(239, 154, 154, 0.6);
         }
 
-        /* 關鍵：橫向滾動設定 */
+      /* 展開後可直接打字又可順暢滑動的樣式 */
         .input-detail-text {
             font-size: 14px;
             font-weight: 900;
             color: #5d4037;
-            white-space: nowrap;       /* 強制文字不換行，一直延伸 */
-            overflow-x: auto;          /* 超出範圍時可以左右滑動 */
-            -webkit-overflow-scrolling: touch; /* 手機滑動更滑順 */
+            white-space: nowrap;          /* 強制單行不換行 */
+            overflow-x: auto;             /* 支援橫向順暢滾動 */
+            -webkit-overflow-scrolling: touch; /* 手機滑動更流暢 */
+            padding: 2px 4px;
+            border-radius: 6px;
+            outline: none;
             box-sizing: border-box;
+            display: block;               /* 確保容器寬度滿格 */
+            width: 100%;
         }
 
-        /* 隱藏滾動條，保持果凍卡片精美 */
+        /* 隱藏滾動條維持美觀（保留這段） */
         .input-detail-text::-webkit-scrollbar {
             display: none;
+        }
+
+        /* 當點擊打字時顯現微亮提示背景 */
+        .input-detail-text:focus {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 6px;
+        }
+
+        /* 空白時顯示預設提示文字 (Placeholder) */
+        .input-detail-text:empty::before {
+            content: attr(placeholder);
+            color: #a0a0a0;
+            font-weight: 700;
         }
 
         /* 輸入框通用設定 */
@@ -637,9 +655,9 @@
             </div>
 
             <!-- 下拉展開區域：字數再多都可以用手指左右滑動對照 -->
-            <div class="transit-expand-content">
-                <input type="text" class="jelly-input input-detail-text" value="山陽新幹線 Sakura 550號 ‧ 3號月台發車 ‧ 預計 14:31 抵達小倉車站" placeholder="輸入詳細月台與備註">
-            </div>
+<div class="transit-expand-content">
+    <div class="input-detail-text" contenteditable="true" placeholder="輸入詳細月台與備註">山陽新幹線 Sakura 550號 ‧ 3號月台發車 ‧ 預計 14:31 抵達小倉車站</div>
+</div>
         </div>
     </div>
 </div>
