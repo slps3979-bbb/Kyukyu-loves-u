@@ -349,20 +349,63 @@
             fill: #ffffff;                            /* 填充顏色變成白色 (襯托紅底) */
         }
 
-        /* 大兩號的時鐘按鈕 (20px) */
+     /* 1. 櫻桃紅色線條時鐘按鈕 (替代原本的灰色 Emoji) */
         .backup-btn {
             background: transparent;
             border: none;
-            padding: 0;
-            font-size: 20px; /* 大兩號 */
+            padding: 2px;
             cursor: pointer;
             outline: none;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: transform 0.2s ease;
         }
 
         .backup-btn:active {
             transform: scale(0.85);
+        }
+
+        /* 時鐘圖案尺寸與櫻桃統一 (20px) */
+        .clock-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* 2. 下拉展開區域：支援左右順暢滑動 */
+        .transit-expand-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+            margin-top: 0;
+            border-top: 1px dashed rgba(239, 154, 154, 0);
+            padding-top: 0;
+        }
+
+        .transit-jelly-card.expanded .transit-expand-content {
+            max-height: 100px;
+            opacity: 1;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top-color: rgba(239, 154, 154, 0.6);
+        }
+
+        /* 關鍵：橫向滾動設定 */
+        .input-detail-text {
+            font-size: 14px;
+            font-weight: 900;
+            color: #5d4037;
+            white-space: nowrap;       /* 強制文字不換行，一直延伸 */
+            overflow-x: auto;          /* 超出範圍時可以左右滑動 */
+            -webkit-overflow-scrolling: touch; /* 手機滑動更滑順 */
+            box-sizing: border-box;
+        }
+
+        /* 隱藏滾動條，保持果凍卡片精美 */
+        .input-detail-text::-webkit-scrollbar {
+            display: none;
         }
 
         /* 輸入框通用設定 */
@@ -568,30 +611,34 @@
                     </div>
                 </div>
 
-                <!-- 博多車站 果凍卡片 (展開版) -->
- <div class="timeline-item">
+ <!-- 博多車站 果凍卡片 (展開版) -->                
+<div class="timeline-item">
     <div class="time-badge">14:16</div>
     <div class="item-details">
         <div class="item-title"><span class="item-icon">🚉</span> HAKATA Station 博多車站</div>
         <div class="transit-jelly-card">
             <div class="transit-header-row">
                 <div class="transit-header">
-                    <!-- 左邊：加大櫻桃按鈕 (點擊它來展開/收合) -->
+                    <!-- 左邊：點擊變大變色的櫻桃按鈕 -->
                     <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
                         <svg class="cherry-icon" viewBox="0 0 24 24" fill="#a8000b">
                             <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
                         </svg>
                     </button>
-                    <!-- 中間：時間輸入框 (14px 粗體) -->
+                    <!-- 中間：時間輸入框 -->
                     <input type="text" class="jelly-input input-time-text" value="14:16 發" placeholder="預覽車次時間">
                 </div>
-                <!-- 右邊：加大兩號的時鐘按鈕 (20px) -->
-                <button class="backup-btn" onclick="openModal('博多 ➔ 小倉 備用班次', ['14:36 發 ➔ 14:51 到 (Sakura 552號)', '14:56 發 ➔ 15:11 到 (Kodama 850號)'])">⏱️</button>
+                <!-- 右邊：櫻桃紅色向量時鐘按鈕 (非常搭配果凍卡片!) -->
+                <button class="backup-btn" onclick="openModal('博多 ➔ 小倉 備用班次', ['14:36 發 ➔ 14:51 到 (Sakura 552號)', '14:56 發 ➔ 15:11 到 (Kodama 850號)'])">
+                    <svg class="clock-icon" viewBox="0 0 24 24" fill="#a8000b">
+                        <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
+                    </svg>
+                </button>
             </div>
 
-            <!-- 下拉展開內容：月台細節 (14px 粗體) -->
+            <!-- 下拉展開區域：字數再多都可以用手指左右滑動對照 -->
             <div class="transit-expand-content">
-                <input type="text" class="jelly-input input-detail-text" value="山陽新幹線 3號月台發車 ‧ 預計 14:31 抵達小倉" placeholder="輸入詳細月台與備註">
+                <input type="text" class="jelly-input input-detail-text" value="山陽新幹線 Sakura 550號 ‧ 3號月台發車 ‧ 預計 14:31 抵達小倉車站" placeholder="輸入詳細月台與備註">
             </div>
         </div>
     </div>
