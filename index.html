@@ -281,20 +281,21 @@
         .tag-trans { background: #e0f7fa; color: #006064; }
 
         /* 8. 交通/車次專用：淺粉色果凍感卡片 */
+       /* 淺粉色果凍感小卡片 (點擊展開版) */
         .transit-jelly-card {
             background: rgba(255, 235, 238, 0.85);
             backdrop-filter: blur(4px);
             border: 1.5px solid rgba(255, 255, 255, 0.9);
             border-bottom: 2.5px solid rgba(239, 154, 154, 0.6);
             border-radius: 14px;
-            padding: 10px 12px;
+            padding: 8px 12px;
             margin-top: 6px;
             box-shadow: 0 4px 12px rgba(211, 47, 47, 0.08);
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
+            cursor: pointer; /* 提示使用者可以點擊 */
+            transition: all 0.25s ease;
         }
 
+        /* 卡片第一排：時間與按鈕 */
         .transit-header-row {
             display: flex;
             align-items: center;
@@ -304,38 +305,48 @@
         .transit-header {
             display: flex;
             align-items: center;
-            gap: 4px;
-            font-size: 13px;
-            font-weight: 800;
-            color: #c62828;
-            flex-wrap: wrap;
+            gap: 6px;
+            flex-grow: 1;
         }
 
-        .transit-icon {
-            font-size: 16px;
+        .cherry-icon {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
         }
 
-        /* 備用時刻按鈕 */
-        .backup-btn {
-            background: #ffffff;
-            color: #d32f2f;
-            border: 1.5px solid #ef9a9a;
-            border-radius: 12px;
-            padding: 2px 8px;
+        /* 右側區域：時鐘 + 展開小箭頭 */
+        .transit-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 展開指示小箭頭 */
+        .arrow-icon {
             font-size: 11px;
+            color: #c62828;
+            transition: transform 0.3s ease;
             font-weight: 900;
-            font-family: 'M PLUS Rounded 1c', sans-serif;
+        }
+
+        /* 當卡片展開時，小箭頭旋轉 180 度 */
+        .transit-jelly-card.expanded .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        /* 無框線時鐘按鈕 */
+        .backup-btn {
+            background: transparent;
+            border: none;
+            padding: 0;
+            font-size: 16px;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-            transition: all 0.2s ease;
+            outline: none;
+            flex-shrink: 0;
         }
 
-        .backup-btn:active {
-            transform: scale(0.95);
-            background: #ffebee;
-        }
-
-        /* 無痕輸入框設定 */
+        /* 時間與車次細節輸入格 */
         .jelly-input {
             font-family: 'M PLUS Rounded 1c', 'Noto Sans TC', sans-serif;
             background: transparent;
@@ -343,30 +354,40 @@
             border-radius: 6px;
             padding: 2px 4px;
             outline: none;
-            transition: all 0.2s ease;
-        }
-
-        .jelly-input:focus, .jelly-input:hover {
-            background: rgba(255, 255, 255, 0.7);
-            border-color: rgba(239, 154, 154, 0.8);
+            width: 100%;
         }
 
         .input-time-text {
-            font-size: 12px;
-            font-weight: 700;
-            color: #5d4037;
-            width: 145px;
-        }
-
-        .input-detail-text {
             font-size: 14px;
             font-weight: 900;
             color: #8e0000;
-            letter-spacing: 0.5px;
-            width: 100%;
-            box-sizing: border-box;
         }
 
+        /* 隱藏的詳細資訊區塊（平時不占空間） */
+        .transit-expand-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+            margin-top: 0;
+            border-top: 1px dashed rgba(239, 154, 154, 0);
+            padding-top: 0;
+        }
+
+        /* 當卡片被加上 .expanded 類別時，順暢滑出展開 */
+        .transit-jelly-card.expanded .transit-expand-content {
+            max-height: 100px; /* 展開最大高度 */
+            opacity: 1;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top-color: rgba(239, 154, 154, 0.6); /* 出現淡粉色分隔線 */
+        }
+
+        .input-detail-text {
+            font-size: 13px;
+            font-weight: 800;
+            color: #5d4037;
+        }
         /* 9. 備用時刻表彈出視窗 (Modal) */
         .modal-overlay {
             display: none;
@@ -525,22 +546,41 @@
                         <span class="item-duration tag-trans">停留 00時13分</span>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="time-badge">14:16</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> HAKATA 博多車站</div>
-                        <div class="transit-jelly-card">
-                            <div class="transit-header-row">
-                                <div class="transit-header">
-                                
-                                    <input type="text" class="jelly-input input-time-text" value="14:16 發" placeholder="時間標示">
-                                </div>
-                                <button class="backup-btn" onclick="openModal('博多 ➔ 小倉 備用班次', ['14:36 發 ➔ 14:51 到 (Sakura 552號)', '14:56 發 ➔ 15:11 到 (Kodama 850號)', '15:16 發 ➔ 15:31 到 (Hikari 592號)'])">⏱️</button>
-                            </div>
-                            <input type="text" class="jelly-input input-detail-text" value="山陽新幹線 Sakura 550號 / 3號月台" placeholder="輸入車次及月台資訊">
-                        </div>
-                    </div>
+<div class="timeline-item">
+ <div class="time-badge">14:16</div>
+    <div class="item-details">
+        <div class="item-title"><span class="item-icon">🚉</span> HAKATA Station 博多車站</div>
+        
+     <!-- 點擊整張卡片即可展開/收合 -->
+        <div class="transit-jelly-card" onclick="toggleExpand(this, event)">
+            <div class="transit-header-row">
+                <div class="transit-header">
+                    <!-- 櫻桃 SVG -->
+                    <svg class="cherry-icon" viewBox="0 0 24 24" fill="#a8000b">
+                        <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
+                    </svg>
+                    <input type="text" class="jelly-input input-time-text" value="14:16 發 (Sakura 550號)" placeholder="預覽車次時間">
                 </div>
+                <div class="transit-actions">
+                    <!-- ⏱️ 時鐘按鈕 -->
+                    <button class="backup-btn" onclick="openModal('博多 ➔ 小倉 備用班次', ['14:36 發 ➔ 14:51 到 (Sakura 552號)', '14:56 發 ➔ 15:11 到 (Kodama 850號)']); event.stopPropagation();">⏱️</button>
+                    <!-- 下拉小箭頭 -->
+                    <span class="arrow-icon">▾</span>
+                </div>
+            </div>
+
+            <!-- 展開後才會看到的詳細內容 (月台/細節/備註) -->
+            <div class="transit-expand-content">
+                <input type="text" class="jelly-input input-detail-text" value="山陽新幹線 3號月台發車 ‧ 預計 14:31 抵達小倉" placeholder="輸入詳細月台與備註">
+            </div>
+        </div>
+    </div>
+</div>
+
+                
+
+    </div>
+          </div>
                 <div class="timeline-item">
                     <div class="time-badge">14:30</div>
                     <div class="item-details">
@@ -556,7 +596,7 @@
                             <input type="text" class="jelly-input input-detail-text" value="新幹線/在來線轉乘月台" placeholder="輸入月台或備註">
                         </div>
                     </div>
-                </div>
+         </div>
                 <div class="timeline-item">
                     <div class="time-badge">14:40</div>
                     <div class="item-details">
@@ -1255,6 +1295,16 @@
     function closeModalDirect() {
         document.getElementById('backupModal').classList.remove('active');
     }
+   /* 控制卡片展開與收合 */
+    function toggleExpand(cardElement, event) {
+        // 如果點擊的是輸入框 (input)，不要觸發收合/展開，方便打字
+        if (event.target.tagName.toLowerCase() === 'input') {
+            return;
+        }
+        // 切換 expanded 類別
+        cardElement.classList.toggle('expanded');
+    }
+    
 </script>
 
 </body>
