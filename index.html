@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>福岡九州 5日極致之旅</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,7 +82,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0;
         }
 
         /* 4. 天數按鈕 */
@@ -199,7 +198,7 @@
             top: 15px;
             bottom: 15px;
             left: 33px;
-            width: 100px;
+            width: 10px;
             background-image: 
                 radial-gradient(circle at 35% 35%, #ffffff 0%, #ffffff 25%, #ff80ab 80%, #d3000d 100%),
                 radial-gradient(circle at 35% 35%, #ffffff 0%, #ffffff 30%, #a8000b 85%, #4a2c11 100%);
@@ -295,7 +294,6 @@
             transition: all 0.25s ease;
             width: 100%;
             box-sizing: border-box;
-            overflow: hidden; /* 防止內容溢出 */
         }
 
         .transit-header-row {
@@ -303,7 +301,6 @@
             align-items: center;
             justify-content: space-between;
             gap: 8px;
-            width: 100%;
         }
 
         .transit-header {
@@ -311,7 +308,7 @@
             align-items: center;
             gap: 8px;
             flex-grow: 1;
-            min-width: 0; /* 讓內部 input 能縮小不撐開 */
+            min-width: 0;
         }
 
         /* 櫻桃按鈕 */
@@ -374,38 +371,17 @@
             fill: #a8000b;
         }
 
-        /* 🔧 關鍵修復：完全允許左右滑動與編輯游標移動 */
+        /* 第一排時間輸入格 */
         .jelly-input {
             font-family: 'M PLUS Rounded 1c', 'Noto Sans TC', sans-serif;
             background: transparent;
             border: 1px solid transparent;
             border-radius: 6px;
-            padding: 2px 6px;
+            padding: 2px 4px;
             outline: none;
             width: 100%;
             box-sizing: border-box;
-            
-            /* 開啟內部水平滑動與文字顯示強迫不換行 */
-            white-space: nowrap !important;
-            overflow-x: auto !important;
-            display: block;
-
-            /* 手機原生文字選取與拖拽能力 */
-            touch-action: pan-x !important;
-            -webkit-user-select: text !important;
-            user-select: text !important;
-            pointer-events: auto !important;
-        }
-
-        /* 隱藏原生滑動條讓畫面更乾淨 */
-        .jelly-input::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* 點擊輸入框時出現細微粉紅邊框 */
-        .jelly-input:focus {
-            background: rgba(255, 255, 255, 0.85);
-            border-color: rgba(239, 154, 154, 0.8);
+            touch-action: pan-x;
         }
 
         .input-time-text {
@@ -424,7 +400,6 @@
             border-top: 1px dashed rgba(239, 154, 154, 0);
             padding-top: 0;
             width: 100%;
-            min-width: 0;
         }
 
         .transit-jelly-card.expanded .transit-expand-content {
@@ -433,13 +408,31 @@
             margin-top: 6px;
             padding-top: 6px;
             border-top-color: rgba(239, 154, 154, 0.6);
-            overflow: visible; /* 允許輸入框滑動 */
         }
 
-        .input-detail-text {
+        /* 🔧 關鍵極致修復：可直接滑動編輯的文字卡片 */
+        .jelly-scroll-text {
+            font-family: 'M PLUS Rounded 1c', 'Noto Sans TC', sans-serif;
             font-size: 14px;
             font-weight: 900;
             color: #5d4037;
+            white-space: nowrap;                   /* 1. 強制文字不換行 */
+            overflow-x: auto;                      /* 2. 允許橫向滑動 */
+            -webkit-overflow-scrolling: touch;     /* 3. iOS 順暢滑動 */
+            width: 100%;
+            box-sizing: border-box;
+            padding: 2px 4px;
+            outline: none;
+            border-radius: 6px;
+        }
+
+        /* 隱藏滾動條，保持果凍感卡片乾淨 */
+        .jelly-scroll-text::-webkit-scrollbar {
+            display: none;
+        }
+
+        .jelly-scroll-text:focus {
+            background: rgba(255, 255, 255, 0.8);
         }
 
         /* 9. 備用時刻表彈出視窗 (Modal) */
@@ -623,7 +616,7 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <input type="text" class="jelly-input input-detail-text" value="山陽新幹線 Sakura 550號 ‧ 3號月台發車 ‧ 預計 14:31 抵達小倉車站" placeholder="輸入詳細月台與備註">
+                                <div class="jelly-scroll-text" contenteditable="true">山陽新幹線 Sakura 550號 ‧ 3號月台發車 ‧ 預計 14:31 抵達小倉車站</div>
                             </div>
                         </div>
                     </div>
@@ -651,7 +644,7 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <input type="text" class="jelly-input input-detail-text" value="新幹線/在來線轉乘月台 ‧ 請留意指標引導" placeholder="輸入月台或備註">
+                                <div class="jelly-scroll-text" contenteditable="true">新幹線/在來線轉乘月台 ‧ 請留意指標引導並預留轉乘時間</div>
                             </div>
                         </div>
                     </div>
@@ -694,7 +687,7 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <input type="text" class="jelly-input input-detail-text" value="鹿兒島本線 快速 / 2號月台發車" placeholder="輸入車次及月台資訊">
+                                <div class="jelly-scroll-text" contenteditable="true">鹿兒島本線 快速 / 2號月台發車 ‧ 請先至月台候車</div>
                             </div>
                         </div>
                     </div>
@@ -796,7 +789,7 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <input type="text" class="jelly-input input-detail-text" value="在來線 / 1號月台" placeholder="輸入車次及月台資訊">
+                                <div class="jelly-scroll-text" contenteditable="true">在來線 / 1號月台發車</div>
                             </div>
                         </div>
                     </div>
@@ -857,7 +850,7 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <input type="text" class="jelly-input input-detail-text" value="JR 特急 Sonic 23號" placeholder="輸入車次及月台資訊">
+                                <div class="jelly-scroll-text" contenteditable="true">JR 特急 Sonic 23號 ‧ 建議提早至月台候車</div>
                             </div>
                         </div>
                     </div>
@@ -1166,7 +1159,7 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <input type="text" class="jelly-input input-detail-text" value="JR 特急 由布之森 / 1號月台發車" placeholder="輸入車次及月台資訊">
+                                <div class="jelly-scroll-text" contenteditable="true">JR 特急 由布之森 / 1號月台發車 ‧ 建議提早抵達月台</div>
                             </div>
                         </div>
                     </div>
