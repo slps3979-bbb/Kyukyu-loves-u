@@ -245,6 +245,7 @@
             border: none;
             padding: 2px 4px;
             box-shadow: none;
+            min-width: 0; /* 關鍵：防止子元素把整體撐大 */
         }
 
         .item-title {
@@ -280,8 +281,7 @@
         .tag-sight { background: #e8f5e9; color: #1b5e20; }
         .tag-trans { background: #e0f7fa; color: #006064; }
 
-        /* 8. 淺粉色果凍感小卡片 (點擊展開版) */
-       /* 淺粉色果凍感小卡片 */
+        /* 8. 淺粉色果凍感小卡片 */
         .transit-jelly-card {
             background: rgba(255, 235, 238, 0.85);
             backdrop-filter: blur(4px);
@@ -292,12 +292,15 @@
             margin-top: 6px;
             box-shadow: 0 4px 12px rgba(211, 47, 47, 0.08);
             transition: all 0.25s ease;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .transit-header-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 8px;
         }
 
         .transit-header {
@@ -305,51 +308,47 @@
             align-items: center;
             gap: 8px;
             flex-grow: 1;
+            min-width: 0; /* 防止輸入框溢出卡片 */
         }
 
-/* 1. 櫻桃外框按鈕：加上圓角框框與微光澤感 */
+        /* 櫻桃按鈕：預設白底紅邊圓角 */
         .cherry-btn {
-            background: #ffffff;                       /* 未點開時：白色背景 */
-            border: 2px solid #a8000b;                 /* 櫻桃紅外框 */
-            border-radius: 10px;                       /* 圓角框框 */
-            padding: 3px;                              /* 外框與櫻桃之間的間距 */
+            background: #ffffff;
+            border: 2px solid #a8000b;
+            border-radius: 10px;
+            padding: 3px;
             cursor: pointer;
             outline: none;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* 微微的陰影 */
-            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Q彈縮放動畫 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* 未點開時：櫻桃圖案大小 (較小，如 18px) */
         .cherry-icon {
             width: 18px;
             height: 18px;
+            fill: #a8000b;
             transition: all 0.25s ease;
         }
 
-        /* -------------------------------------------------- */
-        /* 2. 當選單「點開後 (.expanded)」的框框與櫻桃變大效果 */
-        /* -------------------------------------------------- */
-
-        /* 點開後：外框變深紅色背景、白框，並整體放大 */
+        /* 當選單點開 (.expanded) 時：櫻桃框變深紅底白圖案且放大 */
         .transit-jelly-card.expanded .cherry-btn {
-            background: #a8000b;                      /* 變成櫻桃紅底 */
-            border-color: #ffffff;                    /* 變成白框 */
-            transform: scale(1.15);                   /* 框框整體放大 1.15 倍 */
-            box-shadow: 0 4px 8px rgba(168, 0, 11, 0.3); /* 陰影變深 */
+            background: #a8000b;
+            border-color: #ffffff;
+            transform: scale(1.15);
+            box-shadow: 0 4px 8px rgba(168, 0, 11, 0.3);
         }
 
-        /* 點開後：櫻桃圖案變大，並變成白色 (或保持紅色) */
         .transit-jelly-card.expanded .cherry-icon {
-            width: 22px;                              /* 圖案變大 */
-            height: 22px;
-            fill: #ffffff;                            /* 填充顏色變成白色 (襯托紅底) */
+            width: 20px;
+            height: 20px;
+            fill: #ffffff;
         }
 
-     /* 1. 櫻桃紅色線條時鐘按鈕 (替代原本的灰色 Emoji) */
+        /* 同色系櫻桃紅向量時鐘按鈕 */
         .backup-btn {
             background: transparent;
             border: none;
@@ -367,66 +366,13 @@
             transform: scale(0.85);
         }
 
-        /* 時鐘圖案尺寸與櫻桃統一 (20px) */
         .clock-icon {
             width: 20px;
             height: 20px;
+            fill: #a8000b;
         }
 
-        /* 2. 下拉展開區域：支援左右順暢滑動 */
-        .transit-expand-content {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
-            margin-top: 0;
-            border-top: 1px dashed rgba(239, 154, 154, 0);
-            padding-top: 0;
-        }
-
-        .transit-jelly-card.expanded .transit-expand-content {
-            max-height: 100px;
-            opacity: 1;
-            margin-top: 6px;
-            padding-top: 6px;
-            border-top-color: rgba(239, 154, 154, 0.6);
-        }
-
-      /* 展開後可直接打字又可順暢滑動的樣式 */
-        .input-detail-text {
-            font-size: 14px;
-            font-weight: 900;
-            color: #5d4037;
-            white-space: nowrap;          /* 強制單行不換行 */
-            overflow-x: auto;             /* 支援橫向順暢滾動 */
-            -webkit-overflow-scrolling: touch; /* 手機滑動更流暢 */
-            padding: 2px 4px;
-            border-radius: 6px;
-            outline: none;
-            box-sizing: border-box;
-            display: block;               /* 確保容器寬度滿格 */
-            width: 100%;
-        }
-
-        /* 隱藏滾動條維持美觀（保留這段） */
-        .input-detail-text::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* 當點擊打字時顯現微亮提示背景 */
-        .input-detail-text:focus {
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 6px;
-        }
-
-        /* 空白時顯示預設提示文字 (Placeholder) */
-        .input-detail-text:empty::before {
-            content: attr(placeholder);
-            color: #a0a0a0;
-            font-weight: 700;
-        }
-
-        /* 輸入框通用設定 */
+        /* 核心：無痕輸入框設定 (專屬輸入框內的文字左右滑動，卡片本身不滾動) */
         .jelly-input {
             font-family: 'M PLUS Rounded 1c', 'Noto Sans TC', sans-serif;
             background: transparent;
@@ -435,16 +381,26 @@
             padding: 2px 4px;
             outline: none;
             width: 100%;
+            box-sizing: border-box;
+            
+            /* 讓文字過長時可以在欄位框框內部左右滑動 */
+            white-space: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
-        /* 時間字體大小：統一為 14px 粗體 */
+        /* 隱藏輸入框本身的滾動條，保持簡潔美觀 */
+        .jelly-input::-webkit-scrollbar {
+            display: none;
+        }
+
         .input-time-text {
             font-size: 14px;
             font-weight: 900;
             color: #8e0000;
         }
 
-        /* 展開區塊 */
+        /* 下拉展開內容區域 */
         .transit-expand-content {
             max-height: 0;
             opacity: 0;
@@ -453,6 +409,7 @@
             margin-top: 0;
             border-top: 1px dashed rgba(239, 154, 154, 0);
             padding-top: 0;
+            width: 100%;
         }
 
         .transit-jelly-card.expanded .transit-expand-content {
@@ -463,7 +420,6 @@
             border-top-color: rgba(239, 154, 154, 0.6);
         }
 
-        /* 下拉展開後的細節字體大小：統一為 14px 粗體 */
         .input-detail-text {
             font-size: 14px;
             font-weight: 900;
@@ -629,59 +585,57 @@
                     </div>
                 </div>
 
- <!-- 博多車站 果凍卡片 (展開版) -->                
-<div class="timeline-item">
-    <div class="time-badge">14:16</div>
-    <div class="item-details">
-        <div class="item-title"><span class="item-icon">🚉</span> HAKATA Station 博多車站</div>
-        <div class="transit-jelly-card">
-            <div class="transit-header-row">
-                <div class="transit-header">
-                    <!-- 左邊：點擊變大變色的櫻桃按鈕 -->
-                    <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
-                        <svg class="cherry-icon" viewBox="0 0 24 24" fill="#a8000b">
-                            <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
-                        </svg>
-                    </button>
-                    <!-- 中間：時間輸入框 -->
-                    <input type="text" class="jelly-input input-time-text" value="14:16 發" placeholder="預覽車次時間">
+                <!-- 博多車站 果凍卡片 -->
+                <div class="timeline-item">
+                    <div class="time-badge">14:16</div>
+                    <div class="item-details">
+                        <div class="item-title"><span class="item-icon">🚉</span> HAKATA Station 博多車站</div>
+                        <div class="transit-jelly-card">
+                            <div class="transit-header-row">
+                                <div class="transit-header">
+                                    <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
+                                        <svg class="cherry-icon" viewBox="0 0 24 24">
+                                            <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
+                                        </svg>
+                                    </button>
+                                    <input type="text" class="jelly-input input-time-text" value="14:16 發" placeholder="預覽車次時間">
+                                </div>
+                                <button class="backup-btn" onclick="openModal('博多 ➔ 小倉 備用班次', ['14:36 發 ➔ 14:51 到 (Sakura 552號)', '14:56 發 ➔ 15:11 到 (Kodama 850號)'])">
+                                    <svg class="clock-icon" viewBox="0 0 24 24">
+                                        <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="transit-expand-content">
+                                <input type="text" class="jelly-input input-detail-text" value="山陽新幹線 Sakura 550號 ‧ 3號月台發車 ‧ 預計 14:31 抵達小倉車站" placeholder="輸入詳細月台與備註">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- 右邊：櫻桃紅色向量時鐘按鈕 (非常搭配果凍卡片!) -->
-                <button class="backup-btn" onclick="openModal('博多 ➔ 小倉 備用班次', ['14:36 發 ➔ 14:51 到 (Sakura 552號)', '14:56 發 ➔ 15:11 到 (Kodama 850號)'])">
-                    <svg class="clock-icon" viewBox="0 0 24 24" fill="#a8000b">
-                        <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
-                    </svg>
-                </button>
-            </div>
 
-            <!-- 下拉展開區域：字數再多都可以用手指左右滑動對照 -->
-<div class="transit-expand-content">
-    <div class="input-detail-text" contenteditable="true" placeholder="輸入詳細月台與備註">山陽新幹線 Sakura 550號 ‧ 3號月台發車 ‧ 預計 14:31 抵達小倉車站</div>
-</div>
-        </div>
-    </div>
-</div>
-
-                <!-- 小倉車站 果凍卡片 (展開版) -->
+                <!-- 小倉車站 果凍卡片 -->
                 <div class="timeline-item">
                     <div class="time-badge">14:30</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🚉</span> Kokura Station 小倉車站</div>
-                        <div class="transit-jelly-card" onclick="toggleExpand(this, event)">
+                        <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
-                                    <svg class="cherry-icon" viewBox="0 0 24 24" fill="#a8000b">
-                                        <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
-                                    </svg>
+                                    <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
+                                        <svg class="cherry-icon" viewBox="0 0 24 24">
+                                            <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
+                                        </svg>
+                                    </button>
                                     <input type="text" class="jelly-input input-time-text" value="14:30 到達" placeholder="時間標示">
                                 </div>
-                                <div class="transit-actions">
-                                    <button class="backup-btn" onclick="openModal('小倉車站 備用月台/轉乘', ['14:45 到達 (4號月台)', '15:00 到達 (2號月台)']); event.stopPropagation();">⏱️</button>
-                                    <span class="arrow-icon">▾</span>
-                                </div>
+                                <button class="backup-btn" onclick="openModal('小倉車站 備用月台/轉乘', ['14:45 到達 (4號月台)', '15:00 到達 (2號月台)'])">
+                                    <svg class="clock-icon" viewBox="0 0 24 24">
+                                        <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
+                                    </svg>
+                                </button>
                             </div>
                             <div class="transit-expand-content">
-                                <input type="text" class="jelly-input input-detail-text" value="新幹線/在來線轉乘月台" placeholder="輸入月台或備註">
+                                <input type="text" class="jelly-input input-detail-text" value="新幹線/在來線轉乘月台 ‧ 請留意指標引導" placeholder="輸入月台或備註">
                             </div>
                         </div>
                     </div>
@@ -702,26 +656,29 @@
                     </div>
                 </div>
 
-                <!-- 小倉 ➔ 八幡 果凍卡片 (展開版) -->
+                <!-- 小倉 ➔ 八幡 果凍卡片 -->
                 <div class="timeline-item">
                     <div class="time-badge">16:08</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🚉</span> Kokura Station</div>
-                        <div class="transit-jelly-card" onclick="toggleExpand(this, event)">
+                        <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
-                                    <svg class="cherry-icon" viewBox="0 0 24 24" fill="#a8000b">
-                                        <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
-                                    </svg>
+                                    <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
+                                        <svg class="cherry-icon" viewBox="0 0 24 24">
+                                            <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
+                                        </svg>
+                                    </button>
                                     <input type="text" class="jelly-input input-time-text" value="16:08 發 ➔ 16:25 到" placeholder="時間標示">
                                 </div>
-                                <div class="transit-actions">
-                                    <button class="backup-btn" onclick="openModal('小倉 ➔ 八幡 備用班次', ['16:20 發 ➔ 16:35 到 (普通車)', '16:35 發 ➔ 16:50 到 (區間快速)']); event.stopPropagation();">⏱️</button>
-                                    <span class="arrow-icon">▾</span>
-                                </div>
+                                <button class="backup-btn" onclick="openModal('小倉 ➔ 八幡 備用班次', ['16:20 發 ➔ 16:35 到 (普通車)', '16:35 發 ➔ 16:50 到 (區間快速)'])">
+                                    <svg class="clock-icon" viewBox="0 0 24 24">
+                                        <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
+                                    </svg>
+                                </button>
                             </div>
                             <div class="transit-expand-content">
-                                <input type="text" class="jelly-input input-detail-text" value="鹿兒島本線 快速 / 2號月台" placeholder="輸入車次及月台資訊">
+                                <input type="text" class="jelly-input input-detail-text" value="鹿兒島本線 快速 / 2號月台發車" placeholder="輸入車次及月台資訊">
                             </div>
                         </div>
                     </div>
@@ -806,18 +763,21 @@
                     <div class="time-badge">09:20</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🚉</span> Kokura Station</div>
-                        <div class="transit-jelly-card" onclick="toggleExpand(this, event)">
+                        <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
-                                    <svg class="cherry-icon" viewBox="0 0 24 24" fill="#a8000b">
-                                        <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
-                                    </svg>
+                                    <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
+                                        <svg class="cherry-icon" viewBox="0 0 24 24">
+                                            <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
+                                        </svg>
+                                    </button>
                                     <input type="text" class="jelly-input input-time-text" value="09:20 發 ➔ 09:35 到" placeholder="時間標示">
                                 </div>
-                                <div class="transit-actions">
-                                    <button class="backup-btn" onclick="openModal('小倉車站 備用班次', ['09:40 發 ➔ 09:55 到']); event.stopPropagation();">⏱️</button>
-                                    <span class="arrow-icon">▾</span>
-                                </div>
+                                <button class="backup-btn" onclick="openModal('小倉車站 備用班次', ['09:40 發 ➔ 09:55 到'])">
+                                    <svg class="clock-icon" viewBox="0 0 24 24">
+                                        <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
+                                    </svg>
+                                </button>
                             </div>
                             <div class="transit-expand-content">
                                 <input type="text" class="jelly-input input-detail-text" value="在來線 / 1號月台" placeholder="輸入車次及月台資訊">
@@ -864,18 +824,21 @@
                     <div class="time-badge">12:10</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🚉</span> Kokura Station</div>
-                        <div class="transit-jelly-card" onclick="toggleExpand(this, event)">
+                        <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
-                                    <svg class="cherry-icon" viewBox="0 0 24 24" fill="#a8000b">
-                                        <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
-                                    </svg>
+                                    <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
+                                        <svg class="cherry-icon" viewBox="0 0 24 24">
+                                            <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
+                                        </svg>
+                                    </button>
                                     <input type="text" class="jelly-input input-time-text" value="12:10 發 ➔ 13:30 到" placeholder="時間標示">
                                 </div>
-                                <div class="transit-actions">
-                                    <button class="backup-btn" onclick="openModal('前往大分/湯布院 備用班次', ['12:40 發 ➔ 14:00 到 (Sonic 特急)']); event.stopPropagation();">⏱️</button>
-                                    <span class="arrow-icon">▾</span>
-                                </div>
+                                <button class="backup-btn" onclick="openModal('前往大分/湯布院 備用班次', ['12:40 發 ➔ 14:00 到 (Sonic 特急)'])">
+                                    <svg class="clock-icon" viewBox="0 0 24 24">
+                                        <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
+                                    </svg>
+                                </button>
                             </div>
                             <div class="transit-expand-content">
                                 <input type="text" class="jelly-input input-detail-text" value="JR 特急 Sonic 23號" placeholder="輸入車次及月台資訊">
@@ -1170,21 +1133,24 @@
                     <div class="time-badge">11:19</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🚉</span> 由布院站</div>
-                        <div class="transit-jelly-card" onclick="toggleExpand(this, event)">
+                        <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
-                                    <svg class="cherry-icon" viewBox="0 0 24 24" fill="#a8000b">
-                                        <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
-                                    </svg>
+                                    <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
+                                        <svg class="cherry-icon" viewBox="0 0 24 24">
+                                            <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
+                                        </svg>
+                                    </button>
                                     <input type="text" class="jelly-input input-time-text" value="11:19 發 ➔ 13:30 到" placeholder="時間標示">
                                 </div>
-                                <div class="transit-actions">
-                                    <button class="backup-btn" onclick="openModal('由布院 ➔ 博多 備用班次', ['12:01 發 ➔ 14:18 到 (由布之森 2號)', '14:38 發 ➔ 16:50 到 (由布之森 4號)']); event.stopPropagation();">⏱️</button>
-                                    <span class="arrow-icon">▾</span>
-                                </div>
+                                <button class="backup-btn" onclick="openModal('由布院 ➔ 博多 備用班次', ['12:01 發 ➔ 14:18 到 (由布之森 2號)', '14:38 發 ➔ 16:50 到 (由布之森 4號)'])">
+                                    <svg class="clock-icon" viewBox="0 0 24 24">
+                                        <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
+                                    </svg>
+                                </button>
                             </div>
                             <div class="transit-expand-content">
-                                <input type="text" class="jelly-input input-detail-text" value="JR 特急 由布之森 / 1號月台" placeholder="輸入車次及月台資訊">
+                                <input type="text" class="jelly-input input-detail-text" value="JR 特急 由布之森 / 1號月台發車" placeholder="輸入車次及月台資訊">
                             </div>
                         </div>
                     </div>
@@ -1418,15 +1384,13 @@
         document.getElementById('backupModal').classList.remove('active');
     }
 
-    /* 點擊櫻桃圖案時，控制卡片展開與收合 */
+    /* 櫻桃點擊展開與收合控制 */
     function toggleExpandFromCherry(cherryBtnElement) {
-        // 向上找到這顆櫻桃所屬的果凍卡片
         const card = cherryBtnElement.closest('.transit-jelly-card');
         if (card) {
             card.classList.toggle('expanded');
         }
     }
-   
 </script>
 
 </body>
