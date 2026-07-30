@@ -356,13 +356,20 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
 
-        /* 標籤視覺強化 */
-        .tag-food  { background: #fff3e0; color: #d84315; border: 1px solid #ffe0b2; }
-        .tag-hotel { background: #e8eaf6; color: #283593; border: 1px solid #c5cae9; }
+ /* 標籤視覺強化 */
         .tag-shop  { background: #fce4ec; color: #ad1457; border: 1px solid #f8bbd0; }
-        .tag-sight { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
-        .tag-trans { background: #e0f7fa; color: #00838f; border: 1px solid #b2ebf2; }
+        /* 💜 交通：保留透明淺紫果凍標籤 */
+        .tag-trans { background: rgba(226, 214, 238, 0.85); color: #5b3a82; border: 1px solid #d4c2e8; }
+        /* 📝 給食物、旅館、景點使用的「並排純文字備註」（無背景、無框框） */
+        .inline-note {
+            font-size: 12px;
+            font-weight: 700;
+            color: #8d6e63; /* 溫柔暖棕色文字 */
+            margin-left: 6px;
+            display: inline-block;
+        }
 
+        
         /* 8. 淺粉色果凍感小卡片 (Jelly Card) */
         .transit-jelly-card {
             background: var(--soft-pink-bg);
@@ -680,19 +687,16 @@
                         <span class="item-duration tag-trans">停留 01時30分</span>
                     </div>
                 </div>
-
-    
                 
-<!-- 示範 1：一般景點/商場（將「停留時間」改為「提醒事項」） -->
+<!-- 🛍️ 購物示範（保留獨立標籤） -->
 <div class="timeline-item">
     <div class="time-badge">13:25</div>
     <div class="item-details">
         <div class="item-title"><span class="item-icon">🛍️</span> 購物中心KITTE</div>
-        <!-- 💡 提示事項標籤（可自由改文字） -->
-        <span class="item-duration tag-shop">💡 1F/2F 雜貨可退稅</span>
+        <span class="item-duration tag-shop">停留 00時30分</span> <!-- 💡 保留粉紅標籤 -->
     </div>
 </div>
-
+                
 <!-- 示範 2：一般景點（不寫任何標籤，完全乾淨） -->
 <div class="timeline-item">
     <div class="time-badge">14:02</div>
@@ -701,7 +705,18 @@
         <!-- 這裡不加 <span class="item-duration"> 就不會顯示任何標籤 -->
     </div>
 </div>
+                
+<div class="timeline-item">
+    <div class="time-badge">12:24</div>
+    <div class="item-details">
+        <div class="item-title">
+            <span class="item-icon">🍜</span> Shin-Shin 博多拉麵
+            <span class="inline-note">停留 01時00分</span> <!-- 💡 並排顯示，無框框 -->
+        </div>
+    </div>
+</div>
 
+                
 <!-- 示範 3：簡化版車站果凍卡片（博多 ➔ 小倉 一張卡片搞定） -->
 <div class="timeline-item">
     <div class="time-badge">14:16</div>
@@ -836,13 +851,8 @@
                         <span class="item-duration tag-trans">停留 00時00分</span>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="time-badge">19:51</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍗</span> 肯德基</div>
-                        <span class="item-duration tag-food">停留 00時30分</span>
-                    </div>
-                </div>
+            
+                
                 <div class="timeline-item">
                     <div class="time-badge">20:27</div>
                     <div class="item-details">
