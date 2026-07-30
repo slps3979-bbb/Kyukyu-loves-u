@@ -74,25 +74,27 @@
         }
 
         /* 🍒 標題右下角同心圓櫻桃美食按鈕 */
-        .food-list-btn {
-            position: absolute;
-            bottom: 8px;
-            right: 12px;
-            width: 40px;
-            height: 40px;
-            background: #ffffff;
-            border: 3px solid #a8000b;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 20;
-            box-shadow: 0 0 0 3px #ffffff, 0 4px 10px rgba(0,0,0,0.2);
-            padding: 0;
-            outline: none;
-            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        /* 🍒 調整櫻桃按鈕位置（往上移至中間偏右） */
+.food-list-btn {
+    position: absolute;
+    bottom: 24px; /* 💡 從 8px 增加到 24px，按鈕就會往上移動 */
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    background: #ffffff;
+    border: 3px solid #a8000b;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 0 0 0 3px #ffffff, 0 4px 10px rgba(0,0,0,0.2);
+    padding: 0;
+    outline: none;
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 
         /* 櫻桃圖片本體與旋轉 */
         .food-list-btn img {
@@ -204,22 +206,22 @@
             transform: translateY(0);
         }
 
-        .day-header {
-            flex-shrink: 0;
-            background: linear-gradient(90deg, #a8000b, #c62828);
-            color: white;
-            padding: 10px 16px;
-            border-radius: 18px 18px 0 0;
-            font-weight: 900;
-            font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 2.5px solid #ffffff;
-            border-bottom: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            box-sizing: border-box;
-        }
+ .day-header {
+    flex-shrink: 0;
+    background: linear-gradient(90deg, #a8000b, #c62828);
+    color: white;
+    padding: 16px 18px; /* 💡 將第一個數字由 10px 增加到 16px，紅色標題列上下就會變寬厚實 */
+    border-radius: 18px 18px 0 0;
+    font-weight: 900;
+    font-size: 16px;    /* 💡 順帶稍微加大字體（14px -> 16px），搭配加厚的標題欄位 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2.5px solid #ffffff;
+    border-bottom: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-sizing: border-box;
+}
 
         .day-header .day-date {
             font-size: 11px;
