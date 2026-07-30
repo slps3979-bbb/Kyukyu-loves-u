@@ -73,40 +73,39 @@
             overflow: hidden;
         }
 
-        /* 🍴 美食清單按鈕：大小 40px、無圓框、沿著邊緣留白邊裁剪、帶旋轉特效 */
+        /* 🍒 標題右下角同心圓櫻桃美食按鈕 */
         .food-list-btn {
             position: absolute;
             bottom: 8px;
             right: 12px;
             width: 40px;
             height: 40px;
-            background: transparent;
-            border: none;
-            border-radius: 0;
+            background: #ffffff;
+            border: 3px solid #a8000b;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             z-index: 20;
+            box-shadow: 0 0 0 3px #ffffff, 0 4px 10px rgba(0,0,0,0.2);
             padding: 0;
             outline: none;
             transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
+        /* 櫻桃圖片本體與旋轉 */
         .food-list-btn img {
-            width: 40px;
-            height: 40px;
+            width: 24px;
+            height: 24px;
             object-fit: contain;
-            /* 透過濾鏡製造沿著不規則去背邊緣發光的「立體白邊」裁剪感 */
-            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25)) 
-                    drop-shadow(1px 0 0 #ffffff) drop-shadow(-1px 0 0 #ffffff) 
-                    drop-shadow(0 1px 0 #ffffff) drop-shadow(0 -1px 0 #ffffff);
+            transform: rotate(30deg);
             transition: transform 0.25s ease;
         }
 
-        /* 點擊時縮小並旋轉角度 */
+        /* 按鈕點擊時的動態手感 */
         .food-list-btn:active {
-            transform: scale(0.82) rotate(-25deg);
+            transform: scale(0.85) rotate(15deg);
         }
 
         .peko-bar-top, .peko-bar-bottom {
@@ -600,7 +599,7 @@
 <div class="container">
     <!-- Header Card -->
     <div class="header-card">
-        <!-- 🍴 美食清單按鈕 (位於右下角，大小40px，無圓框、沿邊緣白邊裁剪，點擊有旋轉與縮放效果) -->
+        <!-- 🍴 美食清單按鈕 -->
         <button class="food-list-btn" onclick="openModal('🍴 推薦美食與甜點清單', ['✨ Shin-Shin 博多拉麵 KITTE', '✨ 辻利茶舗 京町本店', '✨ 麵屋兼虎 福岡PARCO', '✨ 焼肉ホルモン山翔'])" title="查看美食清單">
             <img src="cicon.jpg" alt="美食清單">
         </button>
