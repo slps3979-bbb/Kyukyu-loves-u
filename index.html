@@ -73,31 +73,34 @@
             overflow: hidden;
         }
 
-        /* 🍴 美食清單按鈕：大小 30px、定位於標題框右下角、帶白邊與旋轉特效 */
+        /* 🍴 美食清單按鈕：大小 40px、無圓框、沿著邊緣留白邊裁剪、帶旋轉特效 */
         .food-list-btn {
             position: absolute;
-            bottom: 10px;
+            bottom: 8px;
             right: 12px;
-            width: 30px;
-            height: 30px;
-            background: #ffffff;
-            border: 2px solid var(--primary-red);
-            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             z-index: 20;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2), 0 0 0 3px #ffffff; /* 外圍白邊與立體感 */
             padding: 0;
             outline: none;
             transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .food-list-btn img {
-            width: 17px;
-            height: 17px;
+            width: 40px;
+            height: 40px;
             object-fit: contain;
+            /* 透過濾鏡製造沿著不規則去背邊緣發光的「立體白邊」裁剪感 */
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25)) 
+                    drop-shadow(1px 0 0 #ffffff) drop-shadow(-1px 0 0 #ffffff) 
+                    drop-shadow(0 1px 0 #ffffff) drop-shadow(0 -1px 0 #ffffff);
             transition: transform 0.25s ease;
         }
 
@@ -468,15 +471,15 @@
             border-top-color: rgba(239, 154, 154, 0.6);
         }
 
-        /* 🔧 確保左右滾動的 Jelly Scroll Text 設定[cite: 1] */
+        /* 🔧 確保左右滾動的 Jelly Scroll Text 設定 */
         .jelly-scroll-text {
             font-family: inherit;
             font-size: 13px;
             font-weight: 800;
             color: #4e342e;
-            white-space: nowrap;                   /* 1. 強制文字不換行[cite: 1] */
-            overflow-x: auto;                      /* 2. 允許橫向滑動[cite: 1] */
-            -webkit-overflow-scrolling: touch;     /* 3. iOS 順暢滑動[cite: 1] */
+            white-space: nowrap;                   /* 1. 強制文字不換行 */
+            overflow-x: auto;                      /* 2. 允許橫向滑動 */
+            -webkit-overflow-scrolling: touch;     /* 3. iOS 順暢滑動 */
             width: 100%;
             box-sizing: border-box;
             padding: 4px 6px;
@@ -486,7 +489,7 @@
             border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
-        /* 隱藏滾動條，保持果凍感卡片乾淨[cite: 1] */
+        /* 隱藏滾動條，保持果凍感卡片乾淨 */
         .jelly-scroll-text::-webkit-scrollbar {
             display: none;
         }
@@ -597,16 +600,16 @@
 <div class="container">
     <!-- Header Card -->
     <div class="header-card">
-        <!-- 🍴 美食清單按鈕 (位於右下角，大小30px帶白邊，點擊有旋轉與縮放效果) -->
+        <!-- 🍴 美食清單按鈕 (位於右下角，大小40px，無圓框、沿邊緣白邊裁剪，點擊有旋轉與縮放效果) -->
         <button class="food-list-btn" onclick="openModal('🍴 推薦美食與甜點清單', ['✨ Shin-Shin 博多拉麵 KITTE', '✨ 辻利茶舗 京町本店', '✨ 麵屋兼虎 福岡PARCO', '✨ 焼肉ホルモン山翔'])" title="查看美食清單">
             <img src="cicon.jpg" alt="美食清單">
         </button>
 
-        <div class="peko-bar-top">🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒</div>
+        <div class="peko-bar-top">FUKU ‧ FUKU ‧ FUKU ‧ FUKU ‧ FUKU</div>
         <h1 class="main-title">
             <span>福岡九州 5日極致之旅</span>
         </h1>
-        <div class="peko-bar-bottom">🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒</div>
+        <div class="peko-bar-bottom">FUKU ‧ FUKU ‧ FUKU ‧ FUKU ‧ FUKU</div>
     </div>
 
     <!-- Day Navigation Grid -->
@@ -636,45 +639,45 @@
     <!-- Day 1 -->
     <div id="day1" class="day-section active">
         <div class="day-header">
-            <span>DAY 1 ‧ 博多與小倉探索[cite: 1]</span>
-            <span class="day-date">2026/10/24[cite: 1]</span>
+            <span>DAY 1 ‧ 博多與小倉探索</span>
+            <span class="day-date">2026/10/24</span>
         </div>
         <div class="day-content">
             <div class="timeline-list">
                 <div class="timeline-item">
-                    <div class="time-badge">10:40[cite: 1]</div>
+                    <div class="time-badge">10:40</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">✈️</span> 福岡國際機場[cite: 1]</div>
-                        <span class="item-duration tag-trans">停留 01時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">✈️</span> 福岡國際機場</div>
+                        <span class="item-duration tag-trans">停留 01時30分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">12:24[cite: 1]</div>
+                    <div class="time-badge">12:24</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍜</span> Shin-Shin 博多拉麵 KITTE博多店[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍜</span> Shin-Shin 博多拉麵 KITTE博多店</div>
+                        <span class="item-duration tag-food">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">13:25[cite: 1]</div>
+                    <div class="time-badge">13:25</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🛍️</span> 購物中心KITTE[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🛍️</span> 購物中心KITTE</div>
+                        <span class="item-duration tag-shop">停留 00時30分</span>
                     </div>
                 </div> 
                 <div class="timeline-item">
-                    <div class="time-badge">14:02[cite: 1]</div>
+                    <div class="time-badge">14:02</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🎫</span> 博多車站 新幹線 綠色窗口[cite: 1]</div>
-                        <span class="item-duration tag-trans">停留 00時13分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🎫</span> 博多車站 新幹線 綠色窗口</div>
+                        <span class="item-duration tag-trans">停留 00時13分</span>
                     </div>
                 </div>
 
                 <!-- 博多車站 果凍卡片 -->
                 <div class="timeline-item">
-                    <div class="time-badge">14:16[cite: 1]</div>
+                    <div class="time-badge">14:16</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> HAKATA Station 博多車站[cite: 1]</div>
+                        <div class="item-title"><span class="item-icon">🚉</span> HAKATA Station 博多車站</div>
                         <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
@@ -692,7 +695,7 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <div class="jelly-scroll-text" contenteditable="true">山陽新幹線 Sakura 550號 ‧ 3號月台發車 ‧ 預計 14:31 抵達小倉車站[cite: 1]</div>
+                                <div class="jelly-scroll-text" contenteditable="true">山陽新幹線 Sakura 550號 ‧ 3號月台發車 ‧ 預計 14:31 抵達小倉車站</div>
                             </div>
                         </div>
                     </div>
@@ -700,9 +703,9 @@
 
                 <!-- 小倉車站 果凍卡片 -->
                 <div class="timeline-item">
-                    <div class="time-badge">14:30[cite: 1]</div>
+                    <div class="time-badge">14:30</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station 小倉車站[cite: 1]</div>
+                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station 小倉車站</div>
                         <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
@@ -720,32 +723,32 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <div class="jelly-scroll-text" contenteditable="true">新幹線/在來線轉乘月台 ‧ 請留意指標引導並預留轉乘時間[cite: 1]</div>
+                                <div class="jelly-scroll-text" contenteditable="true">新幹線/在來線轉乘月台 ‧ 請留意指標引導並預留轉乘時間</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="time-badge">14:40[cite: 1]</div>
+                    <div class="time-badge">14:40</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🛍️</span> AMU PLAZA 小倉[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時40分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🛍️</span> AMU PLAZA 小倉</div>
+                        <span class="item-duration tag-shop">停留 00時40分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">15:28[cite: 1]</div>
+                    <div class="time-badge">15:28</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏨</span> 小倉麗嘉皇家酒店[cite: 1]</div>
-                        <span class="item-duration tag-hotel">停留 00時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏨</span> 小倉麗嘉皇家酒店</div>
+                        <span class="item-duration tag-hotel">停留 00時30分</span>
                     </div>
                 </div>
 
                 <!-- 小倉 ➔ 八幡 果凍卡片 -->
                 <div class="timeline-item">
-                    <div class="time-badge">16:08[cite: 1]</div>
+                    <div class="time-badge">16:08</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station[cite: 1]</div>
+                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station</div>
                         <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
@@ -763,66 +766,66 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <div class="jelly-scroll-text" contenteditable="true">鹿兒島本線 快速 / 2號月台發車 ‧ 請先至月台候車[cite: 1]</div>
+                                <div class="jelly-scroll-text" contenteditable="true">鹿兒島本線 快速 / 2號月台發車 ‧ 請先至月台候車</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="time-badge">16:55[cite: 1]</div>
+                    <div class="time-badge">16:55</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> Yahata Station[cite: 1]</div>
-                        <span class="item-duration tag-trans">停留 00時35分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🚉</span> Yahata Station</div>
+                        <span class="item-duration tag-trans">停留 00時35分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">18:05[cite: 1]</div>
+                    <div class="time-badge">18:05</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🌃</span> 皿倉山展望台[cite: 1]</div>
-                        <span class="item-duration tag-sight">停留 00時20分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🌃</span> 皿倉山展望台</div>
+                        <span class="item-duration tag-sight">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">18:56[cite: 1]</div>
+                    <div class="time-badge">18:56</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> Yahata Station[cite: 1]</div>
-                        <span class="item-duration tag-trans">停留 00時21分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🚉</span> Yahata Station</div>
+                        <span class="item-duration tag-trans">停留 00時21分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">19:50[cite: 1]</div>
+                    <div class="time-badge">19:50</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station[cite: 1]</div>
-                        <span class="item-duration tag-trans">停留 00時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station</div>
+                        <span class="item-duration tag-trans">停留 00時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">19:51[cite: 1]</div>
+                    <div class="time-badge">19:51</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍗</span> 肯德基[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍗</span> 肯德基</div>
+                        <span class="item-duration tag-food">停留 00時30分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">20:27[cite: 1]</div>
+                    <div class="time-badge">20:27</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍜</span> 資先生烏龍麵魚町店[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍜</span> 資先生烏龍麵魚町店</div>
+                        <span class="item-duration tag-food">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">21:30[cite: 1]</div>
+                    <div class="time-badge">21:30</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🐧</span> Don Quijote Kokura Uomachi[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🐧</span> Don Quijote Kokura Uomachi</div>
+                        <span class="item-duration tag-shop">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">22:47[cite: 1]</div>
+                    <div class="time-badge">22:47</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏨</span> 小倉麗嘉皇家酒店[cite: 1]</div>
-                        <span class="item-duration tag-hotel">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏨</span> 小倉麗嘉皇家酒店</div>
+                        <span class="item-duration tag-hotel">停留 01時00分</span>
                     </div>
                 </div>
             </div>
@@ -832,22 +835,22 @@
     <!-- Day 2 -->
     <div id="day2" class="day-section">
         <div class="day-header">
-            <span>DAY 2 ‧ 小倉老街與前往湯布院[cite: 1]</span>
-            <span class="day-date">2026/10/25[cite: 1]</span>
+            <span>DAY 2 ‧ 小倉老街與前往湯布院</span>
+            <span class="day-date">2026/10/25</span>
         </div>
         <div class="day-content">
             <div class="timeline-list">
                 <div class="timeline-item">
-                    <div class="time-badge">09:00[cite: 1]</div>
+                    <div class="time-badge">09:00</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏨</span> 小倉麗嘉皇家酒店[cite: 1]</div>
-                        <span class="item-duration tag-hotel">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏨</span> 小倉麗嘉皇家酒店</div>
+                        <span class="item-duration tag-hotel">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">09:20[cite: 1]</div>
+                    <div class="time-badge">09:20</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station[cite: 1]</div>
+                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station</div>
                         <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
@@ -865,50 +868,50 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <div class="jelly-scroll-text" contenteditable="true">在來線 / 1號月台發車[cite: 1]</div>
+                                <div class="jelly-scroll-text" contenteditable="true">在來線 / 1號月台發車</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">09:46[cite: 1]</div>
+                    <div class="time-badge">09:46</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">⛩️</span> 八坂神社[cite: 1]</div>
-                        <span class="item-duration tag-sight">停留 00時20分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">⛩️</span> 八坂神社</div>
+                        <span class="item-duration tag-sight">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">10:17[cite: 1]</div>
+                    <div class="time-badge">10:17</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🛍️</span> 小倉中央商店街[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時20分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🛍️</span> 小倉中央商店街</div>
+                        <span class="item-duration tag-shop">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">10:45[cite: 1]</div>
+                    <div class="time-badge">10:45</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🐟</span> 旦過市場[cite: 1]</div>
-                        <span class="item-duration tag-sight">停留 00時25分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🐟</span> 旦過市場</div>
+                        <span class="item-duration tag-sight">停留 00時25分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">11:19[cite: 1]</div>
+                    <div class="time-badge">11:19</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍵</span> 辻利茶舗 京町本店[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍵</span> 辻利茶舗 京町本店</div>
+                        <span class="item-duration tag-food">停留 00時30分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">11:52[cite: 1]</div>
+                    <div class="time-badge">11:52</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🧁</span> 奶油小蛋糕 Shiroya 小倉店[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時15分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🧁</span> 奶油小蛋糕 Shiroya 小倉店</div>
+                        <span class="item-duration tag-food">停留 00時15分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">12:10[cite: 1]</div>
+                    <div class="time-badge">12:10</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station[cite: 1]</div>
+                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station</div>
                         <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
@@ -926,58 +929,58 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <div class="jelly-scroll-text" contenteditable="true">JR 特急 Sonic 23號 ‧ 建議提早至月台候車[cite: 1]</div>
+                                <div class="jelly-scroll-text" contenteditable="true">JR 特急 Sonic 23號 ‧ 建議提早至月台候車</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">14:10[cite: 1]</div>
+                    <div class="time-badge">14:10</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🛍️</span> AMU PLAZA 大分[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時48分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🛍️</span> AMU PLAZA 大分</div>
+                        <span class="item-duration tag-shop">停留 00時48分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">15:52[cite: 1]</div>
+                    <div class="time-badge">15:52</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> 由布院站[cite: 1]</div>
-                        <span class="item-duration tag-trans">停留 00時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🚉</span> 由布院站</div>
+                        <span class="item-duration tag-trans">停留 00時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">15:56[cite: 1]</div>
+                    <div class="time-badge">15:56</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏡</span> 由布院別邸 樹 (獨棟Villa)[cite: 1]</div>
-                        <span class="item-duration tag-hotel">停留 00時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏡</span> 由布院別邸 樹 (獨棟Villa)</div>
+                        <span class="item-duration tag-hotel">停留 00時30分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">16:36[cite: 1]</div>
+                    <div class="time-badge">16:36</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏡</span> 湯布院花卉村[cite: 1]</div>
-                        <span class="item-duration tag-sight">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏡</span> 湯布院花卉村</div>
+                        <span class="item-duration tag-sight">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">17:45[cite: 1]</div>
+                    <div class="time-badge">17:45</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🛒</span> A-COOP超市 湯布院店[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🛒</span> A-COOP超市 湯布院店</div>
+                        <span class="item-duration tag-shop">停留 00時30分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">18:18[cite: 1]</div>
+                    <div class="time-badge">18:18</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏪</span> 7-Eleven; Yufuin Yunotsubo[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏪</span> 7-Eleven; Yufuin Yunotsubo</div>
+                        <span class="item-duration tag-shop">停留 00時30分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">18:57[cite: 1]</div>
+                    <div class="time-badge">18:57</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏡</span> 由布院別邸 樹 (獨棟Villa)[cite: 1]</div>
-                        <span class="item-duration tag-hotel">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏡</span> 由布院別邸 樹 (獨棟Villa)</div>
+                        <span class="item-duration tag-hotel">停留 01時00分</span>
                     </div>
                 </div>
             </div>
@@ -987,191 +990,191 @@
     <!-- Day 3 -->
     <div id="day3" class="day-section">
         <div class="day-header">
-            <span>DAY 3 ‧ 動物園湯之坪散策[cite: 1]</span>
-            <span class="day-date">2026/10/26[cite: 1]</span>
+            <span>DAY 3 ‧ 動物園湯之坪散策</span>
+            <span class="day-date">2026/10/26</span>
         </div>
         <div class="day-content">
             <div class="timeline-list">
                 <div class="timeline-item">
-                    <div class="time-badge">07:30[cite: 1]</div>
+                    <div class="time-badge">07:30</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏡</span> 由布院別邸 樹 (獨棟Villa)[cite: 1]</div>
-                        <span class="item-duration tag-hotel">停留 00時45分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏡</span> 由布院別邸 樹 (獨棟Villa)</div>
+                        <span class="item-duration tag-hotel">停留 00時45分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">08:57[cite: 1]</div>
+                    <div class="time-badge">08:57</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🦁</span> 九州自然動物園[cite: 1]</div>
-                        <span class="item-duration tag-sight">停留 02時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🦁</span> 九州自然動物園</div>
+                        <span class="item-duration tag-sight">停留 02時30分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">11:39[cite: 1]</div>
+                    <div class="time-badge">11:39</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚌</span> Jungle bus No.2 Station[cite: 1]</div>
-                        <span class="item-duration tag-trans">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🚌</span> Jungle bus No.2 Station</div>
+                        <span class="item-duration tag-trans">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">13:08[cite: 1]</div>
+                    <div class="time-badge">13:08</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏡</span> 由布院別邸 樹 (獨棟Villa)[cite: 1]</div>
-                        <span class="item-duration tag-hotel">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏡</span> 由布院別邸 樹 (獨棟Villa)</div>
+                        <span class="item-duration tag-hotel">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">14:25[cite: 1]</div>
+                    <div class="time-badge">14:25</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍩</span> 布丁.甜甜圈 Milch Donut&Cafe[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時15分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍩</span> 布丁.甜甜圈 Milch Donut&Cafe</div>
+                        <span class="item-duration tag-food">停留 00時15分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">14:47[cite: 1]</div>
+                    <div class="time-badge">14:47</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍰</span> 蛋糕卷 B SPEAK 本店[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時15分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍰</span> 蛋糕卷 B SPEAK 本店</div>
+                        <span class="item-duration tag-food">停留 00時15分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">15:06[cite: 1]</div>
+                    <div class="time-badge">15:06</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">☕</span> 鞠智 cucuchi（銅鑼燒和咖啡館）[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時20分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">☕</span> 鞠智 cucuchi（銅鑼燒和咖啡館）</div>
+                        <span class="item-duration tag-food">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">15:34[cite: 1]</div>
+                    <div class="time-badge">15:34</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍦</span> telato 抹茶ジェラート専門店[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時15分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍦</span> telato 抹茶ジェラート専門店</div>
+                        <span class="item-duration tag-food">停留 00時15分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">15:55[cite: 1]</div>
+                    <div class="time-badge">15:55</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍹</span> 湯布院Mana Mana[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍹</span> 湯布院Mana Mana</div>
+                        <span class="item-duration tag-food">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">16:07[cite: 1]</div>
+                    <div class="time-badge">16:07</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🌰</span> Donguri No Mori[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時20分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🌰</span> Donguri No Mori</div>
+                        <span class="item-duration tag-shop">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">16:28[cite: 1]</div>
+                    <div class="time-badge">16:28</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🎁</span> Souvenir Gallery YUFUIN[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🎁</span> Souvenir Gallery YUFUIN</div>
+                        <span class="item-duration tag-shop">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">16:40[cite: 1]</div>
+                    <div class="time-badge">16:40</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍋</span> レモネード&スイーツlimo[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍋</span> レモネード&スイーツlimo</div>
+                        <span class="item-duration tag-food">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">16:51[cite: 1]</div>
+                    <div class="time-badge">16:51</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🌶️</span> 調味料 湯布院薬味家[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🌶️</span> 調味料 湯布院薬味家</div>
+                        <span class="item-duration tag-shop">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">17:03[cite: 1]</div>
+                    <div class="time-badge">17:03</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🎁</span> 名產店 GOEMON[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🎁</span> 名產店 GOEMON</div>
+                        <span class="item-duration tag-shop">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">17:17[cite: 1]</div>
+                    <div class="time-badge">17:17</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🥔</span> 金賞可樂餅 本店[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🥔</span> 金賞可樂餅 本店</div>
+                        <span class="item-duration tag-food">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">17:29[cite: 1]</div>
+                    <div class="time-badge">17:29</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🥤</span> GABUGABU[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🥤</span> GABUGABU</div>
+                        <span class="item-duration tag-food">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">17:40[cite: 1]</div>
+                    <div class="time-badge">17:40</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍦</span> 由布院霜淇淋[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍦</span> 由布院霜淇淋</div>
+                        <span class="item-duration tag-food">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">17:51[cite: 1]</div>
+                    <div class="time-badge">17:51</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🌾</span> 湯布院長壽畑湯之坪店[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🌾</span> 湯布院長壽畑湯之坪店</div>
+                        <span class="item-duration tag-shop">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">18:02[cite: 1]</div>
+                    <div class="time-badge">18:02</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍮</span> 烏骨雞蛋布丁 五衛門[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍮</span> 烏骨雞蛋布丁 五衛門</div>
+                        <span class="item-duration tag-food">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">18:13[cite: 1]</div>
+                    <div class="time-badge">18:13</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🐙</span> 大章魚燒 ばくだん焼本舗[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時15分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🐙</span> 大章魚燒 ばくだん焼本舗</div>
+                        <span class="item-duration tag-food">停留 00時15分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">18:29[cite: 1]</div>
+                    <div class="time-badge">18:29</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍗</span> 中津からあげ吉吾 湯布院店[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍗</span> 中津からあげ吉吾 湯布院店</div>
+                        <span class="item-duration tag-food">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">18:43[cite: 1]</div>
+                    <div class="time-badge">18:43</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🐰</span> Miffy森之廚房[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🐰</span> Miffy森之廚房</div>
+                        <span class="item-duration tag-shop">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">18:57[cite: 1]</div>
+                    <div class="time-badge">18:57</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🥢</span> 箸屋一膳／金鱗湖店[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🥢</span> 箸屋一膳／金鱗湖店</div>
+                        <span class="item-duration tag-shop">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">19:09[cite: 1]</div>
+                    <div class="time-badge">19:09</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🧂</span> 鍵屋 柚子胡椒[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🧂</span> 鍵屋 柚子胡椒</div>
+                        <span class="item-duration tag-shop">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">19:23[cite: 1]</div>
+                    <div class="time-badge">19:23</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍫</span> SNOOPYChocolat 由布院店[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍫</span> SNOOPYChocolat 由布院店</div>
+                        <span class="item-duration tag-shop">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">19:34[cite: 1]</div>
+                    <div class="time-badge">19:34</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍄</span> 湯布院shiitakemonster[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍄</span> 湯布院shiitakemonster</div>
+                        <span class="item-duration tag-food">停留 00時10分</span>
                     </div>
                 </div>
             </div>
@@ -1181,43 +1184,43 @@
     <!-- Day 4 -->
     <div id="day4" class="day-section">
         <div class="day-header">
-            <span>DAY 4 ‧ 返博多與天神購物狂歡[cite: 1]</span>
-            <span class="day-date">2026/10/27[cite: 1]</span>
+            <span>DAY 4 ‧ 返博多與天神購物狂歡</span>
+            <span class="day-date">2026/10/27</span>
         </div>
         <div class="day-content">
             <div class="timeline-list">
                 <div class="timeline-item">
-                    <div class="time-badge">08:00[cite: 1]</div>
+                    <div class="time-badge">08:00</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏡</span> 由布院別邸 樹 (獨棟Villa)[cite: 1]</div>
-                        <span class="item-duration tag-hotel">停留 02時50分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏡</span> 由布院別邸 樹 (獨棟Villa)</div>
+                        <span class="item-duration tag-hotel">停留 02時50分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">10:56[cite: 1]</div>
+                    <div class="time-badge">10:56</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> 由布院站[cite: 1]</div>
-                        <span class="item-duration tag-trans">停留 00時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🚉</span> 由布院站</div>
+                        <span class="item-duration tag-trans">停留 00時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">10:57[cite: 1]</div>
+                    <div class="time-badge">10:57</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍱</span> 由布釜飯 「心」湯布院站前店[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍱</span> 由布釜飯 「心」湯布院站前店</div>
+                        <span class="item-duration tag-food">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">11:08[cite: 1]</div>
+                    <div class="time-badge">11:08</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🧳</span> 可寄行李名產店 日乃新[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🧳</span> 可寄行李名產店 日乃新</div>
+                        <span class="item-duration tag-shop">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">11:19[cite: 1]</div>
+                    <div class="time-badge">11:19</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> 由布院站[cite: 1]</div>
+                        <div class="item-title"><span class="item-icon">🚉</span> 由布院站</div>
                         <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
@@ -1235,93 +1238,93 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <div class="jelly-scroll-text" contenteditable="true">JR 特急 由布之森 / 1號月台發車 ‧ 建議提早抵達月台[cite: 1]</div>
+                                <div class="jelly-scroll-text" contenteditable="true">JR 特急 由布之森 / 1號月台發車 ‧ 建議提早抵達月台</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">14:16[cite: 1]</div>
+                    <div class="time-badge">14:16</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> 博多[cite: 1]</div>
-                        <span class="item-duration tag-trans">停留 00時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🚉</span> 博多</div>
+                        <span class="item-duration tag-trans">停留 00時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">14:22[cite: 1]</div>
+                    <div class="time-badge">14:22</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🛍️</span> 購物中心KITTE[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 00時10分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🛍️</span> 購物中心KITTE</div>
+                        <span class="item-duration tag-shop">停留 00時10分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">14:36[cite: 1]</div>
+                    <div class="time-badge">14:36</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🛍️</span> AMU PLAZA博多[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🛍️</span> AMU PLAZA博多</div>
+                        <span class="item-duration tag-shop">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">15:39[cite: 1]</div>
+                    <div class="time-badge">15:39</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🛍️</span> MING[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🛍️</span> MING</div>
+                        <span class="item-duration tag-shop">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">16:58[cite: 1]</div>
+                    <div class="time-badge">16:58</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店[cite: 1]</div>
-                        <span class="item-duration tag-hotel">停留 00時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店</div>
+                        <span class="item-duration tag-hotel">停留 00時30分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">17:32[cite: 1]</div>
+                    <div class="time-badge">17:32</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🥖</span> Full full[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🥖</span> Full full</div>
+                        <span class="item-duration tag-food">停留 00時30分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">18:11[cite: 1]</div>
+                    <div class="time-badge">18:11</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏬</span> Iwataya Main Store[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 01時15分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏬</span> Iwataya Main Store</div>
+                        <span class="item-duration tag-shop">停留 01時15分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">19:33[cite: 1]</div>
+                    <div class="time-badge">19:33</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏬</span> 大丸 福岡天神店[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏬</span> 大丸 福岡天神店</div>
+                        <span class="item-duration tag-shop">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">20:41[cite: 1]</div>
+                    <div class="time-badge">20:41</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店[cite: 1]</div>
-                        <span class="item-duration tag-hotel">停留 00時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店</div>
+                        <span class="item-duration tag-hotel">停留 00時30分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">21:31[cite: 1]</div>
+                    <div class="time-badge">21:31</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍰</span> Itookashi[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍰</span> Itookashi</div>
+                        <span class="item-duration tag-food">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">22:58[cite: 1]</div>
+                    <div class="time-badge">22:58</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🐧</span> 唐吉訶德 福岡天神本店[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🐧</span> 唐吉訶德 福岡天神本店</div>
+                        <span class="item-duration tag-shop">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">00:07[cite: 1]</div>
+                    <div class="time-badge">00:07</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店[cite: 1]</div>
-                        <span class="item-duration tag-hotel">停留 00時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店</div>
+                        <span class="item-duration tag-hotel">停留 00時00分</span>
                     </div>
                 </div>
             </div>
@@ -1331,79 +1334,79 @@
     <!-- Day 5 -->
     <div id="day5" class="day-section">
         <div class="day-header">
-            <span>DAY 5 ‧ 天神商圈與滿載而歸[cite: 1]</span>
-            <span class="day-date">2026/10/28[cite: 1]</span>
+            <span>DAY 5 ‧ 天神商圈與滿載而歸</span>
+            <span class="day-date">2026/10/28</span>
         </div>
         <div class="day-content">
             <div class="timeline-list">
                 <div class="timeline-item">
-                    <div class="time-badge">09:00[cite: 1]</div>
+                    <div class="time-badge">09:00</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店[cite: 1]</div>
-                        <span class="item-duration tag-hotel">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店</div>
+                        <span class="item-duration tag-hotel">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">10:03[cite: 1]</div>
+                    <div class="time-badge">10:03</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏬</span> 福岡PARCO[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏬</span> 福岡PARCO</div>
+                        <span class="item-duration tag-shop">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">11:03[cite: 1]</div>
+                    <div class="time-badge">11:03</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍜</span> 麵屋兼虎 福岡PARCO店[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時40分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🍜</span> 麵屋兼虎 福岡PARCO店</div>
+                        <span class="item-duration tag-food">停留 00時40分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">11:48[cite: 1]</div>
+                    <div class="time-badge">11:48</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🛍️</span> Mina 天神[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🛍️</span> Mina 天神</div>
+                        <span class="item-duration tag-shop">停留 01時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">12:53[cite: 1]</div>
+                    <div class="time-badge">12:53</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🛍️</span> 天神地下街[cite: 1]</div>
-                        <span class="item-duration tag-shop">停留 01時20分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🛍️</span> 天神地下街</div>
+                        <span class="item-duration tag-shop">停留 01時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">14:32[cite: 1]</div>
+                    <div class="time-badge">14:32</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">⛩️</span> 櫛田神社[cite: 1]</div>
-                        <span class="item-duration tag-sight">停留 00時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">⛩️</span> 櫛田神社</div>
+                        <span class="item-duration tag-sight">停留 00時30分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">15:24[cite: 1]</div>
+                    <div class="time-badge">15:24</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🥖</span> Full full[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 00時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🥖</span> Full full</div>
+                        <span class="item-duration tag-food">停留 00時30分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">16:00[cite: 1]</div>
+                    <div class="time-badge">16:00</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🥩</span> 焼肉ホルモン山翔[cite: 1]</div>
-                        <span class="item-duration tag-food">停留 01時30分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🥩</span> 焼肉ホルモン山翔</div>
+                        <span class="item-duration tag-food">停留 01時30分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">17:38[cite: 1]</div>
+                    <div class="time-badge">17:38</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店[cite: 1]</div>
-                        <span class="item-duration tag-hotel">停留 00時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店</div>
+                        <span class="item-duration tag-hotel">停留 00時00分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time-badge">17:54[cite: 1]</div>
+                    <div class="time-badge">17:54</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">✈️</span> 福岡國際機場[cite: 1]</div>
-                        <span class="item-duration tag-trans">停留 01時00分[cite: 1]</span>
+                        <div class="item-title"><span class="item-icon">✈️</span> 福岡國際機場</div>
+                        <span class="item-duration tag-trans">停留 01時00分</span>
                     </div>
                 </div>
             </div>
@@ -1415,11 +1418,11 @@
 <div id="backupModal" class="modal-overlay" onclick="closeModal(event)">
     <div class="modal-card">
         <div class="modal-title">
-            <span id="modalTitle">⏱️ 備用時刻表[cite: 1]</span>
+            <span id="modalTitle">⏱️ 備用時刻表</span>
             <span style="cursor:pointer; font-size:18px; opacity: 0.7;" onclick="closeModalDirect()">✕</span>
         </div>
         <ul class="modal-list" id="modalList"></ul>
-        <button class="modal-close-btn" onclick="closeModalDirect()">關閉視窗[cite: 1]</button>
+        <button class="modal-close-btn" onclick="closeModalDirect()">關閉視窗</button>
     </div>
 </div>
 
