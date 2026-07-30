@@ -140,17 +140,17 @@
         }
 
        
-       /* 4. 天數按鈕 */
-.day-nav {
+     /* 4. 天數按鈕 */
+    .day-nav {
     flex-shrink: 0;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 6px;
     margin-bottom: 10px;
     width: 100%;
-}
+    }
 
-.nav-btn {
+    .nav-btn {
     /* 💡 換上更可愛、筆畫更粗的圓潤手繪風字體 */
     font-family: 'M PLUS Rounded 1c', 'Comic Sans MS', sans-serif;
     
@@ -182,10 +182,10 @@
     justify-content: center;
     align-items: center;
     line-height: 1.1;
-}
+    }
 
-/* 💡 當天數被選中時：放大尺寸、顯示飽和可愛的招牌紅 */
-.nav-btn.active {
+    /* 💡 當天數被選中時：放大尺寸、顯示飽和可愛的招牌紅 */
+    .nav-btn.active {
     background: linear-gradient(135deg, #a8000b, #d32f2f);
     color: white;
     border-color: #ffffff;
@@ -196,9 +196,9 @@
     
     box-shadow: 0 8px 20px rgba(168, 0, 11, 0.45);
     z-index: 10;
-}
+    }
 
-.nav-btn .date-sub {
+    .nav-btn .date-sub {
     font-size: 10px;
     display: flex;
     flex-direction: column;
@@ -207,7 +207,7 @@
     margin-top: 3px;
     opacity: 0.95;
     line-height: 1.1;
-}
+    }
 
         /* 5. 行程區塊容器與淡入動畫 */
         .day-section {
@@ -228,7 +228,7 @@
             transform: translateY(0);
         }
 
- .day-header {
+     .day-header {
     flex-shrink: 0;
     background: linear-gradient(90deg, #a8000b, #c62828);
     color: white;
@@ -243,7 +243,7 @@
     border-bottom: none;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     box-sizing: border-box;
-}
+    }
 
         .day-header .day-date {
             font-size: 11px;
@@ -356,17 +356,35 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
 
- /* 標籤視覺強化 */
-        .tag-shop  { background: #fce4ec; color: #ad1457; border: 1px solid #f8bbd0; }
-        /* 💜 交通：保留透明淺紫果凍標籤 */
-        .tag-trans { background: rgba(226, 214, 238, 0.85); color: #5b3a82; border: 1px solid #d4c2e8; }
-        /* 📝 給食物、旅館、景點使用的「並排純文字備註」（無背景、無框框） */
+        /* 標籤視覺強化 */
+        /* 📝 並排純文字備註（深駝暖棕色、無背景框） */
         .inline-note {
             font-size: 12px;
             font-weight: 700;
-            color: #8d6e63; /* 溫柔暖棕色文字 */
+            color: #7a5c43; /* 質感深駝暖棕色 */
             margin-left: 6px;
             display: inline-block;
+        }
+        
+        /* 🛍️ 購物/商店標籤（莫蘭迪灰藍果凍框） */
+        .tag-shop { 
+            background: #e8eaf6; 
+            color: #283593; 
+            border: 1px solid #c5cae9; 
+        }
+        
+        /* 💜 交通/車站標籤（Pantone 263 莫蘭迪柔紫果凍框） */
+        .tag-trans { 
+            background: rgba(226, 214, 238, 0.85); 
+            color: #5b3a82; 
+            border: 1px solid #d4c2e8; 
+        }
+        
+        /* 🌲 景點標籤（莫蘭迪薄荷綠果凍框，需要強調時可選用） */
+        .tag-sight { 
+            background: #e8f5e9; 
+            color: #2e7d32; 
+            border: 1px solid #c8e6c9; 
         }
 
         
@@ -400,9 +418,9 @@
             min-width: 0;
         }
 
-        /* 櫻桃按鈕 */
-        /* 🍒 櫻桃按鈕預設（白底紅櫻桃） */
-.cherry-btn {
+   
+    /* 🍒 櫻桃按鈕預設（白底紅櫻桃） */
+    .cherry-btn {
     background: #ffffff;
     border: 2px solid var(--primary-red);
     border-radius: 10px;
@@ -417,20 +435,20 @@
     justify-content: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+    }
 
-.cherry-btn:active {
+    .cherry-btn:active {
     transform: scale(0.85);
-}
+    }
 
-/* 🍒 櫻桃 SVG 圖示預設顏色與轉場 */
-.cherry-icon {
+    /* 🍒 櫻桃 SVG 圖示預設顏色與轉場 */
+    .cherry-icon {
     width: 16px;
     height: 16px;
     fill: var(--primary-red);
     stroke: var(--primary-red);
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+    }
 
 /* 🍒 點擊展開（.expanded）：底色變紅、櫻桃變白，並帶有 30 度旋轉與微放大 */
 .transit-jelly-card.expanded .cherry-btn {
