@@ -139,8 +139,8 @@
             letter-spacing: 0.5px;
         }
 
-        /* 4. 天數按鈕 */
-       /* 4. 天數按鈕（尺寸大小縮放明顯、可愛圓潤字體、更高透明度） */
+       
+       /* 4. 天數按鈕 */
 .day-nav {
     flex-shrink: 0;
     display: grid;
@@ -394,43 +394,49 @@
         }
 
         /* 櫻桃按鈕 */
-        .cherry-btn {
-            background: #ffffff;
-            border: 2px solid var(--primary-red);
-            border-radius: 10px;
-            padding: 3px;
-            cursor: pointer;
-            outline: none;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        /* 🍒 櫻桃按鈕預設（白底紅櫻桃） */
+.cherry-btn {
+    background: #ffffff;
+    border: 2px solid var(--primary-red);
+    border-radius: 10px;
+    padding: 4px;
+    cursor: pointer;
+    outline: none;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-        .cherry-btn:active {
-            transform: scale(0.85);
-        }
+.cherry-btn:active {
+    transform: scale(0.85);
+}
 
-        .cherry-icon {
-            width: 16px;
-            height: 16px;
-            fill: var(--primary-red);
-            transition: all 0.25s ease;
-        }
+/* 🍒 櫻桃 SVG 圖示預設顏色與轉場 */
+.cherry-icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--primary-red);
+    stroke: var(--primary-red);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-        .transit-jelly-card.expanded .cherry-btn {
-            background: var(--primary-red);
-            border-color: #ffffff;
-            transform: rotate(15deg) scale(1.1);
-            box-shadow: 0 4px 8px rgba(168, 0, 11, 0.3);
-        }
+/* 🍒 點擊展開（.expanded）：底色變紅、櫻桃變白，並帶有 30 度旋轉與微放大 */
+.transit-jelly-card.expanded .cherry-btn {
+    background: var(--primary-red);
+    border-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(168, 0, 11, 0.35);
+}
 
-        .transit-jelly-card.expanded .cherry-icon {
-            fill: #ffffff;
-        }
-
+.transit-jelly-card.expanded .cherry-icon {
+    fill: #ffffff;
+    stroke: #ffffff;
+    transform: rotate(30deg) scale(1.15); /* 30度俏皮旋轉 + 1.15倍動態放大 */
+}
         /* 備用時鐘按鈕 */
         .backup-btn {
             background: transparent;
@@ -707,10 +713,10 @@
      <!-- 櫻桃展開按鈕 -->
 <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
     <svg class="cherry-icon" viewBox="0 0 24 24" width="16" height="16" style="display: block; margin: auto;">
-        <circle cx="8" cy="17" r="4" fill="var(--primary-red)" />
-        <circle cx="16" cy="17" r="4" fill="var(--primary-red)" />
-        <path d="M12 3 C12 3 14 1 17 2 C17 2 15 5 12 7 C9 5 7 2 7 2 C10 1 12 3 12 3 Z" fill="var(--primary-red)" fill-rule="evenodd"/>
-        <path d="M12 7 L8 14 M12 7 L16 14" stroke="var(--primary-red)" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <circle cx="8" cy="17" r="4" />
+        <circle cx="16" cy="17" r="4" />
+        <path d="M12 3 C12 3 14 1 17 2 C17 2 15 5 12 7 C9 5 7 2 7 2 C10 1 12 3 12 3 Z" fill-rule="evenodd"/>
+        <path d="M12 7 L8 14 M12 7 L16 14" stroke-width="2" stroke-linecap="round" fill="none"/>
     </svg>
 </button>
                     <!-- 🎯 直接呈現：幾點發 ➔ 幾點到 -->
