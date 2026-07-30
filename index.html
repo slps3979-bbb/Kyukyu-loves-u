@@ -604,11 +604,11 @@
             <img src="cicon.jpg" alt="美食清單">
         </button>
 
-        <div class="peko-bar-top">FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU</div>
+        <div class="peko-bar-top">FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 </div>
         <h1 class="main-title">
             <span>福岡九州 5日極致之旅</span>
         </h1>
-        <div class="peko-bar-bottom">FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU</div>
+        <div class="peko-bar-bottom">FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 </div>
     </div>
 
     <!-- Day Navigation Grid -->
@@ -650,56 +650,60 @@
                         <span class="item-duration tag-trans">停留 01時30分</span>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="time-badge">12:24</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🍜</span> Shin-Shin 博多拉麵 KITTE博多店</div>
-                        <span class="item-duration tag-food">停留 01時00分</span>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time-badge">13:25</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🛍️</span> 購物中心KITTE</div>
-                        <span class="item-duration tag-shop">停留 00時30分</span>
-                    </div>
-                </div> 
-                <div class="timeline-item">
-                    <div class="time-badge">14:02</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🎫</span> 博多車站 新幹線 綠色窗口</div>
-                        <span class="item-duration tag-trans">停留 00時13分</span>
-                    </div>
-                </div>
 
-                <!-- 博多車站 果凍卡片 -->
-                <div class="timeline-item">
-                    <div class="time-badge">14:16</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> HAKATA Station 博多車站</div>
-                        <div class="transit-jelly-card">
-                            <div class="transit-header-row">
-                                <div class="transit-header">
-                                    <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
-                                        <svg class="cherry-icon" viewBox="0 0 24 24">
-                                            <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 21.5,13.5 19.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
-                                        </svg>
-                                    </button>
-                                    <input type="text" class="jelly-input input-time-text" value="14:16 發" placeholder="預覽車次時間">
-                                </div>
-                                <button class="backup-btn" onclick="openModal('博多 ➔ 小倉 備用班次', ['14:36 發 ➔ 14:51 到 (Sakura 552號)', '14:56 發 ➔ 15:11 到 (Kodama 850號)'])">
-                                    <svg class="clock-icon" viewBox="0 0 24 24">
-                                        <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="transit-expand-content">
-                                <div class="jelly-scroll-text" contenteditable="true">山陽新幹線 Sakura 550號 ‧ 3號月台發車 ‧ 預計 14:31 抵達小倉車站</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    
+                
+<!-- 示範 1：一般景點/商場（將「停留時間」改為「提醒事項」） -->
+<div class="timeline-item">
+    <div class="time-badge">13:25</div>
+    <div class="item-details">
+        <div class="item-title"><span class="item-icon">🛍️</span> 購物中心KITTE</div>
+        <!-- 💡 提示事項標籤（可自由改文字） -->
+        <span class="item-duration tag-shop">💡 1F/2F 雜貨可退稅</span>
+    </div>
+</div>
 
+<!-- 示範 2：一般景點（不寫任何標籤，完全乾淨） -->
+<div class="timeline-item">
+    <div class="time-badge">14:02</div>
+    <div class="item-details">
+        <div class="item-title"><span class="item-icon">🎫</span> 博多車站 新幹線 綠色窗口</div>
+        <!-- 這裡不加 <span class="item-duration"> 就不會顯示任何標籤 -->
+    </div>
+</div>
+
+<!-- 示範 3：簡化版車站果凍卡片（博多 ➔ 小倉 一張卡片搞定） -->
+<div class="timeline-item">
+    <div class="time-badge">14:16</div>
+    <div class="item-details">
+        <div class="item-title"><span class="item-icon">🚉</span> 博多車站 ➔ 小倉車站</div>
+        <div class="transit-jelly-card">
+            <div class="transit-header-row">
+                <div class="transit-header">
+                    <!-- 櫻桃展開按鈕 -->
+                    <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
+                        <svg class="cherry-icon" viewBox="0 0 24 24">
+                            <path d="M19.5,13.5 C17.5,13.5 16,15 16,17 C16,19 17.5,20.5 19.5,20.5 C21.5,20.5 23,19 23,17 C23,15 10.5,13.5 8.5,13.5 Z M8.5,13.5 C6.5,13.5 5,15 5,17 C5,19 6.5,20.5 8.5,20.5 C10.5,20.5 12,19 12,17 C12,15 10.5,13.5 8.5,13.5 Z M18.8,13.8 C17.8,8.5 14.5,4.5 11.5,3.5 C11.1,3.4 10.8,3.7 10.9,4.1 C11.8,7.2 13.8,11.2 17.5,13.8 C17.8,14 18.2,13.9 18.2,13.5 L18.8,13.8 Z M7.8,13.8 C8.8,8.5 12.1,4.5 15.1,3.5 C15.5,3.4 15.8,3.7 15.7,4.1 C14.8,7.2 12.8,11.2 9.1,13.8 C8.8,14 8.4,13.9 8.4,13.5 L7.8,13.8 Z"/>
+                        </svg>
+                    </button>
+                    <!-- 🎯 直接呈現：幾點發 ➔ 幾點到 -->
+                    <input type="text" class="jelly-input input-time-text" value="14:16 發 ➔ 14:30 到" placeholder="時間標示">
+                </div>
+                <!-- 右側時鐘按鈕：點擊依然可看備用車次/月台資訊 -->
+                <button class="backup-btn" onclick="openModal('博多 ➔ 小倉 備用班次', ['14:36 發 ➔ 14:51 到 (Sakura 552號)', '14:56 發 ➔ 15:11 到 (Kodama 850號)'])">
+                    <svg class="clock-icon" viewBox="0 0 24 24">
+                        <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
+                    </svg>
+                </button>
+            </div>
+            <!-- 下拉展開詳細資訊（可點擊編輯月台或車次名稱） -->
+            <div class="transit-expand-content">
+                <div class="jelly-scroll-text" contenteditable="true">山陽新幹線 Sakura 550號 ‧ 3號月台發車</div>
+            </div>
+        </div>
+    </div>
+</div>
+               
                 <!-- 小倉車站 果凍卡片 -->
                 <div class="timeline-item">
                     <div class="time-badge">14:30</div>
