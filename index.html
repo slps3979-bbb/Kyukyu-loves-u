@@ -290,10 +290,11 @@
             font-weight: 900;
             font-size: 14.5px;
             color: #2b1704;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            flex-wrap: wrap;
+            gap: 4px 6px;
             line-height: 1.35;
         }
 
@@ -306,24 +307,26 @@
             padding: 2px 8px;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            margin-top: 3px;
         }
 
-        /* 📝 並排純文字備註（深駝暖棕色、無框框） */
+        /* 📝 純文字備註（不擠壓、自動換行、深駝暖棕色） */
         .inline-note {
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 700;
             color: #7a5c43;
-            margin-left: 6px;
-            display: inline-block;
+            display: block;
+            width: 100%;
+            margin-top: 1px;
         }
 
-        /* 🛍️ 商場/商店/超市/唐吉訶德標籤（莫蘭迪灰藍框） */
-        .tag-shop { background: #e8eaf6; color: #283593; border: 1px solid #c5cae9; }
+        /* 🛍️ 購物/商店標籤（新：莫蘭迪薄霧柔藍） */
+        .tag-shop { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; }
 
-        /* 💜 交通/車站標籤（莫蘭迪柔紫框 Pantone 263） */
+        /* 💜 交通/車站標籤（Pantone 263 莫蘭迪柔紫框） */
         .tag-trans { background: rgba(226, 214, 238, 0.85); color: #5b3a82; border: 1px solid #d4c2e8; }
 
-        /* 🌲 景點/神社/展望台標籤（莫蘭迪薄荷綠框） */
+        /* 🌲 景點/神社標籤（莫蘭迪薄荷綠框） */
         .tag-sight { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
 
         /* 車站果凍卡片 */
@@ -344,7 +347,6 @@
         .transit-header-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
         .transit-header { display: flex; align-items: center; gap: 6px; flex-grow: 1; min-width: 0; }
 
-        /* 🍒 櫻桃展合按鈕 */
         .cherry-btn {
             background: #ffffff;
             border: 2px solid var(--primary-red);
@@ -526,7 +528,6 @@
                     </div>
                 </div>
 
-                <!-- 博多 ➔ 小倉 車站果凍卡片 -->
                 <div class="timeline-item">
                     <div class="time-badge">14:16</div>
                     <div class="item-details">
@@ -571,7 +572,6 @@
                     </div>
                 </div>
 
-                <!-- 小倉 ➔ 八幡 車站果凍卡片 -->
                 <div class="timeline-item">
                     <div class="time-badge">16:08</div>
                     <div class="item-details">
@@ -698,11 +698,11 @@
                     </div>
                 </div>
 
-                <!-- 小倉 ➔ 大分 車站果凍卡片 -->
+                <!-- 🟢 特選列車：JR 特急 由布院之森 -->
                 <div class="timeline-item">
                     <div class="time-badge">12:10</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> Kokura Station ➔ AMU PLAZA 大分</div>
+                        <div class="item-title"><span class="item-icon">🚆</span> Kokura ➔ 大分 ➔ 由布院 (由布院之森)</div>
                         <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
@@ -714,7 +714,7 @@
                                             <path d="M12 7 L8 14 M12 7 L16 14" stroke-width="2" stroke-linecap="round" fill="none"/>
                                         </svg>
                                     </button>
-                                    <input type="text" class="jelly-input input-time-text" value="12:10 發 ➔ 13:30 到" placeholder="時間標示">
+                                    <input type="text" class="jelly-input input-time-text" value="12:10 發 ➔ 15:52 到" placeholder="時間標示">
                                 </div>
                                 <button class="backup-btn" onclick="openModal('前往大分/湯布院 備用班次', ['12:40 發 ➔ 14:00 到 (Sonic 特急)'])">
                                     <svg class="clock-icon" viewBox="0 0 24 24">
@@ -723,7 +723,7 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <div class="jelly-scroll-text" contenteditable="true">JR 特急 Sonic 23號 ‧ 建議提早至月台候車</div>
+                                <div class="jelly-scroll-text" contenteditable="true">🌲 JR 特急 由布院之森 ‧ 建議提前至月台搭乘</div>
                             </div>
                         </div>
                     </div>
@@ -808,7 +808,6 @@
                     </div>
                 </div>
 
-                <!-- 🍡 由布院 Day 3 小吃/甜點：完全無果凍框、無文字備註，保持極簡清爽 -->
                 <div class="timeline-item">
                     <div class="time-badge">14:25</div>
                     <div class="item-details">
@@ -985,11 +984,11 @@
                     </div>
                 </div>
 
-                <!-- 由布院 ➔ 博多 車站果凍卡片 -->
+                <!-- 🟢 特選列車：JR 特急 由布院之森 -->
                 <div class="timeline-item">
                     <div class="time-badge">11:19</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚉</span> 由布院站 ➔ 博多</div>
+                        <div class="item-title"><span class="item-icon">🚆</span> 由布院 ➔ 博多 (由布院之森)</div>
                         <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
@@ -1010,7 +1009,7 @@
                                 </button>
                             </div>
                             <div class="transit-expand-content">
-                                <div class="jelly-scroll-text" contenteditable="true">JR 特急 由布之森 / 1號月台發車 ‧ 建議提早抵達月台</div>
+                                <div class="jelly-scroll-text" contenteditable="true">🌲 JR 特急 由布院之森 ‧ 1號月台發車</div>
                             </div>
                         </div>
                     </div>
@@ -1185,7 +1184,7 @@
     </div>
 </div>
 
-<!-- Modal 備用時刻表與清單控制 -->
+<!-- Modal 彈窗 -->
 <div id="backupModal" class="modal-overlay" onclick="closeModal(event)">
     <div class="modal-card">
         <div class="modal-title">
