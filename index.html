@@ -508,7 +508,7 @@
                     <div class="time-badge">12:24</div>
                     <div class="item-details">
                         <div class="item-title">
-                            <span class="item-icon">🍜</span> Shin-Shin 博多拉麵 KITTE店
+                            <div class="item-icon">🍜</span> Shin-Shin 博多拉麵 KITTE店</div>
                              <span class="item-duration tag-shop">停留 00時30分</span>
                         </div>
                     </div>
@@ -602,13 +602,46 @@
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="time-badge">18:05</div>
+              <div class="timeline-item">
+    <div class="time-badge">18:05</div>
+        <div class="item-details">
+                <div class="item-title"><span class="item-icon">🌃</span> 皿倉山展望台</div>
+                <span class="item-duration tag-sight">(上山) 17:05 八幡站 → 17:45 觀景台</span>
+                <span class="item-duration tag-sight">(下山) 18:25 觀景台 → 19:05 八幡站</span>
+        </div>
+    </div>
+
+  <div class="timeline-item">
+                    <div class="time-badge">19:17</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🌃</span> 皿倉山展望台</div>
-                        <span class="item-duration tag-sight">停留 00時20分</span>
+                        <div class="item-title"><span class="item-icon">🚉</span> Yahata Station ➔ Kokura Station </div>
+                        <div class="transit-jelly-card">
+                            <div class="transit-header-row">
+                                <div class="transit-header">
+                                    <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
+                                        <svg class="cherry-icon" viewBox="0 0 24 24" width="16" height="16" style="display: block; margin: auto;">
+                                            <circle cx="8" cy="17" r="4" />
+                                            <circle cx="16" cy="17" r="4" />
+                                            <path d="M12 3 C12 3 14 1 17 2 C17 2 15 5 12 7 C9 5 7 2 7 2 C10 1 12 3 12 3 Z" fill-rule="evenodd"/>
+                                            <path d="M12 7 L8 14 M12 7 L16 14" stroke-width="2" stroke-linecap="round" fill="none"/>
+                                        </svg>
+                                    </button>
+                                    <input type="text" class="jelly-input input-time-text" value="19:17 發 ➔ 19:31 到" placeholder="時間標示">
+                                </div>
+                                <button class="backup-btn" onclick="openModal('八幡 ➔ 小倉 備用班次', ['19:25 發 ➔ 19:35 到 (區間快速)', '19:37 發 ➔ 19:55 到 (普通車)'])">
+                                    <svg class="clock-icon" viewBox="0 0 24 24">
+                                        <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="transit-expand-content">
+                                <div class="jelly-scroll-text" contenteditable="true">鹿兒島本線 快速 </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                
                 <div class="timeline-item">
                     <div class="time-badge">19:51</div>
                     <div class="item-details">
@@ -630,7 +663,7 @@
                 <div class="timeline-item">
                     <div class="time-badge">21:30</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🐧</span> Don Quijote Kokura Uomachi</div>
+                        <div class="item-title"><span class="item-icon">🐧</span>唐吉軻德 Kokura Uomachi</div>
                         <span class="item-duration tag-shop">停留 01時00分</span>
                     </div>
                 </div>
@@ -656,13 +689,14 @@
                     <div class="time-badge">09:00</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🏨</span> 小倉麗嘉皇家酒店</div>
+                         <span class="item-duration tag-sight">先寄行李在小倉車站大廳紫川路線</span>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="time-badge">09:46</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">⛩️</span> 八坂神社</div>
-                        <span class="item-duration tag-sight">停留 00時20分</span>
+                        <span class="item-duration tag-sight">小倉城庭院在旁邊可以逛逛</span>
                     </div>
                 </div>
                 <div class="timeline-item">
