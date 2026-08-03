@@ -458,11 +458,11 @@
         <button class="food-list-btn" onclick="openModal('🍴 推薦美食與甜點清單', ['✨ Shin-Shin 博多拉麵 KITTE', '✨ 辻利茶舗 京町本店', '✨ 麵屋兼虎 福岡PARCO', '✨ 焼肉ホルモン山翔'])" title="查看美食清單">
             <img src="cicon.jpg" alt="美食清單">
         </button>
-        <div class="peko-bar-top">FUKU ‧ FUKU ‧ FUKU ‧ FUKU ‧ FUKU</div>
+        <div class="peko-bar-top">FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU</div>
         <h1 class="main-title">
             <span>福岡九州 5日極致之旅</span>
         </h1>
-        <div class="peko-bar-bottom">FUKU ‧ FUKU ‧ FUKU ‧ FUKU ‧ FUKU</div>
+        <div class="peko-bar-bottom">FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU 🍒 FUKU</div>
     </div>
 
     <!-- Day Navigation Grid -->
@@ -702,7 +702,7 @@
                 <div class="timeline-item">
                     <div class="time-badge">12:10</div>
                     <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚆</span> Kokura ➔ 大分 ➔ 由布院 (由布院之森)</div>
+                        <div class="item-title"><span class="item-icon">🚆</span> Kokura 小倉車站 ➔ Oita 大分車站 </div>
                         <div class="transit-jelly-card">
                             <div class="transit-header-row">
                                 <div class="transit-header">
@@ -714,9 +714,38 @@
                                             <path d="M12 7 L8 14 M12 7 L16 14" stroke-width="2" stroke-linecap="round" fill="none"/>
                                         </svg>
                                     </button>
-                                    <input type="text" class="jelly-input input-time-text" value="12:10 發 ➔ 15:52 到" placeholder="時間標示">
+                                    <input type="text" class="jelly-input input-time-text" value="12:10 發 ➔ 13:37 到" placeholder="時間標示">
                                 </div>
-                                <button class="backup-btn" onclick="openModal('前往大分/湯布院 備用班次', ['12:40 發 ➔ 14:00 到 (Sonic 特急)'])">
+                                <button class="backup-btn" onclick="openModal('前往大分 備用班次', ['12:42 發 ➔ 14:02 到 (Sonic 特急)'])">
+                                    <svg class="clock-icon" viewBox="0 0 24 24">
+                                        <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="transit-expand-content">
+                                <div class="jelly-scroll-text" contenteditable="true">建議提前至月台搭乘</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             <div class="timeline-item">
+                    <div class="time-badge">14:58</div>
+                    <div class="item-details">
+                        <div class="item-title"><span class="item-icon">🚆</span> Oita 大分 ➔ Yufuin 由布院</div>
+                        <div class="transit-jelly-card">
+                            <div class="transit-header-row">
+                                <div class="transit-header">
+                                    <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
+                                        <svg class="cherry-icon" viewBox="0 0 24 24" width="16" height="16" style="display: block; margin: auto;">
+                                            <circle cx="8" cy="17" r="4" />
+                                            <circle cx="16" cy="17" r="4" />
+                                            <path d="M12 3 C12 3 14 1 17 2 C17 2 15 5 12 7 C9 5 7 2 7 2 C10 1 12 3 12 3 Z" fill-rule="evenodd"/>
+                                            <path d="M12 7 L8 14 M12 7 L16 14" stroke-width="2" stroke-linecap="round" fill="none"/>
+                                        </svg>
+                                    </button>
+                                    <input type="text" class="jelly-input input-time-text" value="14:58 發 ➔ 15:46 到" placeholder="時間標示">
+                                </div>
+                                <button class="backup-btn" onclick="openModal('大分 ➔ 由布院 備用班次', ['13:12 發 ➔ 16:15 到 (普通・快速列車)', '16:02 發 ➔ 17:00 到 (普通・快速列車)'])">
                                     <svg class="clock-icon" viewBox="0 0 24 24">
                                         <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
                                     </svg>
@@ -728,6 +757,7 @@
                         </div>
                     </div>
                 </div>
+                
 
                 <div class="timeline-item">
                     <div class="time-badge">14:10</div>
