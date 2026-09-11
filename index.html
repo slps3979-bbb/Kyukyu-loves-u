@@ -119,6 +119,25 @@
             letter-spacing: 0.5px;
         }
 
+        /* 🗺️ 美食地圖按鈕外觀 */
+        .btn-map-link {
+            display: block;
+            background: #e11d48;
+            color: white !important;
+            padding: 10px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 12px;
+            box-shadow: 0 3px 8px rgba(225,29,72,0.25);
+            transition: background 0.2s;
+        }
+        .btn-map-link:active {
+            background: #be123c;
+        }
+        
         /* 天數選單 */
         .day-nav {
             flex-shrink: 0;
@@ -310,7 +329,6 @@
             margin-top: 3px;
         }
 
-        /* 📝 純文字備註（不擠壓、自動換行、深駝暖棕色） */
         .inline-note {
             font-size: 11.5px;
             font-weight: 700;
@@ -320,13 +338,8 @@
             margin-top: 1px;
         }
 
-        /* 🛍️ 購物/商店標籤（新：莫蘭迪薄霧柔藍） */
         .tag-shop { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; }
-
-        /* 💜 交通/車站標籤（Pantone 263 莫蘭迪柔紫框） */
         .tag-trans { background: rgba(226, 214, 238, 0.85); color: #5b3a82; border: 1px solid #d4c2e8; }
-
-        /* 🌲 景點/神社標籤（莫蘭迪薄荷綠框） */
         .tag-sight { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
 
         /* 車站果凍卡片 */
@@ -504,17 +517,15 @@
                         <span class="item-duration tag-trans">搭計程車到博多車站</span>
                     </div>
                 </div>
-<div class="timeline-item">
-    <div class="time-badge">12:24</div>
-    <div class="item-details">
-        <!-- 1. 標題獨立在一層 -->
-        <div class="item-title">
-            <span class="item-icon">🍜</span> Shin-Shin 博多拉麵 KITTE店
-        </div>
-        <!-- 2. 標籤放到外面，就會自動換到下一行 -->
-        <span class="item-duration tag-shop">停留 00時30分</span>
-    </div>
-</div>
+                <div class="timeline-item">
+                    <div class="time-badge">12:24</div>
+                    <div class="item-details">
+                        <div class="item-title">
+                            <span class="item-icon">🍜</span> Shin-Shin 博多拉麵 KITTE店
+                        </div>
+                        <span class="item-duration tag-shop">停留 00時30分</span>
+                    </div>
+                </div>
                 <div class="timeline-item">
                     <div class="time-badge">13:25</div>
                     <div class="item-details">
@@ -604,16 +615,16 @@
                     </div>
                 </div>
 
-              <div class="timeline-item">
-    <div class="time-badge">18:05</div>
-        <div class="item-details">
-                <div class="item-title"><span class="item-icon">🌃</span> 皿倉山展望台</div>
-                <span class="item-duration tag-sight">(上山) 17:05 八幡站 → 17:45 觀景台</span>
-                <span class="item-duration tag-sight">(下山) 18:25 觀景台 → 19:05 八幡站</span>
-        </div>
-    </div>
+                <div class="timeline-item">
+                    <div class="time-badge">18:05</div>
+                    <div class="item-details">
+                        <div class="item-title"><span class="item-icon">🌃</span> 皿倉山展望台</div>
+                        <span class="item-duration tag-sight">(上山) 17:05 八幡站 → 17:45 觀景台</span>
+                        <span class="item-duration tag-sight">(下山) 18:25 觀景台 → 19:05 八幡站</span>
+                    </div>
+                </div>
 
-  <div class="timeline-item">
+                <div class="timeline-item">
                     <div class="time-badge">19:17</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🚉</span> Yahata Station ➔ Kokura Station </div>
@@ -643,7 +654,6 @@
                     </div>
                 </div>
 
-                
                 <div class="timeline-item">
                     <div class="time-badge">19:51</div>
                     <div class="item-details">
@@ -691,7 +701,7 @@
                     <div class="time-badge">09:00</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🏨</span> 小倉麗嘉皇家酒店 </div>
-                         <span class="item-duration tag-sight">先寄行李在小倉車站車站附近找LUUP</span>
+                        <span class="item-duration tag-sight">先寄行李在小倉車站車站附近找LUUP</span>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -734,7 +744,6 @@
                     </div>
                 </div>
 
-                <!-- 🟢 特選列車：JR 特急 由布院之森 -->
                 <div class="timeline-item">
                     <div class="time-badge">12:10</div>
                     <div class="item-details">
@@ -765,7 +774,6 @@
                     </div>
                 </div>
 
-
                 <div class="timeline-item">
                     <div class="time-badge">13:50</div>
                     <div class="item-details">
@@ -774,7 +782,7 @@
                     </div>
                 </div>
                 
-             <div class="timeline-item">
+                <div class="timeline-item">
                     <div class="time-badge">14:58</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🚆</span> Oita 大分 ➔ Yufuin 由布院</div>
@@ -821,21 +829,18 @@
                     <div class="time-badge">17:45</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🛒</span> A-COOP超市 湯布院店</div>
-                        
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="time-badge">18:18</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🏪</span> 7-11 Yufuin Yunotsubo</div>
-                       
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="time-badge">18:57</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🏡</span> 由布院別邸 樹 </div>
-            
                     </div>
                     <span class="item-duration tag-shop">預約明天早上的計程車8:15出發/離開前釜心飯的便當11:50</span>
                 </div>
@@ -855,9 +860,9 @@
                     <div class="time-badge">07:30</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🏡</span> 由布院別邸 樹 </div>
-                         <span class="item-duration tag-sight">吃完早餐馬上要去坐計程車</span>
+                        <span class="item-duration tag-sight">吃完早餐馬上要去坐計程車</span>
                     </div>
-                  </div>
+                </div>
                 
                 <div class="timeline-item">
                     <div class="time-badge">08:57</div>
@@ -877,22 +882,22 @@
                     <div class="time-badge">13:08</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🏡</span> 由布院別邸 樹 </div>
-                           <span class="item-duration tag-trans">稍作休息以後再出門逛逛</span>
+                        <span class="item-duration tag-trans">稍作休息以後再出門逛逛</span>
                     </div>
                 </div>
 
-              <div class="timeline-item">
+                <div class="timeline-item">
                     <div class="time-badge">14:15</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🍰</span> 蛋糕卷 B SPEAK 本店</div>
-                         <span class="item-duration tag-shop">停留 00時20分</span>
+                        <span class="item-duration tag-shop">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="time-badge">14:25</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🍹</span> 湯布院Mana Mana</div>
-                         <span class="item-duration tag-shop">停留 00時20分</span>
+                        <span class="item-duration tag-shop">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -906,35 +911,35 @@
                     <div class="time-badge">14:55</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🍩</span> 布丁.甜甜圈 Milch Donut&Cafe</div>
-                         <span class="item-duration tag-shop">停留 00時20分</span>
+                        <span class="item-duration tag-shop">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="time-badge">15:10</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">☕</span> 鞠智 cucuchi（銅鑼燒和咖啡館）</div>
-                         <span class="item-duration tag-shop">停留 00時20分</span>
+                        <span class="item-duration tag-shop">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="time-badge">15:25</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🍦</span> telato 抹茶ジェラート専門店</div>
-                         <span class="item-duration tag-shop">停留 00時20分</span>
+                        <span class="item-duration tag-shop">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="time-badge">15:40</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🍋</span> レモネード&スイーツlimo</div>
-                         <span class="item-duration tag-shop">停留 00時20分</span>
+                        <span class="item-duration tag-shop">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="time-badge">15:50</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🥔</span> 金賞可樂餅 本店</div>
-                         <span class="item-duration tag-shop">停留 00時20分</span>
+                        <span class="item-duration tag-shop">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -961,14 +966,14 @@
                     <div class="time-badge">16:30</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🐙</span> 大章魚燒 ばくだん焼本舗</div>
-                         <span class="item-duration tag-shop">停留 00時20分</span>
+                        <span class="item-duration tag-shop">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="time-badge">16:45</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🍗</span> 中津からあげ吉吾 湯布院店</div>
-                         <span class="item-duration tag-shop">停留 00時20分</span>
+                        <span class="item-duration tag-shop">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -988,7 +993,7 @@
                     <div class="time-badge">17:20</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🥤</span> GABUGABU</div>
-                         <span class="item-duration tag-shop">停留 00時20分</span>
+                        <span class="item-duration tag-shop">停留 00時20分</span>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -999,7 +1004,6 @@
                     </div>
                 </div>
 
-                <!-- 🌊 金鱗湖周邊區域 -->
                 <div class="timeline-item">
                     <div class="time-badge">17:45</div>
                     <div class="item-details">
@@ -1032,14 +1036,13 @@
                     <div class="time-badge">18:45</div>
                     <div class="item-details">
                         <div class="item-title"><span class="item-icon">🍄</span> 湯布院shiitakemonster</div>
-                         <span class="item-duration tag-shop">停留 00時20分</span>
+                        <span class="item-duration tag-shop">停留 00時20分</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    
     <!-- Day 4 -->
     <div id="day4" class="day-section">
         <div class="day-header">
@@ -1071,7 +1074,6 @@
                     </div>
                 </div>
 
-                <!-- 🟢 特選列車：JR 特急 由布院之森 -->
                 <div class="timeline-item">
                     <div class="time-badge">11:19</div>
                     <div class="item-details">
@@ -1314,6 +1316,15 @@
             li.innerHTML = `<span>${item}</span>`;
             listContainer.appendChild(li);
         });
+
+        // 💡 如果是點擊櫻桃美食清單，自動在彈窗下方加入「區域美食地圖按鈕」
+        if (title.includes('美食')) {
+            const mapBtn = document.createElement('a');
+            mapBtn.href = 'about.html';
+            mapBtn.className = 'btn-map-link';
+            mapBtn.innerText = '🗺️ 開啟區域美食相對位置圖';
+            listContainer.appendChild(mapBtn);
+        }
 
         const modal = document.getElementById('backupModal');
         modal.classList.add('active');
