@@ -31,7 +31,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       padding: 4px 0;
     }
     .btn-back {
@@ -52,6 +52,32 @@
       margin: 0;
       color: #a8000b;
       font-weight: 900;
+    }
+
+    /* 區域切換按鈕區 */
+    .map-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border: 2px solid #ffcdd2;
+      border-radius: 12px;
+      background-color: #ffffff;
+      color: #a8000b;
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+    .tab-btn.active {
+      background-color: #a8000b;
+      color: #ffffff;
+      border-color: #a8000b;
+      box-shadow: 0 3px 8px rgba(168,0,11,0.25);
     }
 
     /* 相對位置示意圖區塊 */
@@ -168,9 +194,15 @@
     <h1>📍 福岡美食相對地圖</h1>
   </header>
 
-  <!-- 相對位置示意圖區塊 (預設讀取 01.jpg) -->
+  <!-- 地圖切換按鈕區 -->
+  <div class="map-tabs">
+    <button class="tab-btn active" onclick="changeMap('2.png', this)">天神地區 1</button>
+    <button class="tab-btn" onclick="changeMap('1.jpg', this)">天神地區 2</button>
+  </div>
+
+  <!-- 相對位置示意圖區塊 (預設顯示 2.png) -->
   <div class="map-card">
-    <img src="01.jpg" alt="美食相對位置圖" class="map-img" onclick="openLightbox(this.src)">
+    <img id="currentMap" src="2.png" alt="美食相對位置圖" class="map-img" onclick="openLightbox(this.src)">
     <div class="map-hint">💡 點擊上圖可放大查看區域相對位置</div>
   </div>
 
@@ -236,10 +268,25 @@
 </div>
 
 <script>
+  // 切換地圖圖片與按鈕高亮
+  function changeMap(imgSrc, btnElement) {
+    document.getElementById('currentMap').src = imgSrc;
+    
+    // 清除所有按鈕 active 樣式
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    // 為點擊的按鈕加上 active 樣式
+    btnElement.classList.add('active');
+  }
+
+  // 開啟燈箱放大
   function openLightbox(src) {
     document.getElementById('lightboxImg').src = src;
     document.getElementById('lightbox').style.display = 'flex';
   }
+
+  // 關閉燈箱
   function closeLightbox() {
     document.getElementById('lightboxImg').src = '';
     document.getElementById('lightbox').style.display = 'none';
