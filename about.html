@@ -195,14 +195,14 @@
   </header>
 
   <!-- 地圖切換按鈕區 -->
-  <div class="map-tabs">
-    <button class="tab-btn active" onclick="changeMap('2.png', this)">天神地區 1</button>
-    <button class="tab-btn" onclick="changeMap('1.jpg', this)">天神地區 2</button>
+ <div class="map-tabs">
+    <button class="tab-btn active" onclick="changeMap('1.png', this)">天神地區 1</button>
+    <button class="tab-btn" onclick="changeMap('2.png', this)">天神地區 2</button>
   </div>
 
   <!-- 相對位置示意圖區塊 (預設顯示 2.png) -->
   <div class="map-card">
-    <img id="currentMap" src="2.png" alt="美食相對位置圖" class="map-img" onclick="openLightbox(this.src)">
+    <img id="currentMap" src="1.png" alt="美食相對位置圖" class="map-img" onclick="openLightbox(this.src)">
     <div class="map-hint">💡 點擊上圖可放大查看區域相對位置</div>
   </div>
 
