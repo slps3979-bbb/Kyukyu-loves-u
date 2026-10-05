@@ -120,7 +120,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* 🗺️ 美食地圖按鈕外觀 */
        /* 🗺️ 美食地圖按鈕（白底粉紅邊） */
 .btn-map-link {
     display: block;
@@ -343,9 +342,10 @@
             margin-top: 1px;
         }
 
-        .tag-shop { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; }
-        .tag-trans { background: rgba(226, 214, 238, 0.85); color: #5b3a82; border: 1px solid #d4c2e8; }
-        .tag-sight { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+        /* 🏷️ 標籤顏色定義 */
+.tag-hotel { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; } /* 旅館：綠色 */
+.tag-sight { background: rgba(226, 214, 238, 0.85); color: #5b3a82; border: 1px solid #d4c2e8; } /* 景點/百貨：紫色 */
+.tag-shop { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; } /* 其他：藍色 */
 
         /* 車站果凍卡片 */
         .transit-jelly-card {
@@ -1008,65 +1008,116 @@
             <span class="day-date">2026/10/31</span>
         </div>
         <div class="day-content">
-            <div class="timeline-list">
-               <div class="timeline-item">
-                    <div class="time-badge">09:00</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店 The Gate HOTEL Fukuoka </div>
-                        <span class="item-duration tag-trans">季放行李 check out</span>
+<div class="timeline-list">
+    <div class="timeline-item">
+        <div class="time-badge">09:00</div>
+        <div class="item-details">
+            <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店 The Gate HOTEL Fukuoka</div>
+            <span class="item-duration tag-hotel">寄放行李 check out</span>
+        </div>
+    </div>
+
+    <!-- 09:30 前往門司港與小倉城（櫻桃卡片） -->
+    <div class="timeline-item">
+        <div class="time-badge">09:30</div>
+        <div class="item-details">
+            <div class="item-title"><span class="item-icon">🚆</span> 前往門司港與小倉城</div>
+            <div class="transit-jelly-card">
+                <div class="transit-header-row">
+                    <div class="transit-header">
+                        <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
+                            <svg class="cherry-icon" viewBox="0 0 24 24" width="16" height="16" style="display: block; margin: auto;">
+                                <circle cx="8" cy="17" r="4" />
+                                <circle cx="16" cy="17" r="4" />
+                                <path d="M12 3 C12 3 14 1 17 2 C17 2 15 5 12 7 C9 5 7 2 7 2 C10 1 12 3 12 3 Z" fill-rule="evenodd"/>
+                                <path d="M12 7 L8 14 M12 7 L16 14" stroke-width="2" stroke-linecap="round" fill="none"/>
+                            </svg>
+                        </button>
+                        <input type="text" class="jelly-input input-time-text" value="09:30 發 ➔ 10:15 到" placeholder="時間標示">
                     </div>
+                    <button class="backup-btn" onclick="openModal('博多 ➔ 小倉/門司港 備用班次', ['09:00 發 ➔ 09:47 到 (特急音速號)', '10:00 發 ➔ 10:47 到 (特急音速號)'])">
+                        <svg class="clock-icon" viewBox="0 0 24 24">
+                            <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
+                        </svg>
+                    </button>
                 </div>
-                <div class="timeline-item">
-                    <div class="time-badge">09:30</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚆</span> 前往門司港與小倉城</div>
-                        <span class="item-duration tag-trans">北九州漫遊，買山陽線新幹線票</span>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time-badge">10:30</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">⚓</span> 門司港懷舊區散策</div>
-                        <span class="item-duration tag-sight">唐戶市場、港區建築、舊門司三井俱樂部</span>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time-badge">13:00</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏯</span> 小倉城 & 庭園巡禮</div>
-                        <span class="item-duration tag-sight">歷史城廓參觀</span>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time-badge">16:30</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚆</span>回博多車站</div>
-                        <span class="item-duration tag-trans">搭地鐵到天神站返回飯店</span>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time-badge">17:00</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店 The Gate HOTEL Fukuoka</div>
-                        <span class="item-duration tag-trans">5點以前拿取寄放行李</span>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time-badge">17:15</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">🚕</span> 搭計程車去機場</div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time-badge">17:45</div>
-                    <div class="item-details">
-                        <div class="item-title"><span class="item-icon">✈️</span> 福岡國際機場</div>
-                        <span class="item-duration tag-trans">辦理登機與返台手續</span>
-                    </div>
+                <div class="transit-expand-content">
+                    <div class="jelly-scroll-text" contenteditable="true">🚄 山陽新幹線 / JR 特急音速號 ‧ 購買山陽線票券</div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="timeline-item">
+        <div class="time-badge">10:30</div>
+        <div class="item-details">
+            <div class="item-title"><span class="item-icon">⚓</span> 門司港懷舊區散策</div>
+            <span class="item-duration tag-sight">唐戶市場、港區建築、舊門司三井俱樂部</span>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="time-badge">13:00</div>
+        <div class="item-details">
+            <div class="item-title"><span class="item-icon">🏯</span> 小倉城 & 庭園巡禮</div>
+            <span class="item-duration tag-sight">歷史城廓參觀</span>
+        </div>
+    </div>
+
+    <!-- 16:30 回博多車站（櫻桃卡片） -->
+    <div class="timeline-item">
+        <div class="time-badge">16:30</div>
+        <div class="item-details">
+            <div class="item-title"><span class="item-icon">🚆</span> 回博多車站</div>
+            <div class="transit-jelly-card">
+                <div class="transit-header-row">
+                    <div class="transit-header">
+                        <button class="cherry-btn" onclick="toggleExpandFromCherry(this)">
+                            <svg class="cherry-icon" viewBox="0 0 24 24" width="16" height="16" style="display: block; margin: auto;">
+                                <circle cx="8" cy="17" r="4" />
+                                <circle cx="16" cy="17" r="4" />
+                                <path d="M12 3 C12 3 14 1 17 2 C17 2 15 5 12 7 C9 5 7 2 7 2 C10 1 12 3 12 3 Z" fill-rule="evenodd"/>
+                                <path d="M12 7 L8 14 M12 7 L16 14" stroke-width="2" stroke-linecap="round" fill="none"/>
+                            </svg>
+                        </button>
+                        <input type="text" class="jelly-input input-time-text" value="16:30 發 ➔ 17:15 到" placeholder="時間標示">
+                    </div>
+                    <button class="backup-btn" onclick="openModal('小倉 ➔ 博多 備用班次', ['16:00 發 ➔ 16:47 到 (特急音速號)', '17:00 發 ➔ 17:47 到 (特急音速號)'])">
+                        <svg class="clock-icon" viewBox="0 0 24 24">
+                            <path d="M12,2 A10,10 0 1,0 22,12 A10,10 0 0,0 12,2 Z M12,20 A8,8 0 1,1 20,12 A8,8 0 0,1 12,20 Z M12.5,7 L11,7 L11,13 L16.2,16.2 L17,14.9 L12.5,12.2 Z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="transit-expand-content">
+                    <div class="jelly-scroll-text" contenteditable="true">🚇 搭地鐵到天神站返回飯店</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="time-badge">17:00</div>
+        <div class="item-details">
+            <div class="item-title"><span class="item-icon">🏨</span> 福岡休雷蓋特酒店 The Gate HOTEL Fukuoka</div>
+            <span class="item-duration tag-hotel">5點以前拿取寄放行李</span>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="time-badge">17:15</div>
+        <div class="item-details">
+            <div class="item-title"><span class="item-icon">🚕</span> 搭計程車去機場</div>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="time-badge">17:45</div>
+        <div class="item-details">
+            <div class="item-title"><span class="item-icon">✈️</span> 福岡國際機場</div>
+            <span class="item-duration tag-shop">辦理登機與返台手續</span>
+        </div>
+    </div>
+</div>
 </div>
 
 <!-- Modal 彈窗 -->
